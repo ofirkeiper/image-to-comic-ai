@@ -1,4 +1,3 @@
-
 import {
   Carousel,
   CarouselContent,
@@ -6,6 +5,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
+import SampleComicPreview from "./SampleComicPreview";
 
 const samples = [
   {
@@ -79,7 +79,7 @@ const samples = [
         caption: "Rainbow cake smiles"
       },
       {
-        img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
+        img: "https://images.unsplash.com/photo-1465101178521-c1a9136a65b6?auto=format&fit=crop&w=400&q=80",
         caption: "Balloons everywhere!"
       },
       {
@@ -193,7 +193,7 @@ const SampleComicPage = ({ panels, style }: { panels: { img: string, caption: st
 );
 
 const SampleGallery = () => (
-  <section className="max-w-2xl mx-auto my-16 px-4 bg-gradient-to-br from-blue-50 via-yellow-50 to-pink-50 rounded-3xl pt-12 pb-7 border-8 border-pink-300 shadow-2xl comic-outline">
+  <section className="max-w-2xl mx-auto my-16 px-4 bg-gradient-to-br from-blue-50 via-yellow-50 to-pink-50 rounded-3xl pt-12 pb-7 border-8 border-pink-300 shadow-2xl comic-outline" id="samples">
     <h2 className="comic-title text-4xl text-center mb-8 text-blue-800 drop-shadow comic-outline bg-gradient-to-r from-yellow-100 via-pink-200 to-blue-200 px-4 py-2 rounded-xl inline-block animate-text-glow">
       Sample Comics
     </h2>
@@ -204,10 +204,10 @@ const SampleGallery = () => (
             <CarouselItem key={idx}>
               <div className={`rounded-2xl border-4 border-yellow-300 shadow-xl bg-gradient-to-br ${styleColors[style as keyof typeof styleColors]} flex flex-col items-center p-5 relative comic-outline`}>
                 <div className="font-bangers text-2xl text-blue-900 mb-2 text-center comic-outline">{title}</div>
-                <div className="text-xs font-bold text-purple-600 mb-3 bg-white/60 px-3 py-1 rounded-lg border-2 border-blue-300 comic-outline">
+                <div className="text-xs font-bold text-purple-600 mb-1 bg-white/60 px-3 py-1 rounded-lg border-2 border-blue-300 comic-outline">
                   {lang} &bull; {style}
                 </div>
-                <SampleComicPage panels={panels} style={style} />
+                <SampleComicPreview panels={panels} title={undefined} style={style} />
                 <span className="absolute -top-3 -right-3 bg-pink-300 text-white text-xs font-bangers px-2 py-[2px] rounded-full border-2 border-blue-400 shadow comic-outline animate-bounce-x z-20">
                   NEW
                 </span>
