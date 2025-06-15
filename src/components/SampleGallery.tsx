@@ -1,3 +1,4 @@
+
 const samples = [
   {
     img: "/placeholder.svg",
@@ -7,20 +8,20 @@ const samples = [
   },
   {
     img: "/placeholder.svg",
-    title: "El Viaje",
-    lang: "ES",
+    title: "Rocket Squirrel Adventure",
+    lang: "EN",
     style: "Classic",
   },
   {
     img: "/placeholder.svg",
-    title: "L'Aventure Mystérieuse",
-    lang: "FR",
+    title: "Mystery of the Lost Robot",
+    lang: "EN",
     style: "Noir",
   },
   {
     img: "/placeholder.svg",
-    title: "Comiclandia",
-    lang: "DE",
+    title: "Comicland Showdown",
+    lang: "EN",
     style: "Pop Art",
   },
 ];
