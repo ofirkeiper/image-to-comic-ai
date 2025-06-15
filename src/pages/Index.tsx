@@ -4,6 +4,7 @@ import SampleGallery from "@/components/SampleGallery";
 import PricingSection from "@/components/PricingSection";
 import FooterBar from "@/components/FooterBar";
 import ComicIntro from "@/components/ComicIntro";
+import ComicFAQ from "@/components/ComicFAQ";
 import { useState } from "react";
 
 const Index = () => {
@@ -38,6 +39,7 @@ const Index = () => {
           <ComicUploader />
           <SampleGallery />
           <PricingSection />
+          <ComicFAQ />
         </main>
         <FooterBar />
       </div>
