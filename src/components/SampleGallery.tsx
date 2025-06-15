@@ -1,28 +1,40 @@
 
 const samples = [
   {
-    img: "/placeholder.svg",
-    title: "Supercat Rescue",
+    img: "/photo-1517022812141-23620dba5c23", // green field, could suit long trip
+    title: "6-Month Adventure in South America",
     lang: "EN",
     style: "Modern",
   },
   {
-    img: "/placeholder.svg",
-    title: "Rocket Squirrel Adventure",
+    img: "/photo-1441057206919-63d19fac2369", // two penguins for a couple trip
+    title: "Trip to Rome with Girlfriend",
     lang: "EN",
     style: "Classic",
   },
   {
-    img: "/placeholder.svg",
-    title: "Mystery of the Lost Robot",
+    img: "/photo-1535268647677-300dbf3d78d1", // grey tabby kitten, playful for birthday
+    title: "2nd Birthday Bash!",
+    lang: "EN",
+    style: "Pop Art",
+  },
+  {
+    img: "/photo-1518877593221-1f28583780b4", // whale in nature for family trip
+    title: "Family Nature Retreat",
     lang: "EN",
     style: "Noir",
   },
   {
-    img: "/placeholder.svg",
-    title: "Comicland Showdown",
+    img: "/photo-1493962853295-0fd70327578a", // ox on mountain for university achievement
+    title: "Graduated Medical University",
     lang: "EN",
-    style: "Pop Art",
+    style: "Classic",
+  },
+  {
+    img: "/photo-1469041797191-50ace28483c3", // camels - party week, vibrant
+    title: "Party Week in Spain with Friends",
+    lang: "EN",
+    style: "Modern",
   },
 ];
 
