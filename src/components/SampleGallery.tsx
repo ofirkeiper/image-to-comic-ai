@@ -1,3 +1,4 @@
+
 import {
   Carousel,
   CarouselContent,
@@ -7,11 +8,9 @@ import {
 } from "@/components/ui/carousel";
 import SampleComicPreview from "./SampleComicPreview";
 import { generateComicPanels } from "../utils/generateComicPanels";
+import React, { useEffect, useState } from "react";
 
 const OPENAI_API_KEY = "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";
-
-// If you want, you could memoize the generated panels to avoid re-calling API
-import React, { useEffect, useState } from "react";
 
 const samples = [
   {
@@ -175,17 +174,24 @@ const styleColors = {
   "Pop Art": "from-blue-400 to-yellow-200"
 } as const;
 
-// For OpenAI-generated captions
+// This component will generate comic panels with OpenAI for each example:
 const MarvelSampleItem = ({ title, lang, style, panels }: any) => {
   const [generatedPanels, setGeneratedPanels] = useState<string[]>([]);
+
   useEffect(() => {
-    if (typeof panels === "object") {
-      const combined = panels.map((p: any) => p.caption).join(" ");
-      generateComicPanels(combined, OPENAI_API_KEY, panels.length)
-        .then(setGeneratedPanels)
-        .catch(() => setGeneratedPanels(panels.map((p: any) => p.caption)));
-    }
-  }, [panels]);
+    const generate = async () => {
+      const story = panels.map((p: any) => p.caption).join(" ");
+      try {
+        const aiPanels = await generateComicPanels(story, OPENAI_API_KEY, panels.length);
+        setGeneratedPanels(aiPanels);
+      } catch (e) {
+        setGeneratedPanels(panels.map((p: any) => p.caption));
+      }
+    };
+    generate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(panels)]);
+
   return (
     <div className={`rounded-2xl border-4 border-yellow-300 shadow-xl bg-gradient-to-br ${styleColors[style as keyof typeof styleColors]} flex flex-col items-center p-5 relative comic-outline`}>
       <div className="font-bangers text-2xl text-blue-900 mb-2 text-center comic-outline">{title}</div>
@@ -229,3 +235,4 @@ const SampleGallery = () => (
 );
 
 export default SampleGallery;
+
