@@ -1,14 +1,20 @@
 import { useRef, useState } from "react";
 import { Image, ArrowUp, Sparkles } from "lucide-react";
 import MarvelComicPreview from "./MarvelComicPreview";
+import { generateComicPanels } from "../utils/generateComicPanels";
+
+// Place your API key here (DEMO ONLY!):
+const OPENAI_API_KEY = "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";
 
 const ComicUploader = () => {
   const [image, setImage] = useState<string | null>(null);
   const [caption, setCaption] = useState<string>("");
   const fileInput = useRef<HTMLInputElement>(null);
 
-  // NEW: state to "generate" comic
+  // Add loading and AI panel state
   const [showPreview, setShowPreview] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [panelCaptions, setPanelCaptions] = useState<string[] | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
@@ -19,9 +25,20 @@ const ComicUploader = () => {
   };
 
   // Updated button click handler
-  const handleGenerateComic = (e: React.FormEvent) => {
+  const handleGenerateComic = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowPreview(true);
+    setLoading(true);
+    setPanelCaptions(null);
+    try {
+      const panels = await generateComicPanels(caption, OPENAI_API_KEY, 6);
+      setPanelCaptions(panels);
+      setShowPreview(true);
+    } catch (err) {
+      alert("Failed to generate comic panels: " + (err as any)?.message);
+      setPanelCaptions(null);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Reset preview to go back to editing
@@ -33,6 +50,7 @@ const ComicUploader = () => {
         uploadedImg={image}
         caption={caption}
         onBack={handleBack}
+        panelCaptions={panelCaptions ?? undefined}
       />
     );
   }
@@ -88,17 +106,31 @@ const ComicUploader = () => {
           <button
             type="submit"
             className="flex items-center justify-center gap-3 px-10 py-4 mt-2 bg-gradient-to-r from-yellow-400 via-pink-200 to-blue-400 text-blue-900 rounded-2xl font-bangers text-2xl border-4 border-blue-700 comic-outline shadow-2xl hover:bg-gradient-to-r hover:from-pink-300 hover:to-yellow-200 hover:text-white hover:scale-110 active:scale-105 transition-all animate-pop-btn relative"
-            disabled={!image || !caption}
+            disabled={!image || !caption || loading}
           >
-            <ArrowUp size={32} /> 
-            <Sparkles className="inline text-pink-500 animate-shine" size={24} />
-            Generate Comic
+            {loading ? (
+              <>
+                <Sparkles className="inline text-pink-500 animate-spin" size={24} />
+                Generating...
+              </>
+            ) : (
+              <>
+                <ArrowUp size={32} /> 
+                <Sparkles className="inline text-pink-500 animate-shine" size={24} />
+                Generate Comic
+              </>
+            )}
           </button>
         </div>
       </form>
-      {image && (
+      {image && !loading && (
         <div className="mt-8 text-green-700 font-semibold text-center w-full animate-fade-in">
           Great! Now click <span className="font-bangers comic-outline px-2 py-1 bg-gradient-to-r from-yellow-200 via-pink-100 to-blue-100 rounded-xl">Generate Comic</span> to start.
+        </div>
+      )}
+      {loading && (
+        <div className="mt-8 text-blue-700 font-semibold text-center w-full animate-fade-in">
+          Talking to AI... Creating your comic magic!
         </div>
       )}
     </section>

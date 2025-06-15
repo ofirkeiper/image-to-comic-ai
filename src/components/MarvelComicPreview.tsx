@@ -1,4 +1,3 @@
-
 import React from "react";
 
 // For demo: an array of Marvel/superhero placeholder action images (unsplash or svg)
@@ -36,6 +35,8 @@ type MarvelComicPreviewProps = {
   uploadedImg: string;
   caption: string;
   onBack?: () => void;
+  panelCaptions?: string[];
+  panelImages?: string[];
 };
 
 const comicLayouts = [
@@ -70,12 +71,19 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
   uploadedImg,
   caption,
   onBack,
+  panelCaptions,
+  panelImages,
 }) => {
-  const textPanels = splitTextToPanels(caption, 6);
+  // If panelCaptions provided (from OpenAI), use those. Else, fallback to old splitTextToPanels logic.
+  const textPanels = panelCaptions && panelCaptions.length >= 2
+    ? panelCaptions.slice(0, 6)
+    : splitTextToPanels(caption, 6);
   const n = textPanels.length;
 
-  // Compose panel images: first is uploaded, rest are marvel-style demo placeholders
-  const panelImgs = [uploadedImg, ...marvelImages].slice(0, n);
+  // Use uploadedImg as panelImages[0] and marvelImages for the rest or use explicit panelImages prop.
+  const panelImgs = panelImages && panelImages.length === n
+    ? panelImages
+    : [uploadedImg, ...marvelImages].slice(0, n);
 
   // For more Marvel fun: add dramatic panel CSS transforms
   const dramaticAngles = [
@@ -100,11 +108,7 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
           <div
             key={i}
             className={`rounded-2xl border-4 border-yellow-400 shadow-xl bg-gradient-to-tr from-pink-200 via-yellow-50 to-blue-100 relative flex flex-col items-center p-2 md:p-4 h-[180px] md:h-[220px] justify-end overflow-hidden comic-outline group ${dramaticAngles[i % dramaticAngles.length]} hover:scale-105 transition-transform`}
-            style={
-              i % 2 === 1
-                ? { zIndex: 10 }
-                : { zIndex: 0 }
-            }
+            style={i % 2 === 1 ? { zIndex: 10 } : { zIndex: 0 }}
           >
             <img
               src={img}

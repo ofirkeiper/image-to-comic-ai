@@ -6,6 +6,12 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import SampleComicPreview from "./SampleComicPreview";
+import { generateComicPanels } from "../utils/generateComicPanels";
+
+const OPENAI_API_KEY = "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";
+
+// If you want, you could memoize the generated panels to avoid re-calling API
+import React, { useEffect, useState } from "react";
 
 const samples = [
   {
@@ -169,28 +175,37 @@ const styleColors = {
   "Pop Art": "from-blue-400 to-yellow-200"
 } as const;
 
-const SampleComicPage = ({ panels, style }: { panels: { img: string, caption: string }[], style: string }) => (
-  <div className={`grid grid-cols-2 md:grid-cols-3 gap-3 mb-2 w-full`}>
-    {panels.map((panel, idx) => (
-      <div
-        key={idx}
-        className={`flex flex-col comic-outline rounded-xl border-2 border-blue-200 bg-gradient-to-br ${styleColors[style as keyof typeof styleColors]} shadow p-2 transition-all`}
-      >
-        <div className="w-full aspect-[4/5] bg-gray-200 overflow-hidden rounded-lg border-2 border-pink-200 mb-2 flex items-center justify-center">
-          <img
-            src={panel.img}
-            alt={panel.caption}
-            className="object-cover w-full h-full animate-fade-in"
-            style={{ maxHeight: 150 }}
-          />
-        </div>
-        <div className="font-bangers text-base text-center text-blue-900 bg-white/70 border border-yellow-300 rounded px-2 py-1 drop-shadow comic-outline">
-          {panel.caption}
-        </div>
+// For OpenAI-generated captions
+const MarvelSampleItem = ({ title, lang, style, panels }: any) => {
+  const [generatedPanels, setGeneratedPanels] = useState<string[]>([]);
+  useEffect(() => {
+    if (typeof panels === "object") {
+      const combined = panels.map((p: any) => p.caption).join(" ");
+      generateComicPanels(combined, OPENAI_API_KEY, panels.length)
+        .then(setGeneratedPanels)
+        .catch(() => setGeneratedPanels(panels.map((p: any) => p.caption)));
+    }
+  }, [panels]);
+  return (
+    <div className={`rounded-2xl border-4 border-yellow-300 shadow-xl bg-gradient-to-br ${styleColors[style as keyof typeof styleColors]} flex flex-col items-center p-5 relative comic-outline`}>
+      <div className="font-bangers text-2xl text-blue-900 mb-2 text-center comic-outline">{title}</div>
+      <div className="text-xs font-bold text-purple-600 mb-1 bg-white/60 px-3 py-1 rounded-lg border-2 border-blue-300 comic-outline">
+        {lang} &bull; {style}
       </div>
-    ))}
-  </div>
-);
+      <SampleComicPreview
+        panels={panels.map((panel: any, idx: number) => ({
+          img: panel.img,
+          caption: generatedPanels[idx] || panel.caption,
+        }))}
+        title={undefined}
+        style={style}
+      />
+      <span className="absolute -top-3 -right-3 bg-pink-300 text-white text-xs font-bangers px-2 py-[2px] rounded-full border-2 border-blue-400 shadow comic-outline animate-bounce-x z-20">
+        AI
+      </span>
+    </div>
+  );
+};
 
 const SampleGallery = () => (
   <section className="max-w-2xl mx-auto my-16 px-4 bg-gradient-to-br from-blue-50 via-yellow-50 to-pink-50 rounded-3xl pt-12 pb-7 border-8 border-pink-300 shadow-2xl comic-outline" id="samples">
@@ -200,18 +215,9 @@ const SampleGallery = () => (
     <div className="relative w-full">
       <Carousel className="relative">
         <CarouselContent>
-          {samples.map(({ title, lang, style, panels }, idx) => (
+          {samples.map((props, idx) => (
             <CarouselItem key={idx}>
-              <div className={`rounded-2xl border-4 border-yellow-300 shadow-xl bg-gradient-to-br ${styleColors[style as keyof typeof styleColors]} flex flex-col items-center p-5 relative comic-outline`}>
-                <div className="font-bangers text-2xl text-blue-900 mb-2 text-center comic-outline">{title}</div>
-                <div className="text-xs font-bold text-purple-600 mb-1 bg-white/60 px-3 py-1 rounded-lg border-2 border-blue-300 comic-outline">
-                  {lang} &bull; {style}
-                </div>
-                <SampleComicPreview panels={panels} title={undefined} style={style} />
-                <span className="absolute -top-3 -right-3 bg-pink-300 text-white text-xs font-bangers px-2 py-[2px] rounded-full border-2 border-blue-400 shadow comic-outline animate-bounce-x z-20">
-                  NEW
-                </span>
-              </div>
+              <MarvelSampleItem {...props} />
             </CarouselItem>
           ))}
         </CarouselContent>
