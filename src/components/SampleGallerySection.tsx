@@ -9,12 +9,15 @@ import {
 import MarvelSampleItem from "./MarvelSampleItem";
 import React from "react";
 
+// Add a "mood" and "customPrompt" for each sample
 const samples = [
   {
     img: "/photo-1517022812141-23620dba5c23",
     title: "6-Month Adventure in South America",
     lang: "EN",
     style: "Modern",
+    mood: "funny",
+    customPrompt: "Turn this travel adventure into a funny and light-hearted Marvel-style comic. Make each panel witty, silly, or poke fun at travel mishaps and joys.",
     panels: [
       {
         img: "/photo-1517022812141-23620dba5c23",
@@ -47,6 +50,8 @@ const samples = [
     title: "Trip to Rome with Girlfriend",
     lang: "EN",
     style: "Classic",
+    mood: "emotional",
+    customPrompt: "Retell this romantic vacation as a deeply emotional and heartwarming Marvel comic. Focus on sweet, meaningful, love-driven captions in each panel.",
     panels: [
       {
         img: "/photo-1441057206919-63d19fac2369",
@@ -71,6 +76,8 @@ const samples = [
     title: "2nd Birthday Bash!",
     lang: "EN",
     style: "Pop Art",
+    mood: "funny",
+    customPrompt: "Transform this toddler's birthday into a comical, over-the-top Marvel comic that makes parents and kids laugh out loud!",
     panels: [
       {
         img: "/photo-1535268647677-300dbf3d78d1",
@@ -95,6 +102,8 @@ const samples = [
     title: "Family Nature Retreat",
     lang: "EN",
     style: "Noir",
+    mood: "emotional",
+    customPrompt: "Rewrite this vacation as an emotionally resonant Marvel comic. Make it touching, focusing on family love, bonding, and the beauty of nature.",
     panels: [
       {
         img: "/photo-1518877593221-1f28583780b4",
@@ -119,6 +128,8 @@ const samples = [
     title: "Graduated Medical University",
     lang: "EN",
     style: "Classic",
+    mood: "emotional",
+    customPrompt: "Make this story about graduating med school uplifting and moving—focus on pride, relief, family, and dreams coming true. Make it Marvel-epic but heartfelt.",
     panels: [
       {
         img: "/photo-1493962853295-0fd70327578a",
@@ -143,6 +154,8 @@ const samples = [
     title: "Party Week in Spain with Friends",
     lang: "EN",
     style: "Modern",
+    mood: "funny",
+    customPrompt: "Reimagine this wild party trip as a Marvel comic full of slapstick, jokes, and over-the-top fun. Make each panel zany and energetic.",
     panels: [
       {
         img: "/photo-1469041797191-50ace28483c3",
@@ -174,7 +187,10 @@ const SampleGallerySection = () => (
         <CarouselContent>
           {samples.map((props, idx) => (
             <CarouselItem key={idx}>
-              <MarvelSampleItem {...props} />
+              <MarvelSampleItem 
+                {...props}
+                customPrompt={props.customPrompt}
+              />
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -186,3 +202,4 @@ const SampleGallerySection = () => (
 );
 
 export default SampleGallerySection;
+

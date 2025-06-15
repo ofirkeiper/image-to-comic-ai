@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import SampleComicPreview from "./SampleComicPreview";
 import { generateComicPanels } from "../utils/generateComicPanels";
 
+// Use your own OpenAI API key, though please move this to a secure place before deploying!
 const OPENAI_API_KEY = "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";
 
 const styleColors = {
@@ -17,16 +18,28 @@ type MarvelSampleItemProps = {
   lang: string;
   style: string;
   panels: { img: string; caption: string }[];
+  customPrompt?: string;
 };
 
-const MarvelSampleItem: React.FC<MarvelSampleItemProps> = ({ title, lang, style, panels }) => {
+const MarvelSampleItem: React.FC<MarvelSampleItemProps> = ({ title, lang, style, panels, customPrompt }) => {
   const [generatedPanels, setGeneratedPanels] = useState<string[]>([]);
 
   useEffect(() => {
     const generate = async () => {
       const story = panels.map((p) => p.caption).join(" ");
+      // Combine the base prompt and the custom prompt (if any)
+      const prompt = customPrompt
+        ? `${customPrompt}\nStory: """${story}"""`
+        : `You are a comic script writer. Given a short story, event, or moment, break it into a Marvel-style comic summary with up to ${panels.length} vividly captioned panels.
+Each panel should:
+- Advance the story (e.g. intro, conflict, climax, resolution).
+- Use short, dynamic language. Write dialogue in ALL CAPS and narration in present tense.
+Respond ONLY with a numbered list of the panel captions. No explanation.
+Text: """${story}"""
+Panels:
+`;
       try {
-        const aiPanels = await generateComicPanels(story, OPENAI_API_KEY, panels.length);
+        const aiPanels = await generateComicPanels(prompt, OPENAI_API_KEY, panels.length, true);
         setGeneratedPanels(aiPanels);
       } catch (e) {
         setGeneratedPanels(panels.map((p) => p.caption));
@@ -34,7 +47,7 @@ const MarvelSampleItem: React.FC<MarvelSampleItemProps> = ({ title, lang, style,
     };
     generate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(panels)]);
+  }, [JSON.stringify(panels), customPrompt]);
 
   return (
     <div className={`rounded-2xl border-4 border-yellow-300 shadow-xl bg-gradient-to-br ${styleColors[style as keyof typeof styleColors]} flex flex-col items-center p-5 relative comic-outline`}>
