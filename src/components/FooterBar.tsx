@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -7,6 +7,69 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
+// Reusable FAQ content
+const faqText = `
+1. How does the comic creation process work?
+Answer:
+It’s simple! Upload a photo, add a short description or dialogue, and our AI will generate a unique comic based on your input. You’ll be able to preview the result and either download it digitally or print it as a physical comic book.
+
+2. What kind of images can I upload?
+Answer:
+You can upload JPG, PNG, or WebP images. Make sure your image is clear and appropriate for all audiences. The better the quality, the better your comic will look!
+
+3. Can I choose the style of the comic?
+Answer:
+In the initial version, the comic style is automatically selected by the AI. In future updates, we plan to add style options (manga, cartoon, sketch, etc.).
+
+4. How long does it take to generate a comic?
+Answer:
+On average, it takes about 30–60 seconds for the AI to generate your comic after you upload your image and enter your text.
+
+5. Can I print my comic as a real book?
+Answer:
+Absolutely! Once your comic is ready, you’ll have the option to print it using our integration with Lulu. You’ll be able to choose your shipping location and see real-time pricing and delivery options.
+
+6. How much does it cost?
+Answer:
+You can try out comic creation for free (limited previews). Full-resolution downloads and printed copies are priced based on page count and shipping location. Visit our Pricing page for full details.
+
+7. Will I receive an invoice after payment?
+Answer:
+Yes. A detailed receipt and invoice will be emailed to you automatically after purchase.
+
+8. Can I edit my comic after it’s generated?
+Answer:
+Currently, editing is limited. You can regenerate your comic by uploading a new photo or adjusting the text. Full editing tools are coming soon.
+
+9. Who owns the rights to the comic I create?
+Answer:
+You own the rights to the comic you create, including the uploaded image and text. However, we may request permission to showcase your creation on our site (optional and opt-in only).
+
+10. Is the content safe for children?
+Answer:
+We aim to provide a safe and fun platform for all ages. However, AI content is generated based on user input, so we ask all users to follow our content guidelines and refrain from uploading offensive material.
+
+11. Can I use the comic commercially?
+Answer:
+Yes, as long as you own the image and the content you upload. Please ensure any uploaded content does not infringe on third-party rights.
+
+12. What languages do you support?
+Answer:
+The site is in English by default, but we support multiple languages depending on your location. You can also switch languages manually from the menu.
+
+13. Can I get a refund if I’m not happy with my comic?
+Answer:
+Digital products are non-refundable. For printed books, please contact our support if your order arrives damaged or there’s an issue with printing or delivery.
+
+14. I’m a teacher/parent/organization. Can I use this for a group?
+Answer:
+Yes! We love working with schools and organizations. Please contact us for bulk licensing or classroom tools.
+
+15. How can I contact support?
+Answer:
+You can reach us through the Contact Us page, where you can fill out a form or use the live chat (when available). We usually respond within 24 hours.
+`;
 
 const termsText = `
 Effective Date: [Insert Date]
@@ -112,7 +175,6 @@ We may update these Terms from time to time. When we do, we will revise the "Eff
 `;
 
 const FooterBar = () => {
-  // state is handled inside shadcn Dialog, so we don't need our own useState here
   return (
     <footer className="mt-20 w-full py-8 border-t-2 border-blue-200 bg-gradient-to-r from-blue-50 via-white to-yellow-100 shadow-t-sm">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between px-6">
@@ -122,9 +184,21 @@ const FooterBar = () => {
         </div>
         <ul className="flex flex-wrap gap-5 text-xs text-blue-900 font-semibold items-center">
           <li>
-            <a href="#" className="hover:text-yellow-500 underline transition">
-              FAQ
-            </a>
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="hover:text-yellow-500 underline transition bg-transparent border-none cursor-pointer p-0 m-0">
+                  Questions and Answers
+                </button>
+              </DialogTrigger>
+              <DialogContent className="max-h-[85vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="mb-4 text-2xl font-bold">Frequently Asked Questions (FAQ)</DialogTitle>
+                </DialogHeader>
+                <div className="text-xs whitespace-pre-line leading-relaxed text-blue-900 font-medium pr-2">
+                  {faqText}
+                </div>
+              </DialogContent>
+            </Dialog>
           </li>
           <li>
             <Dialog>
@@ -169,4 +243,3 @@ const FooterBar = () => {
 };
 
 export default FooterBar;
-
