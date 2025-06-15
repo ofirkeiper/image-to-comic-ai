@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Dialog,
@@ -7,6 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import ComicFAQDialog from "./ComicFAQDialog";
 
 // Reusable FAQ content
 const faqText = `
@@ -184,21 +184,7 @@ const FooterBar = () => {
         </div>
         <ul className="flex flex-wrap gap-5 text-xs text-blue-900 font-semibold items-center">
           <li>
-            <Dialog>
-              <DialogTrigger asChild>
-                <button className="hover:text-yellow-500 underline transition bg-transparent border-none cursor-pointer p-0 m-0">
-                  Questions and Answers
-                </button>
-              </DialogTrigger>
-              <DialogContent className="max-h-[85vh] overflow-y-auto">
-                <DialogHeader>
-                  <DialogTitle className="mb-4 text-2xl font-bold">Frequently Asked Questions (FAQ)</DialogTitle>
-                </DialogHeader>
-                <div className="text-xs whitespace-pre-line leading-relaxed text-blue-900 font-medium pr-2">
-                  {faqText}
-                </div>
-              </DialogContent>
-            </Dialog>
+            <ComicFAQDialog />
           </li>
           <li>
             <Dialog>

@@ -39,7 +39,6 @@ const Index = () => {
           <ComicUploader />
           <SampleGallery />
           <PricingSection />
-          <ComicFAQ />
         </main>
         <FooterBar />
       </div>
