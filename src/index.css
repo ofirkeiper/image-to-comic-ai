@@ -1,8 +1,7 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
 @layer base {
   :root {
@@ -99,5 +98,13 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: linear-gradient(135deg, #fffbe7 45%, #dce5fe 100%);
+  }
+
+  h1, .comic-title {
+    @apply font-bangers;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0 #fff, 2px 2px 0 #1e3a8a;
   }
 }
