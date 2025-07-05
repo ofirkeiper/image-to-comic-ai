@@ -1,3 +1,4 @@
+
 import React from "react";
 
 // For demo: an array of Marvel/superhero placeholder action images (unsplash or svg)
@@ -39,14 +40,6 @@ type MarvelComicPreviewProps = {
   panelImages?: string[];
 };
 
-const comicLayouts = [
-  "grid-cols-2", // 2 panels, side by side
-  "grid-cols-3", // 3 panels
-  "grid-cols-3", // 4 panels (some overlap/angles)
-  "grid-cols-6", // 5 panels, lots of variety
-  "grid-cols-6", // 6 panels
-];
-
 const ComicSpeechBubble = ({
   children,
   style,
@@ -55,15 +48,16 @@ const ComicSpeechBubble = ({
   style?: React.CSSProperties;
 }) => (
   <div
-    className="font-bangers text-lg md:text-xl text-blue-900 bg-white/90 border-2 border-blue-300 shadow comic-outline rounded-xl px-2 py-1 relative z-20 speech-bubble animate-pop-text"
-    style={style}
+    className="font-bold text-sm md:text-base text-black bg-white border-3 border-black rounded-2xl px-3 py-2 relative z-20 shadow-lg"
+    style={{
+      ...style,
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 75%, 25% 75%, 15% 100%, 10% 75%, 0% 75%)",
+      fontFamily: "'Comic Neue', 'Bangers', cursive",
+      letterSpacing: "0.5px",
+      lineHeight: "1.2"
+    }}
   >
-    <span>{children}</span>
-    <svg width="0" height="0">
-      <filter id="comic-shadow" colorInterpolationFilters="sRGB">
-        <feDropShadow stdDeviation="1" dx="1" dy="1" floodColor="#000" floodOpacity="0.15" />
-      </filter>
-    </svg>
+    <span className="relative z-10">{children}</span>
   </div>
 );
 
@@ -85,66 +79,78 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
     ? panelImages
     : [uploadedImg, ...marvelImages].slice(0, n);
 
-  // For more Marvel fun: add dramatic panel CSS transforms
-  const dramaticAngles = [
-    "-rotate-3",
-    "rotate-3",
-    "-rotate-6",
-    "rotate-2",
-    "rotate-1",
-    "-rotate-2",
-  ];
-
   return (
-    <section className="bg-gradient-to-tr from-blue-100 via-yellow-100 to-pink-50 rounded-3xl border-8 border-pink-300 shadow-2xl max-w-3xl mx-auto mt-12 px-3 py-8 comic-outline animate-fade-in relative">
-      <h2 className="text-center text-4xl md:text-5xl font-bangers comic-title text-blue-900 mb-5 animate-text-glow">
-        Your Marvel-Style Comic!
-      </h2>
-      <div className="absolute left-3 md:left-8 top-0 font-bangers text-yellow-700 bg-blue-200 px-4 py-2 rounded-xl border-2 border-blue-400 shadow comic-outline text-xl md:text-2xl -rotate-2 animate-shake">
-        AI Comic Demo
+    <section className="bg-white rounded-lg border-4 border-black shadow-xl max-w-4xl mx-auto mt-12 p-4 relative" style={{ backgroundColor: '#f8f8f8' }}>
+      {/* Comic Title Header */}
+      <div className="bg-red-600 text-white px-4 py-2 mb-4 relative">
+        <div className="absolute left-2 top-0 bg-white text-red-600 px-2 py-1 text-xs font-bold border-2 border-black" style={{ transform: 'translateY(-50%)' }}>
+          MARVEL
+        </div>
+        <h2 className="text-center text-2xl md:text-3xl font-bold uppercase tracking-wider ml-16">
+          Your Epic Story
+        </h2>
+        <div className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-black px-2 py-1 text-xs font-bold border border-black rounded-full">
+          #1
+        </div>
       </div>
-      <div className={`grid gap-4 ${comicLayouts[n - 2] || "grid-cols-2"}`}>
+
+      {/* Comic Panel Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 bg-white p-2 border-2 border-black">
         {panelImgs.map((img, i) => (
           <div
             key={i}
-            className={`rounded-2xl border-4 border-yellow-400 shadow-xl bg-gradient-to-tr from-pink-200 via-yellow-50 to-blue-100 relative flex flex-col items-center p-2 md:p-4 h-[180px] md:h-[220px] justify-end overflow-hidden comic-outline group ${dramaticAngles[i % dramaticAngles.length]} hover:scale-105 transition-transform`}
-            style={i % 2 === 1 ? { zIndex: 10 } : { zIndex: 0 }}
+            className="relative border-3 border-black bg-white overflow-hidden"
+            style={{ 
+              aspectRatio: i === 0 ? '16/10' : '4/3',
+              gridColumn: i === 0 && n > 2 ? 'span 2' : 'span 1'
+            }}
           >
             <img
               src={img}
               alt={`Panel ${i + 1}`}
-              className="w-full h-full object-cover rounded-xl border-2 border-blue-300 shadow-lg absolute top-0 left-0 z-0 opacity-80"
-              style={{ filter: "drop-shadow(0 4px 24px #ffed73aa) contrast(1.05)" }}
+              className="w-full h-full object-cover"
+              style={{ 
+                filter: "contrast(1.1) saturate(1.2)",
+              }}
             />
-            <div className="absolute inset-0 pointer-events-none" />
-            <div className="relative z-20 mt-auto flex justify-center items-end h-full w-full p-2">
+            {/* Panel border effect */}
+            <div className="absolute inset-0 border-2 border-black pointer-events-none" />
+            
+            {/* Speech bubble positioned in corner */}
+            <div className="absolute bottom-2 left-2 right-2 z-20">
               <ComicSpeechBubble
                 style={{
                   maxWidth: "90%",
-                  filter: "url(#comic-shadow)",
-                  marginBottom: "0.5em",
+                  fontSize: i === 0 ? '14px' : '12px'
                 }}
               >
                 {textPanels[i]}
               </ComicSpeechBubble>
             </div>
-            <div className="absolute left-2 top-2 w-8 h-8 bg-yellow-300 text-blue-800 text-center font-bangers text-lg border-2 border-pink-300 rounded-full shadow comic-outline z-30 opacity-90 animate-pulse">
+
+            {/* Panel number */}
+            <div className="absolute top-1 left-1 w-6 h-6 bg-yellow-300 text-black text-center text-xs font-bold border border-black rounded-full flex items-center justify-center z-30">
               {i + 1}
             </div>
           </div>
         ))}
       </div>
+
+      {/* Marvel-style footer */}
+      <div className="mt-4 flex justify-between items-center text-xs bg-red-600 text-white px-3 py-1">
+        <span>MARVEL COMICS GROUP</span>
+        <span>KEEPICS PRESENTS</span>
+        <span>$3.99 US</span>
+      </div>
+
       {onBack && (
         <button
-          className="mt-6 font-bangers text-lg text-blue-900 bg-yellow-200 rounded-xl px-5 py-2 border-2 border-blue-400 comic-outline shadow hover:bg-pink-200 transition-all"
+          className="mt-4 font-bold text-lg text-white bg-red-600 rounded-lg px-6 py-2 border-2 border-black shadow hover:bg-red-700 transition-all uppercase"
           onClick={onBack}
         >
           ← Back to Editor
         </button>
       )}
-      <div className="mt-6 text-center text-pink-700 text-sm italic opacity-75">
-        When you connect your OpenAI or image generation API, this will be a real Marvel-style comic based on your upload & story!
-      </div>
     </section>
   );
 };
