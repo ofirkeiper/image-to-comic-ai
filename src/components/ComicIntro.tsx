@@ -34,43 +34,71 @@ const ComicIntro = ({ onFinish }: { onFinish: () => void }) => {
 
   // Skip button handler
   const handleSkip = () => {
-    console.log("Skip button clicked");
+    console.log("Skip button clicked - forcing finish");
     setShow(false);
-    setTimeout(() => onFinish(), 300);
+    setTimeout(() => {
+      console.log("Skip timeout completed, calling onFinish");
+      onFinish();
+    }, 100);
   };
 
+  // Keyboard skip handler
   useEffect(() => {
-    console.log("ComicIntro useEffect triggered, page:", page);
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+        console.log("Keyboard skip triggered:", e.key);
+        handleSkip();
+      }
+    };
     
-    // Shorter safety timeout to prevent getting stuck
-    const safetyTimeout = setTimeout(() => {
-      console.log("Safety timeout triggered, forcing finish");
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
+  useEffect(() => {
+    console.log("ComicIntro useEffect triggered, page:", page, "show:", show);
+    
+    // Emergency timeout - force finish after 2 seconds
+    const emergencyTimeout = setTimeout(() => {
+      console.log("EMERGENCY: Forcing intro to finish after 2 seconds");
       setShow(false);
-      setTimeout(() => onFinish(), 300);
-    }, 3000); // 3 seconds max for entire intro
+      setTimeout(() => {
+        console.log("Emergency finish calling onFinish");
+        onFinish();
+      }, 100);
+    }, 2000);
 
     if (page < 3) {
-      const timeout = setTimeout(() => {
-        console.log("Moving to next page:", page + 1);
-        setPage(p => p + 1);
-      }, 800); // Shorter page transitions
+      console.log("Setting timeout for page transition from", page, "to", page + 1);
+      const pageTimeout = setTimeout(() => {
+        console.log("Page timeout triggered, moving to page:", page + 1);
+        setPage(p => {
+          console.log("setPage called, current:", p, "new:", p + 1);
+          return p + 1;
+        });
+      }, 600); // Shorter transitions
+      
       return () => {
-        clearTimeout(timeout);
-        clearTimeout(safetyTimeout);
+        console.log("Cleaning up timeouts for page:", page);
+        clearTimeout(pageTimeout);
+        clearTimeout(emergencyTimeout);
       };
     } else {
-      // Start fade out effect
-      console.log("Starting fade out");
-      const timeout = setTimeout(() => {
+      // Final page - start fade out
+      console.log("Final page reached, starting fade out");
+      const fadeTimeout = setTimeout(() => {
+        console.log("Fade timeout triggered, hiding intro");
         setShow(false);
         setTimeout(() => {
-          console.log("Calling onFinish");
+          console.log("Final timeout calling onFinish");
           onFinish();
-        }, 300);
-      }, 600);
+        }, 200);
+      }, 400);
+      
       return () => {
-        clearTimeout(timeout);
-        clearTimeout(safetyTimeout);
+        console.log("Cleaning up final timeouts");
+        clearTimeout(fadeTimeout);
+        clearTimeout(emergencyTimeout);
       };
     }
   }, [page, onFinish]);
@@ -79,17 +107,30 @@ const ComicIntro = ({ onFinish }: { onFinish: () => void }) => {
     <div
       className={`
         fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-yellow-200 via-pink-200 to-blue-300
-        transition-all duration-700 ${show ? "opacity-100" : "opacity-0 pointer-events-none"}
+        transition-all duration-300 ${show ? "opacity-100" : "opacity-0 pointer-events-none"}
       `}
-      style={{ fontFamily: "'Bangers', cursive" }}
+      style={{ fontFamily: "'Bangers', cursive, sans-serif" }}
     >
-      {/* Skip button */}
+      {/* Multiple skip options */}
       <button
         onClick={handleSkip}
-        className="absolute top-4 right-4 z-[10000] bg-white/90 hover:bg-white text-blue-800 px-4 py-2 rounded-xl border-2 border-blue-300 font-bold text-sm transition-all hover:scale-105"
+        className="absolute top-4 right-4 z-[10000] bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl border-2 border-red-700 font-bold text-lg transition-all hover:scale-105 animate-pulse"
+        style={{ fontFamily: "'Bangers', cursive, sans-serif" }}
       >
-        Skip Intro
+        SKIP INTRO
       </button>
+
+      <button
+        onClick={handleSkip}
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-[10000] bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all"
+      >
+        Press Enter or Click to Skip
+      </button>
+
+      {/* Current page indicator */}
+      <div className="absolute top-4 left-4 z-[10000] bg-white/90 px-3 py-1 rounded-lg text-blue-800 font-bold">
+        Page {page + 1}/4
+      </div>
 
       {/* Comic pages */}
       <div className="relative w-[350px] h-[500px]">
@@ -98,58 +139,30 @@ const ComicIntro = ({ onFinish }: { onFinish: () => void }) => {
             key={i}
             className={`
               absolute top-0 left-0 w-full h-full rounded-[2rem] border-[6px] shadow-2xl flex flex-col items-center justify-center
-              bg-gradient-to-br ${PAGE_COLORS[i]}
-              transition-transform duration-700
+              bg-gradient-to-br ${PAGE_COLORS[i] || PAGE_COLORS[0]}
+              transition-transform duration-500
               ${page === i
                 ? "z-30 scale-100 rotate-0"
                 : page > i
                   ? "z-10 scale-[0.97] rotate-[-18deg] -translate-x-10 opacity-0"
                   : "z-20 scale-95 rotate-6 opacity-80"}
-              ${i === 2 ? "delay-200" : i === 1 ? "delay-100" : ""}
             `}
             style={{
               boxShadow: page === i ? "0 8px 36px #ffae0080" : undefined,
               borderColor: i === page ? "#facc15" : "#ea76f6",
-              filter: i === page ? "drop-shadow(0 0 20px #facc15b9)" : undefined,
-              textShadow: "2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000"
             }}
           >
-            <span
-              className="text-[120px] leading-[0.9] text-pink-400 mb-4"
-              style={{ 
-                pointerEvents: "none",
-                animation: "wiggleX 1s ease-in-out infinite"
-              }}
-            >{PAGE_TEXT[i].emoji}</span>
+            <span className="text-[120px] leading-[0.9] text-pink-400 mb-4">
+              {PAGE_TEXT[i]?.emoji || "✨"}
+            </span>
             <h1 className="text-4xl md:text-5xl text-blue-800 mb-3 font-bold px-3 text-center">
-              {PAGE_TEXT[i].title}
+              {PAGE_TEXT[i]?.title || "Welcome!"}
             </h1>
             <p className="text-xl text-pink-700 mb-2 bg-white/50 px-3 py-1 rounded-lg border-2 border-pink-300">
-              {PAGE_TEXT[i].subtitle}
+              {PAGE_TEXT[i]?.subtitle || "Let's get started!"}
             </p>
           </div>
         ))}
-        
-        {/* Comic panel border */}
-        <div className="absolute inset-0 rounded-[2rem] border-[8px] border-blue-700 pointer-events-none" style={{
-          borderStyle: "double"
-        }} />
-        
-        {/* Comic effects */}
-        <div className="absolute -top-4 -left-10 text-yellow-600 text-3xl rotate-[-22deg] font-bold" 
-             style={{ 
-               textShadow: "2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000",
-               animation: "popText 2s ease-in-out infinite"
-             }}>
-          POW!
-        </div>
-        <div className="absolute -bottom-6 right-0 text-pink-400 text-2xl rotate-12 font-bold"
-             style={{
-               textShadow: "2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000",
-               animation: "bounceX 2s ease-in-out infinite"
-             }}>
-          WOW!
-        </div>
       </div>
     </div>
   );
