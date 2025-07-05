@@ -1,0 +1,104 @@
+
+/* Modern Components */
+@layer components {
+  /* Card System */
+  .modern-card {
+    @apply relative bg-card rounded-2xl border border-border shadow-md hover:shadow-lg transition-all duration-300;
+  }
+  
+  .modern-card-elevated {
+    @apply modern-card shadow-lg hover:shadow-xl;
+  }
+  
+  .modern-card-content {
+    @apply p-6 space-y-4;
+  }
+  
+  /* Button System */
+  .btn-modern {
+    @apply inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .btn-primary {
+    @apply btn-modern bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md;
+  }
+  
+  .btn-secondary {
+    @apply btn-modern bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border;
+  }
+  
+  .btn-ghost {
+    @apply btn-modern hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .btn-outline {
+    @apply btn-modern border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground;
+  }
+  
+  /* Input System */
+  .input-modern {
+    @apply flex h-12 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm ring-offset-background transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  /* Speech Bubble */
+  .speech-bubble {
+    @apply relative bg-white rounded-2xl border-2 border-blue-300 p-6 shadow-lg;
+  }
+  
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
+  }
+  
+  /* Navigation */
+  .nav-modern {
+    @apply sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60;
+  }
+  
+  .nav-item {
+    @apply relative px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors;
+  }
+  
+  .nav-item-active {
+    @apply nav-item text-foreground;
+  }
+  
+  .nav-item-active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: hsl(var(--primary));
+  }
+  
+  /* Form Styles */
+  .form-group {
+    @apply space-y-2;
+  }
+  
+  .form-label {
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  }
+  
+  .form-message {
+    @apply text-sm font-medium text-destructive;
+  }
+  
+  /* Loading States */
+  .loading-skeleton {
+    @apply animate-pulse rounded-md bg-muted;
+  }
+  
+  .loading-spinner {
+    @apply animate-spin rounded-full border-2 border-muted border-t-primary;
+  }
+}
