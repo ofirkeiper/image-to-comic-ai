@@ -2,7 +2,11 @@
 import { useRef, useState } from "react";
 import { Image, ArrowUp, Sparkles } from "lucide-react";
 import MarvelComicPreview from "./MarvelComicPreview";
-import { supabase } from "../lib/supabase";
+// import { generateComicPanels } from "../utils/generateComicPanels"; // Unused with new external API
+
+// MOCK/PLACEHOLDER: Add your actual API key and endpoint below!
+const EXTERNAL_API_KEY = "YOUR_MOCK_API_KEY_HERE";
+const EXTERNAL_API_ENDPOINT = "https://api.example.com/generate-comic";
 
 const ComicUploader = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -24,7 +28,7 @@ const ComicUploader = () => {
     }
   };
 
-  // Call Supabase Edge Function for comic generation
+  // External comic API call
   const handleGenerateComic = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -34,25 +38,35 @@ const ComicUploader = () => {
 
     try {
       if (!image || !caption) throw new Error("Please upload an image and enter a caption!");
-
-      // Call Supabase Edge Function
-      const { data, error: functionError } = await supabase.functions.invoke('generate-comic', {
-        body: {
-          image: image, // Base64 data URL
-          caption: caption,
-          style: "marvel"
-        }
+      // Compose request
+      const payload = {
+        prompt: caption,
+        image, // Base64 data URL
+        style: "marvel", // Optional: add style if your API supports it
+      };
+      const response = await fetch(EXTERNAL_API_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": EXTERNAL_API_KEY
+        },
+        body: JSON.stringify(payload)
       });
 
-      if (functionError) {
-        throw new Error(functionError.message || "Comic generation failed");
+      if (!response.ok) {
+        throw new Error("Comic generation failed: " + response.statusText);
       }
+      // Response: { panels: [{ img: string, caption: string }] }
+      const data = await response.json();
 
       // Validate panels structure
-      if (!data.panels || !Array.isArray(data.panels) || data.panels.length < 2) {
+      if (
+        !data.panels ||
+        !Array.isArray(data.panels) ||
+        data.panels.length < 2
+      ) {
         throw new Error("Invalid comic API response");
       }
-
       setPanelCaptions(data.panels.map((p: any) => p.caption));
       setPanelImages(data.panels.map((p: any) => p.img));
       setShowPreview(true);
@@ -155,7 +169,7 @@ const ComicUploader = () => {
       )}
       {loading && (
         <div className="mt-8 text-blue-700 font-semibold text-center w-full animate-fade-in">
-          Creating your comic magic with AI...
+          Talking to API... Creating your comic magic!
         </div>
       )}
       {error && (
@@ -168,3 +182,4 @@ const ComicUploader = () => {
 };
 
 export default ComicUploader;
+
