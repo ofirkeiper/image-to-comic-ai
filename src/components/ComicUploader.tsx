@@ -1,12 +1,15 @@
+
 import { useRef, useState } from "react";
 import { Image, ArrowUp, Sparkles } from "lucide-react";
 import MarvelComicPreview from "./MarvelComicPreview";
 import { generateComicPanels } from "../utils/generateComicPanels";
+import { useTranslation } from "@/contexts/TranslationContext";
 
 // Place your API key here (DEMO ONLY!):
 const OPENAI_API_KEY = "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";
 
 const ComicUploader = () => {
+  const { t } = useTranslation();
   const [image, setImage] = useState<string | null>(null);
   const [caption, setCaption] = useState<string>("");
   const fileInput = useRef<HTMLInputElement>(null);
@@ -60,9 +63,9 @@ const ComicUploader = () => {
       id="comic-uploader"
       className="w-full max-w-4xl mx-auto bg-gradient-to-br from-yellow-100 via-pink-100 to-blue-100 border-8 border-pink-300 rounded-[2.2rem] drop-shadow-2xl shadow-yellow-200 p-10 mb-12 flex flex-col items-center comic-outline animate-fade-in"
     >
-      <h2 className="comic-title text-5xl text-blue-700 mb-4 animate-text-glow">Start Your Comic</h2>
-      <p className="mb-5 text-xl text-blue-700 font-semibold bg-gradient-to-r from-yellow-50 via-pink-50 to-blue-50 px-4 py-2 rounded-full shadow-inner border-2 border-yellow-200 comic-outline animate-shake">
-        1. Upload an image <br/> 2. Add a caption<br/> 3. Generate!
+      <h2 className="comic-title text-5xl text-blue-700 mb-4 animate-text-glow">{t('uploader.title')}</h2>
+      <p className="mb-5 text-xl text-blue-700 font-semibold bg-gradient-to-r from-yellow-50 via-pink-50 to-blue-50 px-4 py-2 rounded-full shadow-inner border-2 border-yellow-200 comic-outline animate-shake whitespace-pre-line text-center">
+        {t('uploader.steps')}
       </p>
       <form className="flex flex-col sm:flex-row w-full gap-8" onSubmit={handleGenerateComic}>
         <div className="flex flex-col items-center w-full sm:w-1/2">
@@ -80,8 +83,8 @@ const ComicUploader = () => {
             ) : (
               <div className="flex flex-col items-center">
                 <Image size={48} className="text-yellow-500 mb-2 animate-bounce" />
-                <span className="text-pink-600 text-xl font-bangers animate-pop-text">Click to upload</span>
-                <span className="text-xs text-blue-600">JPG, PNG, or WebP</span>
+                <span className="text-pink-600 text-xl font-bangers animate-pop-text">{t('uploader.clickUpload')}</span>
+                <span className="text-xs text-blue-600">{t('uploader.fileTypes')}</span>
               </div>
             )}
             <input
@@ -92,7 +95,7 @@ const ComicUploader = () => {
               onChange={handleImageChange}
             />
             <span className="absolute -top-4 left-3 bg-gradient-to-r from-yellow-300 via-pink-200 to-blue-200 px-3 py-1 rounded-xl font-bangers text-blue-700 shadow comic-outline border-2 border-pink-400 text-xs animate-wiggle-x">
-              comic panel
+              {t('uploader.comicPanel')}
             </span>
           </div>
         </div>
@@ -100,7 +103,7 @@ const ComicUploader = () => {
           <textarea
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
-            placeholder="Describe what's happening in your image or write a dialogue!"
+            placeholder={t('uploader.placeholder')}
             className="w-full min-h-[120px] max-h-[180px] shadow appearance-none rounded-xl border-4 border-blue-400 bg-white/90 px-4 py-3 mb-3 text-lg focus:outline-none focus:ring focus:ring-yellow-400 focus:border-yellow-400 resize-none transition-all comic-outline"
           />
           <button
@@ -111,13 +114,13 @@ const ComicUploader = () => {
             {loading ? (
               <>
                 <Sparkles className="inline text-pink-500 animate-spin" size={24} />
-                Generating...
+                {t('uploader.generating')}
               </>
             ) : (
               <>
                 <ArrowUp size={32} /> 
                 <Sparkles className="inline text-pink-500 animate-shine" size={24} />
-                Generate Comic
+                {t('uploader.generateComic')}
               </>
             )}
           </button>
@@ -125,12 +128,12 @@ const ComicUploader = () => {
       </form>
       {image && !loading && (
         <div className="mt-8 text-green-700 font-semibold text-center w-full animate-fade-in">
-          Great! Now click <span className="font-bangers comic-outline px-2 py-1 bg-gradient-to-r from-yellow-200 via-pink-100 to-blue-100 rounded-xl">Generate Comic</span> to start.
+          {t('uploader.ready')}
         </div>
       )}
       {loading && (
         <div className="mt-8 text-blue-700 font-semibold text-center w-full animate-fade-in">
-          Talking to AI... Creating your comic magic!
+          {t('uploader.aiWorking')}
         </div>
       )}
     </section>
