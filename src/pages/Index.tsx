@@ -1,4 +1,3 @@
-
 import ComicHero from "@/components/ComicHero";
 import ComicUploader from "@/components/ComicUploader";
 import SampleGallery from "@/components/SampleGallery";
@@ -7,11 +6,9 @@ import FooterBar from "@/components/FooterBar";
 import ComicIntro from "@/components/ComicIntro";
 import ComicFAQ from "@/components/ComicFAQ";
 import { useState } from "react";
-import { useTranslation } from "../contexts/TranslationContext";
 
 const Index = () => {
   const [introDone, setIntroDone] = useState(false);
-  const { t } = useTranslation();
 
   return (
     <>
@@ -21,20 +18,20 @@ const Index = () => {
           <span className="font-bangers text-2xl text-blue-800 tracking-wide">keepics</span>
           <ul className="flex gap-8 font-semibold text-blue-900 text-md">
             <li>
-              <a href="#comic-uploader" className="hover:text-yellow-500 transition-all">{t('create')}</a>
+              <a href="#comic-uploader" className="hover:text-yellow-500 transition-all">Create</a>
             </li>
             <li>
-              <a href="#samples" className="hover:text-yellow-500 transition-all">{t('samples')}</a>
+              <a href="#samples" className="hover:text-yellow-500 transition-all">Samples</a>
             </li>
             <li>
-              <a href="#pricing" className="hover:text-yellow-500 transition-all">{t('pricing')}</a>
+              <a href="#pricing" className="hover:text-yellow-500 transition-all">Pricing</a>
             </li>
             <li>
-              <a href="#" className="hover:text-yellow-500 transition-all">{t('faq')}</a>
+              <a href="#" className="hover:text-yellow-500 transition-all">FAQ</a>
             </li>
           </ul>
           <button className="rounded bg-blue-600 text-white px-6 py-2 font-bangers shadow hover:bg-yellow-400 hover:text-blue-900 border-2 border-blue-700 transition-all">
-            {t('login')}
+            Login
           </button>
         </nav>
         <ComicHero />
