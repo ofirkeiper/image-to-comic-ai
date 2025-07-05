@@ -39,8 +39,7 @@ Text: """${story}"""
 Panels:
 `;
       try {
-        // FIX: Remove the fourth argument ('true')
-        const aiPanels = await generateComicPanels(prompt, OPENAI_API_KEY, panels.length);
+        const aiPanels = await generateComicPanels(prompt, OPENAI_API_KEY, panels.length, true);
         setGeneratedPanels(aiPanels);
       } catch (e) {
         setGeneratedPanels(panels.map((p) => p.caption));
