@@ -34,12 +34,23 @@ const ComicIntro = ({ onFinish }: { onFinish: () => void }) => {
 
   useEffect(() => {
     console.log("ComicIntro useEffect triggered, page:", page);
+    
+    // Safety timeout to ensure intro doesn't get stuck
+    const safetyTimeout = setTimeout(() => {
+      console.log("Safety timeout triggered, forcing finish");
+      setShow(false);
+      setTimeout(() => onFinish(), 300);
+    }, 6000); // 6 seconds max for entire intro
+
     if (page < 3) {
       const timeout = setTimeout(() => {
         console.log("Moving to next page:", page + 1);
         setPage(p => p + 1);
       }, 1100);
-      return () => clearTimeout(timeout);
+      return () => {
+        clearTimeout(timeout);
+        clearTimeout(safetyTimeout);
+      };
     } else {
       // Start fade out effect
       console.log("Starting fade out");
@@ -50,7 +61,10 @@ const ComicIntro = ({ onFinish }: { onFinish: () => void }) => {
           onFinish();
         }, 600); // after fade out, call onFinish
       }, 800);
-      return () => clearTimeout(timeout);
+      return () => {
+        clearTimeout(timeout);
+        clearTimeout(safetyTimeout);
+      };
     }
   }, [page, onFinish]);
 

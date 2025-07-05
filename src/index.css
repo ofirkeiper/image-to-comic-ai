@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Bangers&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -233,6 +233,21 @@
   .comic-button:hover::before {
     opacity: 1;
   }
+
+  /* Comic Outline Effect */
+  .comic-outline {
+    text-shadow: 2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000;
+  }
+
+  /* Text Shadow */
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+
+  /* Drop Shadow Comic */
+  .drop-shadow-comic {
+    filter: drop-shadow(3px 3px 0px #1e40af) drop-shadow(4px 4px 0px #ffffff);
+  }
   
   /* Form Styles */
   .form-group {
@@ -307,6 +322,50 @@
   
   .animate-wiggle {
     animation: wiggle 0.5s ease-in-out;
+  }
+
+  .animate-wiggle-x {
+    animation: wiggleX 1s ease-in-out infinite;
+  }
+
+  .animate-bounce-x {
+    animation: bounceX 2s ease-in-out infinite;
+  }
+
+  .animate-pop-text {
+    animation: popText 2s ease-in-out infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounceSlow 3s ease-in-out infinite;
+  }
+
+  .animate-hero-pop {
+    animation: heroPopIn 0.8s ease-out forwards;
+  }
+
+  .animate-hero-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  .animate-gradient-move {
+    animation: gradientMove 3s ease-in-out infinite;
+  }
+
+  .animate-pop-btn {
+    animation: popButton 2s ease-in-out infinite;
+  }
+
+  .animate-shine {
+    animation: shine 2s ease-in-out infinite;
+  }
+
+  .animate-text-glow {
+    animation: textGlow 2s ease-in-out infinite;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
   }
   
   .animate-spin-slow {
@@ -451,6 +510,121 @@
   }
   75% {
     transform: rotate(2deg);
+  }
+}
+
+@keyframes wiggleX {
+  0%, 100% {
+    transform: translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(5px) rotate(1deg);
+  }
+}
+
+@keyframes bounceX {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(-10px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+}
+
+@keyframes popText {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes bounceSlow {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes heroPopIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+}
+
+@keyframes gradientMove {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes popButton {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shine {
+  0%, 100% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(180deg);
+    opacity: 0.8;
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
   }
 }
 
