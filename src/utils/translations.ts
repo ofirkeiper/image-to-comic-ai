@@ -1,1888 +1,1217 @@
-export type Language = 'en' | 'fr' | 'es' | 'de' | 'it' | 'pt' | 'ru' | 'zh' | 'ja' | 'ar' | 'ko';
+export type Language = 'en' | 'es' | 'fr' | 'de' | 'he' | 'it' | 'pt' | 'ru' | 'ja' | 'zh' | 'ar';
 
 export const languages: Record<Language, string> = {
   en: 'English',
-  fr: 'Français',
   es: 'Español',
+  fr: 'Français',
   de: 'Deutsch',
+  he: 'עברית',
   it: 'Italiano',
   pt: 'Português',
   ru: 'Русский',
-  zh: '中文',
   ja: '日本語',
-  ar: 'العربية',
-  ko: '한국어'
+  zh: '中文',
+  ar: 'العربية'
 };
 
-export const translations = {
+export const translations: Record<Language, Record<string, string>> = {
   en: {
     // Navigation
-    nav: {
-      create: "Create",
-      samples: "Samples",
-      pricing: "Pricing",
-      faq: "FAQ",
-      login: "Login"
-    },
+    'nav.create': 'Create',
+    'nav.samples': 'Samples',
+    'nav.pricing': 'Pricing',
+    'nav.faq': 'FAQ',
+    'nav.login': 'Login',
     
-    // Hero Section
-    hero: {
-      memories: "memories",
-      memoriesSubtext: "into epic Marvel-style comics!",
-      createComic: "Create My Comic"
-    },
-    
-    // Comic Uploader
-    uploader: {
-      title: "Create Your Comic",
-      steps: "1. Upload a photo 📸\n2. Describe your story ✍️\n3. Get your Marvel comic! 🦸‍♂️",
-      clickUpload: "Click to Upload",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "Comic Panel",
-      placeholder: "Describe your story, adventure, or memory here... The more details, the better your comic will be!",
-      generating: "Generating...",
-      generateComic: "Generate Comic",
-      ready: "✅ Ready to create your comic!",
-      aiWorking: "🤖 AI is working its magic..."
-    },
-    
-    // Preview
-    preview: {
-      title: "Your Epic Adventure",
-      aiGenerated: "AI Generated Comic",
-      marvelComics: "MARVEL COMICS",
-      presents: "PRESENTS",
-      price: "$3.99",
-      backToEditor: "← Back to Editor"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "Choose Your Comic Style",
-      digitalTitle: "Digital Comic",
-      digitalFeature1: "High-quality PDF download",
-      digitalFeature2: "Perfect for sharing online",
-      digitalFeature3: "Instant delivery",
-      digitalPrice: "$4.99",
-      printedTitle: "Printed Comic",
-      printedFeature1: "Professional print quality",
-      printedFeature2: "Shipped to your door",
-      printedFeature3: "Collector's edition feel",
-      printedPrice: "$12.99"
-    },
-    
-    // FAQ
-    faq: {
-      title: "Questions & Answers",
-      q1: "How does the AI create my comic?",
-      a1: "Our AI analyzes your photo and story to create Marvel-style panels with dynamic captions and layouts!",
-      q2: "Can I customize my comic after it's generated?",
-      a2: "Yes! You can edit text, adjust panels, and choose different comic styles before finalizing.",
-      q3: "What image formats do you accept?",
-      a3: "We support PNG, JPG, and WEBP formats. For best results, use high-resolution images!",
-      q4: "How long does it take to generate a comic?",
-      a4: "Most comics are ready in 30-60 seconds! Complex stories might take a bit longer.",
-      q5: "Can I create comics in different languages?",
-      a5: "Absolutely! Our AI supports multiple languages for both input and comic generation.",
-      exclamation: "WOW!",
-      contact: "Still have questions?",
-      contactLink: "Contact us!"
-    },
-    
-    // Footer
-    footer: {
-      rights: "All rights reserved",
-      terms: "Terms of Service",
-      privacy: "Privacy Policy",
-      contact: "Contact",
-      questionsAnswers: "Q&A"
-    },
-    
-    // Terms of Service
-    terms: {
-      effective: "Effective Date",
-      title: "Terms of Service",
-      eligibility: "Eligibility",
-      eligibilityText: "You must be at least 13 years old to use our service. By using keepics, you agree to these terms.",
-      userResponsibilities: "User Responsibilities",
-      userResponsibilitiesText: "You are responsible for the content you upload. Do not upload copyrighted material, inappropriate content, or content that violates others' rights.",
-      aiContent: "AI-Generated Content",
-      aiContentText: "Comics are generated using AI technology. While we strive for quality, results may vary. You own the rights to your final comic.",
-      ownership: "Ownership",
-      ownershipText: "You retain ownership of your uploaded photos. keepics owns the AI-generated comic elements and styling.",
-      payments: "Payments",
-      paymentsText: "All payments are processed securely. Digital comics are delivered instantly. Physical comics ship within 5-7 business days.",
-      contact: "Contact Information",
-      contactText: "For questions about these terms, contact us at legal@keepics.com"
-    },
-    
-    // Privacy Policy
-    privacy: {
-      effective: "Effective Date",
-      title: "Privacy Policy",
-      infoCollect: "Information We Collect",
-      infoCollectText: "We collect photos you upload, story descriptions, and basic usage analytics to improve our service.",
-      howUse: "How We Use Your Information",
-      howUseText: "Your data is used solely to generate your comics and improve our AI. We never sell your personal information.",
-      sharing: "Information Sharing",
-      sharingText: "We do not share your personal information with third parties except as required by law.",
-      dataRetention: "Data Retention",
-      dataRetentionText: "Uploaded photos are deleted after 30 days. Generated comics are stored for your account access.",
-      yourRights: "Your Rights",
-      yourRightsText: "You can request deletion of your data, access your information, or correct inaccuracies at any time.",
-      security: "Security",
-      securityText: "We use industry-standard encryption and security measures to protect your data.",
-      contact: "Contact Us",
-      contactText: "For privacy questions, email us at privacy@keepics.com"
-    },
-    
-    // Sample Gallery
-    samples: {
-      title: "Sample Comics",
-      adventure: "6-Month Adventure in South America",
-      rome: "Trip to Rome with Girlfriend",
-      birthday: "2nd Birthday Bash!",
-      nature: "Family Nature Retreat",
-      graduation: "Graduated Medical University",
-      party: "Party Week in Spain with Friends",
-      
-      // Adventure panels
-      adventurePanel1: "Day 1: Ready for the wild!",
-      adventurePanel2: "Patagonia: endless trails",
-      adventurePanel3: "Surfing at sunrise",
-      adventurePanel4: "Friends from every country",
-      adventurePanel5: "Rainforest adventures",
-      adventurePanel6: "Back home, hearts full",
-      
-      // Rome panels
-      romePanel1: "Ciao, Roma!",
-      romePanel2: "Gelato every morning",
-      romePanel3: "Trevi Fountain wishes",
-      romePanel4: "Sunset by the Colosseum",
-      
-      // Birthday panels
-      birthdayPanel1: "Birthday superstar!",
-      birthdayPanel2: "Rainbow cake smiles",
-      birthdayPanel3: "Balloons everywhere!",
-      birthdayPanel4: "Nap with a new teddy",
-      
-      // Nature panels
-      naturePanel1: "Whale watch begins",
-      naturePanel2: "Camp under the stars",
-      naturePanel3: "Forest wanderings",
-      naturePanel4: "Endless laughter",
-      
-      // Graduation panels
-      graduationPanel1: "Finally, Doctor!",
-      graduationPanel2: "Caps in the air",
-      graduationPanel3: "Proud family hugs",
-      graduationPanel4: "Next stop: hospital!",
-      
-      // Party panels
-      partyPanel1: "Vamos a la playa!",
-      partyPanel2: "Sandy feet & sunsets",
-      partyPanel3: "Dancing all night",
-      partyPanel4: "Memories forever"
-    }
-  },
-  fr: {
-    // Navigation
-    nav: {
-      create: "Créer",
-      samples: "Exemples",
-      pricing: "Tarifs",
-      faq: "FAQ",
-      login: "Connexion"
-    },
-    
-    // Hero Section
-    hero: {
-      memories: "souvenirs",
-      memoriesSubtext: "en BD épiques style Marvel !",
-      createComic: "Créer Ma BD"
-    },
+    // Hero section
+    'hero.title': 'Turn Your Photos Into Amazing Comics!',
+    'hero.subtitle': 'Upload a photo, add your story, and watch AI create a personalized comic book just for you.',
+    'hero.cta': 'Start Creating',
+    'hero.memories': 'memories',
+    'hero.createComic': 'Create Your Comic',
+    'hero.memoriesSubtext': 'into comics in seconds!',
     
     // Comic Uploader
-    uploader: {
-      title: "Créez Votre BD",
-      steps: "1. Téléchargez une photo 📸\n2. Décrivez votre histoire ✍️\n3. Obtenez votre BD Marvel ! 🦸‍♂️",
-      clickUpload: "Cliquez pour télécharger",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "Case de BD",
-      placeholder: "Décrivez votre histoire, aventure ou souvenir ici... Plus de détails = meilleure BD !",
-      generating: "Génération...",
-      generateComic: "Générer la BD",
-      ready: "✅ Prêt à créer votre BD !",
-      aiWorking: "🤖 L'IA fait sa magie..."
-    },
-    
-    // Preview
-    preview: {
-      title: "Votre Aventure Épique",
-      aiGenerated: "BD Générée par IA",
-      marvelComics: "MARVEL COMICS",
-      presents: "PRÉSENTE",
-      price: "3,99€",
-      backToEditor: "← Retour à l'éditeur"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "Choisissez Votre Style de BD",
-      digitalTitle: "BD Numérique",
-      digitalFeature1: "Téléchargement PDF haute qualité",
-      digitalFeature2: "Parfait pour partager en ligne",
-      digitalFeature3: "Livraison instantanée",
-      digitalPrice: "4,99€",
-      printedTitle: "BD Imprimée",
-      printedFeature1: "Qualité d'impression professionnelle",
-      printedFeature2: "Livrée à votre porte",
-      printedFeature3: "Sensation d'édition collector",
-      printedPrice: "12,99€"
-    },
-    
-    // FAQ
-    faq: {
-      title: "Questions & Réponses",
-      q1: "Comment l'IA crée-t-elle ma BD ?",
-      a1: "Notre IA analyse votre photo et histoire pour créer des cases style Marvel avec des légendes dynamiques !",
-      q2: "Puis-je personnaliser ma BD après génération ?",
-      a2: "Oui ! Vous pouvez éditer le texte, ajuster les cases et choisir différents styles avant finalisation.",
-      q3: "Quels formats d'image acceptez-vous ?",
-      a3: "Nous supportons PNG, JPG et WEBP. Pour de meilleurs résultats, utilisez des images haute résolution !",
-      q4: "Combien de temps pour générer une BD ?",
-      a4: "La plupart des BD sont prêtes en 30-60 secondes ! Les histoires complexes peuvent prendre plus de temps.",
-      q5: "Puis-je créer des BD en différentes langues ?",
-      a5: "Absolument ! Notre IA supporte plusieurs langues pour l'entrée et la génération de BD.",
-      exclamation: "WOW !",
-      contact: "Encore des questions ?",
-      contactLink: "Contactez-nous !"
-    },
+    'uploader.title': 'Start Your Comic',
+    'uploader.steps': '1. Upload an image\n2. Add a caption\n3. Generate!',
+    'uploader.clickUpload': 'Click to upload',
+    'uploader.fileTypes': 'JPG, PNG, or WebP',
+    'uploader.comicPanel': 'comic panel',
+    'uploader.placeholder': 'Describe what\'s happening in your image or write a dialogue!',
+    'uploader.generating': 'Generating...',
+    'uploader.generateComic': 'Generate Comic',
+    'uploader.ready': 'Great! Now click Generate Comic to start.',
+    'uploader.aiWorking': 'Talking to AI... Creating your comic magic!',
+
+    // Comic Preview
+    'preview.title': 'Your Epic Story',
+    'preview.backToEditor': '← Back to Editor',
+    'preview.marvelComics': 'MARVEL COMICS GROUP',
+    'preview.presents': 'KEEPICS PRESENTS',
+    'preview.price': '$3.99 US',
+    'preview.aiGenerated': 'AI GENERATED COMIC',
+
+    // Pricing Section
+    'pricing.title': 'Pricing & Options',
+    'pricing.digitalTitle': 'Digital Comic (Free Tier)',
+    'pricing.digitalFeature1': 'Create up to 3 comics/month',
+    'pricing.digitalFeature2': 'Download as PDF/PNG',
+    'pricing.digitalFeature3': 'Try before you buy!',
+    'pricing.digitalPrice': '$0',
+    'pricing.printedTitle': 'Printed Comic (Premium)',
+    'pricing.printedFeature1': 'Upgrade for more comics',
+    'pricing.printedFeature2': 'Order beautiful prints via Lulu',
+    'pricing.printedFeature3': 'Worldwide shipping',
+    'pricing.printedPrice': 'Starting at $12',
     
     // Footer
-    footer: {
-      rights: "Tous droits réservés",
-      terms: "Conditions d'utilisation",
-      privacy: "Politique de confidentialité",
-      contact: "Contact",
-      questionsAnswers: "Q&R"
-    },
+    'footer.faq': 'FAQ',
+    'footer.terms': 'Terms and Conditions',
+    'footer.privacy': 'Privacy',
+    'footer.contact': 'Contact',
+    'footer.rights': 'All Rights Reserved',
+    'footer.questionsAnswers': 'Questions and Answers',
     
-    // Terms of Service
-    terms: {
-      effective: "Date d'entrée en vigueur",
-      title: "Conditions d'utilisation",
-      eligibility: "Éligibilité",
-      eligibilityText: "Vous devez avoir au moins 13 ans pour utiliser notre service. En utilisant keepics, vous acceptez ces conditions.",
-      userResponsibilities: "Responsabilités de l'utilisateur",
-      userResponsibilitiesText: "Vous êtes responsable du contenu que vous téléchargez. Ne téléchargez pas de matériel protégé par des droits d'auteur, de contenu inapproprié ou de contenu qui viole les droits d'autrui.",
-      aiContent: "Contenu généré par IA",
-      aiContentText: "Les BD sont générées à l'aide de la technologie IA. Bien que nous nous efforcions d'obtenir la qualité, les résultats peuvent varier. Vous possédez les droits sur votre BD finale.",
-      ownership: "Propriété",
-      ownershipText: "Vous conservez la propriété de vos photos téléchargées. keepics possède les éléments de BD générés par IA et le style.",
-      payments: "Paiements",
-      paymentsText: "Tous les paiements sont traités de manière sécurisée. Les BD numériques sont livrées instantanément. Les BD physiques sont expédiées dans les 5-7 jours ouvrables.",
-      contact: "Informations de contact",
-      contactText: "Pour des questions sur ces conditions, contactez-nous à legal@keepics.com"
-    },
-    
+    // FAQ
+    'faq.title': 'Frequently Asked Questions (FAQ)',
+    'faq.contact': 'Still have questions?',
+    'faq.contactLink': 'Contact us!',
+
+    // FAQ Questions and Answers
+    'faq.q1': 'How does the comic creation process work?',
+    'faq.a1': 'It\'s simple! Upload a photo, add a short description or dialogue, and our AI will generate a unique comic based on your input. You\'ll be able to preview the result and either download it digitally or print it as a physical comic book.',
+    'faq.q2': 'What kind of images can I upload?',
+    'faq.a2': 'You can upload JPG, PNG, or WebP images. Make sure your image is clear and appropriate for all audiences. The better the quality, the better your comic will look!',
+    'faq.q3': 'Can I choose the style of the comic?',
+    'faq.a3': 'In the initial version, the comic style is automatically selected by the AI. In future updates, we plan to add style options (manga, cartoon, sketch, etc.).',
+    'faq.q4': 'How long does it take to generate a comic?',
+    'faq.a4': 'On average, it takes about 30–60 seconds for the AI to generate your comic after you upload your image and enter your text.',
+    'faq.q5': 'Can I print my comic as a real book?',
+    'faq.a5': 'Absolutely! Once your comic is ready, you\'ll have the option to print it using our integration with Lulu. You\'ll be able to choose your shipping location and see real-time pricing and delivery options.',
+    'faq.exclamation': 'WOW!',
+
+    // Terms and Conditions
+    'terms.title': 'Terms and Conditions',
+    'terms.effective': 'Effective Date',
+    'terms.eligibility': 'Eligibility',
+    'terms.eligibilityText': 'You must be at least 13 years old or the legal age of digital consent in your jurisdiction to use this Service.',
+    'terms.userResponsibilities': 'User Responsibilities',
+    'terms.userResponsibilitiesText': 'Provide accurate and lawful content. Not use the platform for illegal, harmful, or offensive purposes.',
+    'terms.aiContent': 'AI-Generated Content',
+    'terms.aiContentText': 'The comic output is created using artificial intelligence. While we strive for creative and appropriate content, AI output may occasionally be imperfect.',
+    'terms.ownership': 'Ownership & Copyright',
+    'terms.ownershipText': 'You retain ownership of any original content you upload and the final comic generated by the Service.',
+    'terms.payments': 'Payments and Refunds',
+    'terms.paymentsText': 'Digital comic downloads are non-refundable. Printed comic orders are subject to printing and shipping policies.',
+    'terms.contact': 'Contact',
+    'terms.contactText': 'If you have any questions about these Terms, you can contact us.',
+
     // Privacy Policy
-    privacy: {
-      effective: "Date d'entrée en vigueur",
-      title: "Politique de confidentialité",
-      infoCollect: "Informations que nous collectons",
-      infoCollectText: "Nous collectons les photos que vous téléchargez, les descriptions d'histoires et les analyses d'utilisation de base pour améliorer notre service.",
-      howUse: "Comment nous utilisons vos informations",
-      howUseText: "Vos données sont utilisées uniquement pour générer vos BD et améliorer notre IA. Nous ne vendons jamais vos informations personnelles.",
-      sharing: "Partage d'informations",
-      sharingText: "Nous ne partageons pas vos informations personnelles avec des tiers sauf si requis par la loi.",
-      dataRetention: "Conservation des données",
-      dataRetentionText: "Les photos téléchargées sont supprimées après 30 jours. Les BD générées sont stockées pour l'accès à votre compte.",
-      yourRights: "Vos droits",
-      yourRightsText: "Vous pouvez demander la suppression de vos données, accéder à vos informations ou corriger les inexactitudes à tout moment.",
-      security: "Sécurité",
-      securityText: "Nous utilisons un chiffrement standard de l'industrie et des mesures de sécurité pour protéger vos données.",
-      contact: "Contactez-nous",
-      contactText: "Pour les questions de confidentialité, envoyez-nous un e-mail à privacy@keepics.com"
-    },
-    
-    // Sample Gallery
-    samples: {
-      title: "Exemples de BD",
-      adventure: "Aventure de 6 mois en Amérique du Sud",
-      rome: "Voyage à Rome avec ma copine",
-      birthday: "Fête des 2 ans !",
-      nature: "Retraite familiale dans la nature",
-      graduation: "Diplômé de l'université de médecine",
-      party: "Semaine de fête en Espagne avec les amis",
-      
-      // Adventure panels
-      adventurePanel1: "Jour 1 : Prêt pour l'aventure !",
-      adventurePanel2: "Patagonie : sentiers infinis",
-      adventurePanel3: "Surf au lever du soleil",
-      adventurePanel4: "Des amis de tous les pays",
-      adventurePanel5: "Aventures en forêt tropicale",
-      adventurePanel6: "De retour, le cœur plein",
-      
-      // Rome panels
-      romePanel1: "Ciao, Roma !",
-      romePanel2: "Gelato tous les matins",
-      romePanel3: "Vœux à la fontaine de Trevi",
-      romePanel4: "Coucher de soleil près du Colisée",
-      
-      // Birthday panels
-      birthdayPanel1: "Superstar d'anniversaire !",
-      birthdayPanel2: "Sourires de gâteau arc-en-ciel",
-      birthdayPanel3: "Des ballons partout !",
-      birthdayPanel4: "Sieste avec un nouveau nounours",
-      
-      // Nature panels
-      naturePanel1: "L'observation des baleines commence",
-      naturePanel2: "Camper sous les étoiles",
-      naturePanel3: "Randonnées en forêt",
-      naturePanel4: "Rires sans fin",
-      
-      // Graduation panels
-      graduationPanel1: "Enfin, Docteur !",
-      graduationPanel2: "Toques en l'air",
-      graduationPanel3: "Câlins de famille fière",
-      graduationPanel4: "Prochaine étape : hôpital !",
-      
-      // Party panels
-      partyPanel1: "Vamos a la playa !",
-      partyPanel2: "Pieds sablonneux et couchers de soleil",
-      partyPanel3: "Danser toute la nuit",
-      partyPanel4: "Souvenirs pour toujours"
-    }
+    'privacy.title': 'Privacy Policy',
+    'privacy.effective': 'Effective Date',
+    'privacy.infoCollect': 'Information We Collect',
+    'privacy.infoCollectText': 'We may collect personal information such as your name, email address, uploaded content, and usage data.',
+    'privacy.howUse': 'How We Use Your Information',
+    'privacy.howUseText': 'We use the information to provide and improve our services, generate comics, and communicate with you.',
+    'privacy.sharing': 'Sharing Your Information',
+    'privacy.sharingText': 'We do not sell your personal information. We may share information with service providers that help us operate the website.',
+    'privacy.dataRetention': 'Data Retention',
+    'privacy.dataRetentionText': 'We keep your personal information only as long as necessary to provide our services.',
+    'privacy.yourRights': 'Your Rights',
+    'privacy.yourRightsText': 'You may have the right to access, correct, or delete your data depending on your location.',
+    'privacy.security': 'Security',
+    'privacy.securityText': 'We take reasonable measures to protect your information, but no method of transmission is 100% secure.',
+    'privacy.contact': 'Contact Us',
+    'privacy.contactText': 'If you have any questions about this Privacy Policy, please contact us.',
   },
   es: {
     // Navigation
-    nav: {
-      create: "Crear",
-      samples: "Ejemplos",
-      pricing: "Precios",
-      faq: "FAQ",
-      login: "Iniciar Sesión"
-    },
+    'nav.create': 'Crear',
+    'nav.samples': 'Ejemplos',
+    'nav.pricing': 'Precios',
+    'nav.faq': 'FAQ',
+    'nav.login': 'Iniciar Sesión',
     
-    // Hero Section
-    hero: {
-      memories: "recuerdos",
-      memoriesSubtext: "¡en cómics épicos estilo Marvel!",
-      createComic: "Crear Mi Cómic"
-    },
+    // Hero section
+    'hero.title': '¡Convierte Tus Fotos En Cómics Increíbles!',
+    'hero.subtitle': 'Sube una foto, añade tu historia y observa cómo la IA crea un cómic personalizado solo para ti.',
+    'hero.cta': 'Empezar a Crear',
+    'hero.memories': 'recuerdos',
+    'hero.createComic': 'Crea Tu Cómic',
+    'hero.memoriesSubtext': '¡en cómics en segundos!',
     
     // Comic Uploader
-    uploader: {
-      title: "Crea Tu Cómic",
-      steps: "1. Sube una foto 📸\n2. Describe tu historia ✍️\n3. ¡Obtén tu cómic Marvel! 🦸‍♂️",
-      clickUpload: "Haz clic para subir",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "Panel de Cómic",
-      placeholder: "Describe tu historia, aventura o recuerdo aquí... ¡Más detalles = mejor cómic!",
-      generating: "Generando...",
-      generateComic: "Generar Cómic",
-      ready: "✅ ¡Listo para crear tu cómic!",
-      aiWorking: "🤖 La IA está haciendo su magia..."
-    },
-    
-    // Preview
-    preview: {
-      title: "Tu Aventura Épica",
-      aiGenerated: "Cómic Generado por IA",
-      marvelComics: "MARVEL COMICS",
-      presents: "PRESENTA",
-      price: "3,99€",
-      backToEditor: "← Volver al Editor"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "Elige Tu Estilo de Cómic",
-      digitalTitle: "Cómic Digital",
-      digitalFeature1: "Descarga PDF de alta calidad",
-      digitalFeature2: "Perfecto para compartir online",
-      digitalFeature3: "Entrega instantánea",
-      digitalPrice: "4,99€",
-      printedTitle: "Cómic Impreso",
-      printedFeature1: "Calidad de impresión profesional",
-      printedFeature2: "Enviado a tu puerta",
-      printedFeature3: "Sensación de edición de coleccionista",
-      printedPrice: "12,99€"
-    },
-    
-    // FAQ
-    faq: {
-      title: "Preguntas y Respuestas",
-      q1: "¿Cómo crea la IA mi cómic?",
-      a1: "¡Nuestra IA analiza tu foto e historia para crear paneles estilo Marvel con leyendas dinámicas!",
-      q2: "¿Puedo personalizar mi cómic después de generarlo?",
-      a2: "¡Sí! Puedes editar texto, ajustar paneles y elegir diferentes estilos antes de finalizar.",
-      q3: "¿Qué formatos de imagen aceptan?",
-      a3: "¡Soportamos PNG, JPG y WEBP. Para mejores resultados, usa imágenes de alta resolución!",
-      q4: "¿Cuánto tiempo tarda en generar un cómic?",
-      a4: "¡La mayoría de cómics están listos en 30-60 segundos! Las historias complejas pueden tardar más.",
-      q5: "¿Puedo crear cómics en diferentes idiomas?",
-      a5: "¡Absolutamente! Nuestra IA soporta múltiples idiomas para entrada y generación de cómics.",
-      exclamation: "¡WOW!",
-      contact: "¿Aún tienes preguntas?",
-      contactLink: "¡Contáctanos!"
-    },
+    'uploader.title': 'Comienza Tu Cómic',
+    'uploader.steps': '1. Sube una imagen\n2. Añade una descripción\n3. ¡Genera!',
+    'uploader.clickUpload': 'Haz clic para subir',
+    'uploader.fileTypes': 'JPG, PNG, o WebP',
+    'uploader.comicPanel': 'panel de cómic',
+    'uploader.placeholder': '¡Describe lo que está pasando en tu imagen o escribe un diálogo!',
+    'uploader.generating': 'Generando...',
+    'uploader.generateComic': 'Generar Cómic',
+    'uploader.ready': '¡Genial! Ahora haz clic en Generar Cómic para comenzar.',
+    'uploader.aiWorking': 'Hablando con IA... ¡Creando la magia de tu cómic!',
+
+    // Comic Preview
+    'preview.title': 'Tu Historia Épica',
+    'preview.backToEditor': '← Volver al Editor',
+    'preview.marvelComics': 'GRUPO MARVEL COMICS',
+    'preview.presents': 'KEEPICS PRESENTA',
+    'preview.price': '$3.99 US',
+    'preview.aiGenerated': 'CÓMIC GENERADO POR IA',
+
+    // Pricing Section
+    'pricing.title': 'Precios y Opciones',
+    'pricing.digitalTitle': 'Cómic Digital (Nivel Gratuito)',
+    'pricing.digitalFeature1': 'Crea hasta 3 cómics/mes',
+    'pricing.digitalFeature2': 'Descarga como PDF/PNG',
+    'pricing.digitalFeature3': '¡Prueba antes de comprar!',
+    'pricing.digitalPrice': '$0',
+    'pricing.printedTitle': 'Cómic Impreso (Premium)',
+    'pricing.printedFeature1': 'Actualiza para más cómics',
+    'pricing.printedFeature2': 'Ordena impresiones hermosas vía Lulu',
+    'pricing.printedFeature3': 'Envío mundial',
+    'pricing.printedPrice': 'Desde $12',
     
     // Footer
-    footer: {
-      rights: "Todos los derechos reservados",
-      terms: "Términos de Servicio",
-      privacy: "Política de Privacidad",
-      contact: "Contacto",
-      questionsAnswers: "P&R"
-    },
+    'footer.faq': 'FAQ',
+    'footer.terms': 'Términos y Condiciones',
+    'footer.privacy': 'Privacidad',
+    'footer.contact': 'Contacto',
+    'footer.rights': 'Todos los Derechos Reservados',
+    'footer.questionsAnswers': 'Preguntas y Respuestas',
     
-    // Terms of Service
-    terms: {
-      effective: "Fecha de vigencia",
-      title: "Términos de Servicio",
-      eligibility: "Elegibilidad",
-      eligibilityText: "Debes tener al menos 13 años para usar nuestro servicio. Al usar keepics, aceptas estos términos.",
-      userResponsibilities: "Responsabilidades del Usuario",
-      userResponsibilitiesText: "Eres responsable del contenido que subes. No subas material con derechos de autor, contenido inapropiado o contenido que viole los derechos de otros.",
-      aiContent: "Contenido Generado por IA",
-      aiContentText: "Los cómics se generan usando tecnología IA. Aunque nos esforzamos por la calidad, los resultados pueden variar. Posees los derechos de tu cómic final.",
-      ownership: "Propiedad",
-      ownershipText: "Mantienes la propiedad de tus fotos subidas. keepics posee los elementos de cómic generados por IA y el estilo.",
-      payments: "Pagos",
-      paymentsText: "Todos los pagos se procesan de forma segura. Los cómics digitales se entregan instantáneamente. Los cómics físicos se envían en 5-7 días hábiles.",
-      contact: "Información de Contacto",
-      contactText: "Para preguntas sobre estos términos, contáctanos en legal@keepics.com"
-    },
-    
+    // FAQ
+    'faq.title': 'Preguntas Frecuentes (FAQ)',
+    'faq.contact': '¿Aún tienes preguntas?',
+    'faq.contactLink': '¡Contáctanos!',
+
+    // FAQ Questions and Answers
+    'faq.q1': '¿Cómo funciona el proceso de creación de cómics?',
+    'faq.a1': '¡Es simple! Sube una foto, añade una descripción corta o diálogo, y nuestra IA generará un cómic único basado en tu entrada. Podrás previsualizar el resultado y descargarlo digitalmente o imprimirlo como un libro físico.',
+    'faq.q2': '¿Qué tipo de imágenes puedo subir?',
+    'faq.a2': 'Puedes subir imágenes JPG, PNG o WebP. Asegúrate de que tu imagen sea clara y apropiada para todas las audiencias. ¡Cuanto mejor sea la calidad, mejor se verá tu cómic!',
+    'faq.q3': '¿Puedo elegir el estilo del cómic?',
+    'faq.a3': 'En la versión inicial, el estilo del cómic es seleccionado automáticamente por la IA. En futuras actualizaciones, planeamos añadir opciones de estilo (manga, caricatura, boceto, etc.).',
+    'faq.q4': '¿Cuánto tiempo toma generar un cómic?',
+    'faq.a4': 'En promedio, toma alrededor de 30-60 segundos para que la IA genere tu cómic después de subir tu imagen e ingresar tu texto.',
+    'faq.q5': '¿Puedo imprimir mi cómic como un libro real?',
+    'faq.a5': '¡Absolutamente! Una vez que tu cómic esté listo, tendrás la opción de imprimirlo usando nuestra integración con Lulu. Podrás elegir tu ubicación de envío y ver precios y opciones de entrega en tiempo real.',
+    'faq.exclamation': '¡WOW!',
+
+    // Terms and Conditions
+    'terms.title': 'Términos y Condiciones',
+    'terms.effective': 'Fecha Efectiva',
+    'terms.eligibility': 'Elegibilidad',
+    'terms.eligibilityText': 'Debes tener al menos 13 años o la edad legal de consentimiento digital en tu jurisdicción para usar este Servicio.',
+    'terms.userResponsibilities': 'Responsabilidades del Usuario',
+    'terms.userResponsibilitiesText': 'Proporcionar contenido preciso y legal. No usar la plataforma para propósitos ilegales, dañinos u ofensivos.',
+    'terms.aiContent': 'Contenido Generado por IA',
+    'terms.aiContentText': 'La salida del cómic se crea usando inteligencia artificial. Aunque nos esforzamos por contenido creativo y apropiado, la salida de IA puede ocasionalmente ser imperfecta.',
+    'terms.ownership': 'Propiedad y Derechos de Autor',
+    'terms.ownershipText': 'Mantienes la propiedad de cualquier contenido original que subas y el cómic final generado por el Servicio.',
+    'terms.payments': 'Pagos y Reembolsos',
+    'terms.paymentsText': 'Las descargas de cómics digitales no son reembolsables. Los pedidos de cómics impresos están sujetos a políticas de impresión y envío.',
+    'terms.contact': 'Contacto',
+    'terms.contactText': 'Si tienes alguna pregunta sobre estos Términos, puedes contactarnos.',
+
     // Privacy Policy
-    privacy: {
-      effective: "Fecha de vigencia",
-      title: "Política de Privacidad",
-      infoCollect: "Información que Recopilamos",
-      infoCollectText: "Recopilamos fotos que subes, descripciones de historias y análisis básicos de uso para mejorar nuestro servicio.",
-      howUse: "Cómo Usamos Tu Información",
-      howUseText: "Tus datos se usan únicamente para generar tus cómics y mejorar nuestra IA. Nunca vendemos tu información personal.",
-      sharing: "Compartir Información",
-      sharingText: "No compartimos tu información personal con terceros excepto cuando lo requiere la ley.",
-      dataRetention: "Retención de Datos",
-      dataRetentionText: "Las fotos subidas se eliminan después de 30 días. Los cómics generados se almacenan para el acceso de tu cuenta.",
-      yourRights: "Tus Derechos",
-      yourRightsText: "Puedes solicitar eliminación de tus datos, acceder a tu información o corregir inexactitudes en cualquier momento.",
-      security: "Seguridad",
-      securityText: "Usamos encriptación estándar de la industria y medidas de seguridad para proteger tus datos.",
-      contact: "Contáctanos",
-      contactText: "Para preguntas de privacidad, envíanos un email a privacy@keepics.com"
-    },
+    'privacy.title': 'Política de Privacidad',
+    'privacy.effective': 'Fecha Efectiva',
+    'privacy.infoCollect': 'Información que Recopilamos',
+    'privacy.infoCollectText': 'Podemos recopilar información personal como tu nombre, dirección de correo electrónico, contenido subido y datos de uso.',
+    'privacy.howUse': 'Cómo Usamos Tu Información',
+    'privacy.howUseText': 'Usamos la información para proporcionar y mejorar nuestros servicios, generar cómics y comunicarnos contigo.',
+    'privacy.sharing': 'Compartir Tu Información',
+    'privacy.sharingText': 'No vendemos tu información personal. Podemos compartir información con proveedores de servicios que nos ayudan a operar el sitio web.',
+    'privacy.dataRetention': 'Retención de Datos',
+    'privacy.dataRetentionText': 'Mantenemos tu información personal solo el tiempo necesario para proporcionar nuestros servicios.',
+    'privacy.yourRights': 'Tus Derechos',
+    'privacy.yourRightsText': 'Puedes tener el derecho de acceder, corregir o eliminar tus datos dependiendo de tu ubicación.',
+    'privacy.security': 'Seguridad',
+    'privacy.securityText': 'Tomamos medidas razonables para proteger tu información, pero ningún método de transmisión es 100% seguro.',
+    'privacy.contact': 'Contáctanos',
+    'privacy.contactText': 'Si tienes alguna pregunta sobre esta Política de Privacidad, por favor contáctanos.',
+  },
+  fr: {
+    // Navigation
+    'nav.create': 'Créer',
+    'nav.samples': 'Exemples',
+    'nav.pricing': 'Tarifs',
+    'nav.faq': 'FAQ',
+    'nav.login': 'Connexion',
     
-    // Sample Gallery
-    samples: {
-      title: "Cómics de Muestra",
-      adventure: "Aventura de 6 meses en Sudamérica",
-      rome: "Viaje a Roma con mi novia",
-      birthday: "¡Fiesta de 2º cumpleaños!",
-      nature: "Retiro familiar en la naturaleza",
-      graduation: "Graduado de la Universidad de Medicina",
-      party: "Semana de fiesta en España con amigos",
-      
-      // Adventure panels
-      adventurePanel1: "Día 1: ¡Listos para lo salvaje!",
-      adventurePanel2: "Patagonia: senderos infinitos",
-      adventurePanel3: "Surfeando al amanecer",
-      adventurePanel4: "Amigos de todos los países",
-      adventurePanel5: "Aventuras en la selva",
-      adventurePanel6: "De vuelta a casa, corazones llenos",
-      
-      // Rome panels
-      romePanel1: "¡Ciao, Roma!",
-      romePanel2: "Gelato todas las mañanas",
-      romePanel3: "Deseos en la Fontana di Trevi",
-      romePanel4: "Atardecer junto al Coliseo",
-      
-      // Birthday panels
-      birthdayPanel1: "¡Súper estrella de cumpleaños!",
-      birthdayPanel2: "Sonrisas de pastel arcoíris",
-      birthdayPanel3: "¡Globos por todas partes!",
-      birthdayPanel4: "Siesta con un nuevo osito",
-      
-      // Nature panels
-      naturePanel1: "Comienza la observación de ballenas",
-      naturePanel2: "Acampar bajo las estrellas",
-      naturePanel3: "Vagando por el bosque",
-      naturePanel4: "Risas infinitas",
-      
-      // Graduation panels
-      graduationPanel1: "¡Por fin, Doctor!",
-      graduationPanel2: "Birretes al aire",
-      graduationPanel3: "Abrazos de familia orgullosa",
-      graduationPanel4: "¡Siguiente parada: hospital!",
-      
-      // Party panels
-      partyPanel1: "¡Vamos a la playa!",
-      partyPanel2: "Pies arenosos y atardeceres",
-      partyPanel3: "Bailando toda la noche",
-      partyPanel4: "Recuerdos para siempre"
-    }
+    // Hero section
+    'hero.title': 'Transformez Vos Photos En Bandes Dessinées Incroyables !',
+    'hero.subtitle': 'Téléchargez une photo, ajoutez votre histoire et regardez l\'IA créer une bande dessinée personnalisée juste pour vous.',
+    'hero.cta': 'Commencer à Créer',
+    'hero.memories': 'souvenirs',
+    'hero.createComic': 'Créez Votre BD',
+    'hero.memoriesSubtext': 'en BD en quelques secondes !',
+    
+    // Comic Uploader
+    'uploader.title': 'Commencez Votre BD',
+    'uploader.steps': '1. Téléchargez une image\n2. Ajoutez une légende\n3. Générez !',
+    'uploader.clickUpload': 'Cliquez pour télécharger',
+    'uploader.fileTypes': 'JPG, PNG, ou WebP',
+    'uploader.comicPanel': 'panneau de BD',
+    'uploader.placeholder': 'Décrivez ce qui se passe dans votre image ou écrivez un dialogue !',
+    'uploader.generating': 'Génération...',
+    'uploader.generateComic': 'Générer la BD',
+    'uploader.ready': 'Parfait ! Maintenant cliquez sur Générer la BD pour commencer.',
+    'uploader.aiWorking': 'Discussion avec l\'IA... Création de la magie de votre BD !',
+
+    // Comic Preview
+    'preview.title': 'Votre Histoire Épique',
+    'preview.backToEditor': '← Retour à l\'Éditeur',
+    'preview.marvelComics': 'GROUPE MARVEL COMICS',
+    'preview.presents': 'KEEPICS PRÉSENTE',
+    'preview.price': '3,99 € FR',
+    'preview.aiGenerated': 'BD GÉNÉRÉE PAR IA',
+
+    // Pricing Section
+    'pricing.title': 'Tarifs et Options',
+    'pricing.digitalTitle': 'BD Numérique (Gratuit)',
+    'pricing.digitalFeature1': 'Créez jusqu\'à 3 BD/mois',
+    'pricing.digitalFeature2': 'Téléchargez en PDF/PNG',
+    'pricing.digitalFeature3': 'Essayez avant d\'acheter !',
+    'pricing.digitalPrice': '0€',
+    'pricing.printedTitle': 'BD Imprimée (Premium)',
+    'pricing.printedFeature1': 'Mise à niveau pour plus de BD',
+    'pricing.printedFeature2': 'Commandez de belles impressions via Lulu',
+    'pricing.printedFeature3': 'Expédition mondiale',
+    'pricing.printedPrice': 'À partir de 12€',
+    
+    // Footer
+    'footer.faq': 'FAQ',
+    'footer.terms': 'Conditions Générales',
+    'footer.privacy': 'Confidentialité',
+    'footer.contact': 'Contact',
+    'footer.rights': 'Tous Droits Réservés',
+    'footer.questionsAnswers': 'Questions et Réponses',
+    
+    // FAQ
+    'faq.title': 'Foire Aux Questions (FAQ)',
+    'faq.contact': 'Vous avez encore des questions ?',
+    'faq.contactLink': 'Contactez-nous !',
+
+    // FAQ Questions and Answers
+    'faq.q1': 'Comment fonctionne le processus de création de BD ?',
+    'faq.a1': 'C\'est simple ! Téléchargez une photo, ajoutez une courte description ou dialogue, et notre IA générera une BD unique basée sur votre saisie. Vous pourrez prévisualiser le résultat et le télécharger numériquement ou l\'imprimer comme un livre physique.',
+    'faq.q2': 'Quel type d\'images puis-je télécharger ?',
+    'faq.a2': 'Vous pouvez télécharger des images JPG, PNG ou WebP. Assurez-vous que votre image soit claire et appropriée pour tous les publics. Meilleure est la qualité, meilleure sera votre BD !',
+    'faq.q3': 'Puis-je choisir le style de la BD ?',
+    'faq.a3': 'Dans la version initiale, le style de BD est automatiquement sélectionné par l\'IA. Dans les futures mises à jour, nous prévoyons d\'ajouter des options de style (manga, cartoon, esquisse, etc.).',
+    'faq.q4': 'Combien de temps faut-il pour générer une BD ?',
+    'faq.a4': 'En moyenne, il faut environ 30-60 secondes pour que l\'IA génère votre BD après avoir téléchargé votre image et saisi votre texte.',
+    'faq.q5': 'Puis-je imprimer ma BD comme un vrai livre ?',
+    'faq.a5': 'Absolument ! Une fois votre BD prête, vous aurez l\'option de l\'imprimer en utilisant notre intégration avec Lulu. Vous pourrez choisir votre lieu de livraison et voir les prix et options de livraison en temps réel.',
+    'faq.exclamation': 'WOW !',
+
+    // Terms and Conditions
+    'terms.title': 'Conditions Générales',
+    'terms.effective': 'Date d\'Entrée en Vigueur',
+    'terms.eligibility': 'Éligibilité',
+    'terms.eligibilityText': 'Vous devez avoir au moins 13 ans ou l\'âge légal de consentement numérique dans votre juridiction pour utiliser ce Service.',
+    'terms.userResponsibilities': 'Responsabilités de l\'Utilisateur',
+    'terms.userResponsibilitiesText': 'Fournir un contenu précis et légal. Ne pas utiliser la plateforme à des fins illégales, nuisibles ou offensantes.',
+    'terms.aiContent': 'Contenu Généré par IA',
+    'terms.aiContentText': 'La sortie de la BD est créée en utilisant l\'intelligence artificielle. Bien que nous nous efforcions d\'obtenir un contenu créatif et approprié, la sortie de l\'IA peut parfois être imparfaite.',
+    'terms.ownership': 'Propriété et Droits d\'Auteur',
+    'terms.ownershipText': 'Vous conservez la propriété de tout contenu original que vous téléchargez et de la BD finale générée par le Service.',
+    'terms.payments': 'Paiements et Remboursements',
+    'terms.paymentsText': 'Les téléchargements de BD numériques ne sont pas remboursables. Les commandes de BD imprimées sont soumises aux politiques d\'impression et d\'expédition.',
+    'terms.contact': 'Contact',
+    'terms.contactText': 'Si vous avez des questions sur ces Conditions, vous pouvez nous contacter.',
+
+    // Privacy Policy
+    'privacy.title': 'Politique de Confidentialité',
+    'privacy.effective': 'Date d\'Entrée en Vigueur',
+    'privacy.infoCollect': 'Informations que Nous Collectons',
+    'privacy.infoCollectText': 'Nous pouvons collecter des informations personnelles telles que votre nom, adresse e-mail, contenu téléchargé et données d\'utilisation.',
+    'privacy.howUse': 'Comment Nous Utilisons Vos Informations',
+    'privacy.howUseText': 'Nous utilisons les informations pour fournir et améliorer nos services, générer des BD et communiquer avec vous.',
+    'privacy.sharing': 'Partage de Vos Informations',
+    'privacy.sharingText': 'Nous ne vendons pas vos informations personnelles. Nous pouvons partager des informations avec des prestataires de services qui nous aident à exploiter le site web.',
+    'privacy.dataRetention': 'Conservation des Données',
+    'privacy.dataRetentionText': 'Nous conservons vos informations personnelles seulement le temps nécessaire pour fournir nos services.',
+    'privacy.yourRights': 'Vos Droits',
+    'privacy.yourRightsText': 'Vous pouvez avoir le droit d\'accéder, corriger ou supprimer vos données selon votre localisation.',
+    'privacy.security': 'Sécurité',
+    'privacy.securityText': 'Nous prenons des mesures raisonnables pour protéger vos informations, mais aucune méthode de transmission n\'est 100% sécurisée.',
+    'privacy.contact': 'Nous Contacter',
+    'privacy.contactText': 'Si vous avez des questions sur cette Politique de Confidentialité, veuillez nous contacter.',
   },
   de: {
     // Navigation
-    nav: {
-      create: "Erstellen",
-      samples: "Beispiele",
-      pricing: "Preise",
-      faq: "FAQ",
-      login: "Anmelden"
-    },
+    'nav.create': 'Erstellen',
+    'nav.samples': 'Beispiele',
+    'nav.pricing': 'Preise',
+    'nav.faq': 'FAQ',
+    'nav.login': 'Anmelden',
     
-    // Hero Section
-    hero: {
-      memories: "Erinnerungen",
-      memoriesSubtext: "in epische Marvel-Comics!",
-      createComic: "Meinen Comic Erstellen"
-    },
+    // Hero section
+    'hero.title': 'Verwandeln Sie Ihre Fotos In Fantastische Comics!',
+    'hero.subtitle': 'Laden Sie ein Foto hoch, fügen Sie Ihre Geschichte hinzu und sehen Sie zu, wie KI einen personalisierten Comic nur für Sie erstellt.',
+    'hero.cta': 'Jetzt Erstellen',
+    'hero.memories': 'Erinnerungen',
+    'hero.createComic': 'Erstellen Sie Ihren Comic',
+    'hero.memoriesSubtext': 'in Sekunden zu Comics!',
     
     // Comic Uploader
-    uploader: {
-      title: "Erstelle Deinen Comic",
-      steps: "1. Foto hochladen 📸\n2. Geschichte beschreiben ✍️\n3. Marvel-Comic erhalten! 🦸‍♂️",
-      clickUpload: "Zum Hochladen klicken",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "Comic-Panel",
-      placeholder: "Beschreibe deine Geschichte, dein Abenteuer oder deine Erinnerung hier... Mehr Details = besserer Comic!",
-      generating: "Generiere...",
-      generateComic: "Comic Generieren",
-      ready: "✅ Bereit, deinen Comic zu erstellen!",
-      aiWorking: "🤖 KI arbeitet ihre Magie..."
-    },
-    
-    // Preview
-    preview: {
-      title: "Dein Episches Abenteuer",
-      aiGenerated: "KI-Generierter Comic",
-      marvelComics: "MARVEL COMICS",
-      presents: "PRÄSENTIERT",
-      price: "3,99€",
-      backToEditor: "← Zurück zum Editor"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "Wähle Deinen Comic-Stil",
-      digitalTitle: "Digitaler Comic",
-      digitalFeature1: "Hochwertiger PDF-Download",
-      digitalFeature2: "Perfekt zum Online-Teilen",
-      digitalFeature3: "Sofortige Lieferung",
-      digitalPrice: "4,99€",
-      printedTitle: "Gedruckter Comic",
-      printedFeature1: "Professionelle Druckqualität",
-      printedFeature2: "Direkt vor deine Tür geliefert",
-      printedFeature3: "Sammlerausgabe-Gefühl",
-      printedPrice: "12,99€"
-    },
-    
-    // FAQ
-    faq: {
-      title: "Fragen & Antworten",
-      q1: "Wie erstellt die KI meinen Comic?",
-      a1: "Unsere KI analysiert dein Foto und deine Geschichte, um Marvel-Panels mit dynamischen Bildunterschriften zu erstellen!",
-      q2: "Kann ich meinen Comic nach der Generierung anpassen?",
-      a2: "Ja! Du kannst Text bearbeiten, Panels anpassen und verschiedene Comic-Stile vor der Fertigstellung wählen.",
-      q3: "Welche Bildformate akzeptiert ihr?",
-      a3: "Wir unterstützen PNG, JPG und WEBP. Für beste Ergebnisse verwende hochauflösende Bilder!",
-      q4: "Wie lange dauert es, einen Comic zu generieren?",
-      a4: "Die meisten Comics sind in 30-60 Sekunden fertig! Komplexe Geschichten können etwas länger dauern.",
-      q5: "Kann ich Comics in verschiedenen Sprachen erstellen?",
-      a5: "Absolut! Unsere KI unterstützt mehrere Sprachen für Eingabe und Comic-Generierung.",
-      exclamation: "WOW!",
-      contact: "Noch Fragen?",
-      contactLink: "Kontaktiere uns!"
-    },
+    'uploader.title': 'Starten Sie Ihren Comic',
+    'uploader.steps': '1. Bild hochladen\n2. Beschreibung hinzufügen\n3. Generieren!',
+    'uploader.clickUpload': 'Klicken zum Hochladen',
+    'uploader.fileTypes': 'JPG, PNG, oder WebP',
+    'uploader.comicPanel': 'Comic-Panel',
+    'uploader.placeholder': 'Beschreiben Sie, was in Ihrem Bild passiert oder schreiben Sie einen Dialog!',
+    'uploader.generating': 'Generiere...',
+    'uploader.generateComic': 'Comic Generieren',
+    'uploader.ready': 'Großartig! Klicken Sie jetzt auf Comic Generieren um zu beginnen.',
+    'uploader.aiWorking': 'Spreche mit KI... Erschaffe die Magie Ihres Comics!',
+
+    // Comic Preview
+    'preview.title': 'Ihre Epische Geschichte',
+    'preview.backToEditor': '← Zurück zum Editor',
+    'preview.marvelComics': 'MARVEL COMICS GRUPPE',
+    'preview.presents': 'KEEPICS PRÄSENTIERT',
+    'preview.price': '3,99 € DE',
+    'preview.aiGenerated': 'KI GENERIERTER COMIC',
+
+    // Pricing Section
+    'pricing.title': 'Preise und Optionen',
+    'pricing.digitalTitle': 'Digitaler Comic (Kostenlos)',
+    'pricing.digitalFeature1': 'Erstelle bis zu 3 Comics/Monat',
+    'pricing.digitalFeature2': 'Download als PDF/PNG',
+    'pricing.digitalFeature3': 'Vor dem Kauf testen!',
+    'pricing.digitalPrice': '0€',
+    'pricing.printedTitle': 'Gedruckter Comic (Premium)',
+    'pricing.printedFeature1': 'Upgrade für mehr Comics',
+    'pricing.printedFeature2': 'Bestelle schöne Drucke via Lulu',
+    'pricing.printedFeature3': 'Weltweite Lieferung',
+    'pricing.printedPrice': 'Ab 12€',
     
     // Footer
-    footer: {
-      rights: "Alle Rechte vorbehalten",
-      terms: "Nutzungsbedingungen",
-      privacy: "Datenschutzrichtlinie",
-      contact: "Kontakt",
-      questionsAnswers: "F&A"
-    },
+    'footer.faq': 'FAQ',
+    'footer.terms': 'Geschäftsbedingungen',
+    'footer.privacy': 'Datenschutz',
+    'footer.contact': 'Kontakt',
+    'footer.rights': 'Alle Rechte Vorbehalten',
+    'footer.questionsAnswers': 'Fragen und Antworten',
     
-    // Terms of Service
-    terms: {
-      effective: "Gültigkeitsdatum",
-      title: "Nutzungsbedingungen",
-      eligibility: "Berechtigung",
-      eligibilityText: "Du musst mindestens 13 Jahre alt sein, um unseren Service zu nutzen. Durch die Nutzung von keepics stimmst du diesen Bedingungen zu.",
-      userResponsibilities: "Benutzerverantwortlichkeiten",
-      userResponsibilitiesText: "Du bist für die Inhalte verantwortlich, die du hochlädst. Lade keine urheberrechtlich geschützten Materialien, unangemessene Inhalte oder Inhalte hoch, die die Rechte anderer verletzen.",
-      aiContent: "KI-Generierte Inhalte",
-      aiContentText: "Comics werden mit KI-Technologie generiert. Obwohl wir uns um Qualität bemühen, können die Ergebnisse variieren. Du besitzt die Rechte an deinem finalen Comic.",
-      ownership: "Eigentum",
-      ownershipText: "Du behältst das Eigentum an deinen hochgeladenen Fotos. keepics besitzt die KI-generierten Comic-Elemente und das Styling.",
-      payments: "Zahlungen",
-      paymentsText: "Alle Zahlungen werden sicher verarbeitet. Digitale Comics werden sofort geliefert. Physische Comics werden innerhalb von 5-7 Werktagen versandt.",
-      contact: "Kontaktinformationen",
-      contactText: "Für Fragen zu diesen Bedingungen kontaktiere uns unter legal@keepics.com"
-    },
-    
+    // FAQ
+    'faq.title': 'Häufig Gestellte Fragen (FAQ)',
+    'faq.contact': 'Haben Sie noch Fragen?',
+    'faq.contactLink': 'Kontaktieren Sie uns!',
+
+    // FAQ Questions and Answers
+    'faq.q1': 'Wie funktioniert der Comic-Erstellungsprozess?',
+    'faq.a1': 'Es ist einfach! Laden Sie ein Foto hoch, fügen Sie eine kurze Beschreibung oder Dialog hinzu, und unsere KI wird einen einzigartigen Comic basierend auf Ihrer Eingabe generieren. Sie können das Ergebnis vorschauen und es digital herunterladen oder als physisches Comicbuch drucken.',
+    'faq.q2': 'Welche Art von Bildern kann ich hochladen?',
+    'faq.a2': 'Sie können JPG-, PNG- oder WebP-Bilder hochladen. Stellen Sie sicher, dass Ihr Bild klar und für alle Zielgruppen geeignet ist. Je besser die Qualität, desto besser wird Ihr Comic aussehen!',
+    'faq.q3': 'Kann ich den Stil des Comics wählen?',
+    'faq.a3': 'In der ersten Version wird der Comic-Stil automatisch von der KI ausgewählt. In zukünftigen Updates planen wir, Stiloptionen hinzuzufügen (Manga, Cartoon, Skizze, etc.).',
+    'faq.q4': 'Wie lange dauert es, einen Comic zu generieren?',
+    'faq.a4': 'Im Durchschnitt dauert es etwa 30-60 Sekunden, bis die KI Ihren Comic generiert, nachdem Sie Ihr Bild hochgeladen und Ihren Text eingegeben haben.',
+    'faq.q5': 'Kann ich meinen Comic als echtes Buch drucken?',
+    'faq.a5': 'Absolut! Sobald Ihr Comic fertig ist, haben Sie die Option, ihn über unsere Integration mit Lulu zu drucken. Sie können Ihren Versandort wählen und Preise und Lieferoptionen in Echtzeit sehen.',
+    'faq.exclamation': 'WOW!',
+
+    // Terms and Conditions
+    'terms.title': 'Geschäftsbedingungen',
+    'terms.effective': 'Wirksamkeitsdatum',
+    'terms.eligibility': 'Berechtigung',
+    'terms.eligibilityText': 'Sie müssen mindestens 13 Jahre alt oder das gesetzliche Alter für digitale Zustimmung in Ihrer Gerichtsbarkeit sein, um diesen Service zu nutzen.',
+    'terms.userResponsibilities': 'Benutzerverantwortlichkeiten',
+    'terms.userResponsibilitiesText': 'Stellen Sie genaue und rechtmäßige Inhalte bereit. Verwenden Sie die Plattform nicht für illegale, schädliche oder beleidigende Zwecke.',
+    'terms.aiContent': 'KI-Generierte Inhalte',
+    'terms.aiContentText': 'Die Comic-Ausgabe wird mit künstlicher Intelligenz erstellt. Obwohl wir nach kreativen und angemessenen Inhalten streben, kann die KI-Ausgabe gelegentlich unvollkommen sein.',
+    'terms.ownership': 'Eigentum und Urheberrecht',
+    'terms.ownershipText': 'Sie behalten das Eigentum an allen ursprünglichen Inhalten, die Sie hochladen, und dem vom Service generierten endgültigen Comic.',
+    'terms.payments': 'Zahlungen und Rückerstattungen',
+    'terms.paymentsText': 'Digitale Comic-Downloads sind nicht rückerstattbar. Gedruckte Comic-Bestellungen unterliegen Druck- und Versandrichtlinien.',
+    'terms.contact': 'Kontakt',
+    'terms.contactText': 'Wenn Sie Fragen zu diesen Bedingungen haben, können Sie uns kontaktieren.',
+
     // Privacy Policy
-    privacy: {
-      effective: "Gültigkeitsdatum",
-      title: "Datenschutzrichtlinie",
-      infoCollect: "Informationen, die wir sammeln",
-      infoCollectText: "Wir sammeln Fotos, die du hochlädst, Geschichtsbeschreibungen und grundlegende Nutzungsanalysen zur Verbesserung unseres Services.",
-      howUse: "Wie wir deine Informationen verwenden",
-      howUseText: "Deine Daten werden ausschließlich zur Generierung deiner Comics und Verbesserung unserer KI verwendet. Wir verkaufen niemals deine persönlichen Informationen.",
-      sharing: "Informationsaustausch",
-      sharingText: "Wir teilen deine persönlichen Informationen nicht mit Dritten, außer wenn gesetzlich vorgeschrieben.",
-      dataRetention: "Datenspeicherung",
-      dataRetentionText: "Hochgeladene Fotos werden nach 30 Tagen gelöscht. Generierte Comics werden für den Zugang zu deinem Konto gespeichert.",
-      yourRights: "Deine Rechte",
-      yourRightsText: "Du kannst jederzeit die Löschung deiner Daten beantragen, auf deine Informationen zugreifen oder Ungenauigkeiten korrigieren.",
-      security: "Sicherheit",
-      securityText: "Wir verwenden branchenübliche Verschlüsselung und Sicherheitsmaßnahmen zum Schutz deiner Daten.",
-      contact: "Kontaktiere uns",
-      contactText: "Für Datenschutzfragen sende uns eine E-Mail an privacy@keepics.com"
-    },
+    'privacy.title': 'Datenschutzrichtlinie',
+    'privacy.effective': 'Wirksamkeitsdatum',
+    'privacy.infoCollect': 'Informationen, die Wir Sammeln',
+    'privacy.infoCollectText': 'Wir können persönliche Informationen wie Ihren Namen, E-Mail-Adresse, hochgeladene Inhalte und Nutzungsdaten sammeln.',
+    'privacy.howUse': 'Wie Wir Ihre Informationen Verwenden',
+    'privacy.howUseText': 'Wir verwenden die Informationen, um unsere Services bereitzustellen und zu verbessern, Comics zu generieren und mit Ihnen zu kommunizieren.',
+    'privacy.sharing': 'Teilen Ihrer Informationen',
+    'privacy.sharingText': 'Wir verkaufen Ihre persönlichen Informationen nicht. Wir können Informationen mit Servicepartnern teilen, die uns beim Betrieb der Website helfen.',
+    'privacy.dataRetention': 'Datenspeicherung',
+    'privacy.dataRetentionText': 'Wir bewahren Ihre persönlichen Informationen nur so lange auf, wie es zur Bereitstellung unserer Services erforderlich ist.',
+    'privacy.yourRights': 'Ihre Rechte',
+    'privacy.yourRightsText': 'Je nach Ihrem Standort haben Sie möglicherweise das Recht, auf Ihre Daten zuzugreifen, sie zu korrigieren oder zu löschen.',
+    'privacy.security': 'Sicherheit',
+    'privacy.securityText': 'Wir ergreifen angemessene Maßnahmen zum Schutz Ihrer Informationen, aber keine Übertragungsmethode ist 100% sicher.',
+    'privacy.contact': 'Kontaktieren Sie Uns',
+    'privacy.contactText': 'Wenn Sie Fragen zu dieser Datenschutzrichtlinie haben, kontaktieren Sie uns bitte.',
+  },
+  he: {
+    // Navigation
+    'nav.create': 'צור',
+    'nav.samples': 'דוגמאות',
+    'nav.pricing': 'מחירים',
+    'nav.faq': 'שאלות נפוצות',
+    'nav.login': 'התחבר',
     
-    // Sample Gallery
-    samples: {
-      title: "Beispiel-Comics",
-      adventure: "6-Monats-Abenteuer in Südamerika",
-      rome: "Reise nach Rom mit Freundin",
-      birthday: "2. Geburtstags-Party!",
-      nature: "Familien-Naturausflug",
-      graduation: "Medizinstudium abgeschlossen",
-      party: "Party-Woche in Spanien mit Freunden",
-      
-      // Adventure panels
-      adventurePanel1: "Tag 1: Bereit für die Wildnis!",
-      adventurePanel2: "Patagonien: endlose Pfade",
-      adventurePanel3: "Surfen bei Sonnenaufgang",
-      adventurePanel4: "Freunde aus jedem Land",
-      adventurePanel5: "Regenwald-Abenteuer",
-      adventurePanel6: "Zurück zuhause, Herzen voller Freude",
-      
-      // Rome panels
-      romePanel1: "Ciao, Roma!",
-      romePanel2: "Gelato jeden Morgen",
-      romePanel3: "Wünsche am Trevi-Brunnen",
-      romePanel4: "Sonnenuntergang am Kolosseum",
-      
-      // Birthday panels
-      birthdayPanel1: "Geburtstags-Superstar!",
-      birthdayPanel2: "Regenbogen-Kuchen-Lächeln",
-      birthdayPanel3: "Ballons überall!",
-      birthdayPanel4: "Nickerchen mit neuem Teddy",
-      
-      // Nature panels
-      naturePanel1: "Walbeobachtung beginnt",
-      naturePanel2: "Campen unter den Sternen",
-      naturePanel3: "Waldwanderungen",
-      naturePanel4: "Endloses Lachen",
-      
-      // Graduation panels
-      graduationPanel1: "Endlich, Doktor!",
-      graduationPanel2: "Hüte in die Luft",
-      graduationPanel3: "Stolze Familienumarmungen",
-      graduationPanel4: "Nächster Halt: Krankenhaus!",
-      
-      // Party panels
-      partyPanel1: "Vamos a la playa!",
-      partyPanel2: "Sandige Füße & Sonnenuntergänge",
-      partyPanel3: "Die ganze Nacht tanzen",
-      partyPanel4: "Erinnerungen für immer"
-    }
+    // Hero section
+    'hero.title': '!הפכו את התמונות שלכם לקומיקס מדהים',
+    'hero.subtitle': 'העלו תמונה, הוסיפו את הסיפור שלכם וצפו כיצד בינה מלאכותית יוצרת עבורכם קומיקס מותאם אישית.',
+    'hero.cta': 'התחל ליצור',
+    'hero.memories': 'זיכרונות',
+    'hero.createComic': 'צרו את הקומיקס שלכם',
+    'hero.memoriesSubtext': '!לקומיקס בשניות',
+    
+    // Comic Uploader
+    'uploader.title': 'התחילו את הקומיקס שלכם',
+    'uploader.steps': 'העלו תמונה .1\nהוסיפו כיתוב .2\n!צרו .3',
+    'uploader.clickUpload': 'לחצו להעלאה',
+    'uploader.fileTypes': 'JPG, PNG, או WebP',
+    'uploader.comicPanel': 'פאנל קומיקס',
+    'uploader.placeholder': '!תארו מה קורה בתמונה או כתבו דיאלוג',
+    'uploader.generating': '...יוצר',
+    'uploader.generateComic': 'צור קומיקס',
+    'uploader.ready': '.מעולה! עכשיו לחצו על צור קומיקס כדי להתחיל',
+    'uploader.aiWorking': '!מדבר עם בינה מלאכותית... יוצר את הקסם של הקומיקס שלכם',
+
+    // Comic Preview
+    'preview.title': 'הסיפור האפי שלכם',
+    'preview.backToEditor': '← חזרה לעורך',
+    'preview.marvelComics': 'קבוצת מארוול קומיקס',
+    'preview.presents': 'קיפיקס מציג',
+    'preview.price': '₪15 ישראל',
+    'preview.aiGenerated': 'קומיקס שנוצר ע"י בינה מלאכותית',
+
+    // Pricing Section
+    'pricing.title': 'מחירים ואפשרויות',
+    'pricing.digitalTitle': 'קומיקס דיגיטלי (חינם)',
+    'pricing.digitalFeature1': 'צרו עד 3 קומיקסים/חודש',
+    'pricing.digitalFeature2': 'הורידו כ-PDF/PNG',
+    'pricing.digitalFeature3': '!נסו לפני שאתם קונים',
+    'pricing.digitalPrice': '₪0',
+    'pricing.printedTitle': 'קומיקס מודפס (פרימיום)',
+    'pricing.printedFeature1': 'שדרוג לקומיקסים נוספים',
+    'pricing.printedFeature2': 'הזמינו הדפסות יפות דרך Lulu',
+    'pricing.printedFeature3': 'משלוח עולמי',
+    'pricing.printedPrice': 'החל מ-₪45',
+    
+    // Footer
+    'footer.faq': 'שאלות נפוצות',
+    'footer.terms': 'תנאים והגבלות',
+    'footer.privacy': 'פרטיות',
+    'footer.contact': 'צור קשר',
+    'footer.rights': 'כל הזכויות שמורות',
+    'footer.questionsAnswers': 'שאלות ותשובות',
+    
+    // FAQ
+    'faq.title': 'שאלות נפוצות',
+    'faq.contact': 'עדיין יש לכם שאלות?',
+    'faq.contactLink': '!צרו קשר',
+
+    // FAQ Questions and Answers
+    'faq.q1': 'איך עובד תהליך יצירת הקומיקס?',
+    'faq.a1': 'זה פשוט! העלו תמונה, הוסיפו תיאור קצר או דיאלוג, והבינה המלאכותית שלנו תייצר קומיקס ייחודי בהתבסס על הקלט שלכם. תוכלו לראות תצוגה מקדימה של התוצאה ולהוריד אותה דיגיטלית או להדפיס אותה כספר קומיקס פיזי.',
+    'faq.q2': 'איזה סוג של תמונות אני יכול להעלות?',
+    'faq.a2': 'תוכלו להעלות תמונות JPG, PNG או WebP. וודאו שהתמונה שלכם ברורה ומתאימה לכל הקהלים. ככל שהאיכות טובה יותר, כך הקומיקס שלכם ייראה טוב יותר!',
+    'faq.q3': 'האם אני יכול לבחור את הסגנון של הקומיקס?',
+    'faq.a3': 'בגרסה הראשונית, סגנון הקומיקס נבחר אוטומטית על ידי הבינה המלאכותית. בעדכונים עתידיים, אנו מתכננים להוסיף אפשרויות סגנון (מנגה, קריקטורה, סקיצה, וכו\').',
+    'faq.q4': 'כמה זמן לוקח ליצור קומיקס?',
+    'faq.a4': 'בממוצע, לוקח כ-30-60 שניות לבינה המלאכותית ליצור את הקומיקס שלכם לאחר שהעלתם את התמונה והזנתם את הטקסט.',
+    'faq.q5': 'האם אני יכול להדפיס את הקומיקס שלי כספר אמיתי?',
+    'faq.a5': 'בהחלט! ברגע שהקומיקס שלכם מוכן, תהיה לכם אפשרות להדפיס אותו באמצעות השילוב שלנו עם Lulu. תוכלו לבחור את מיקום המשלוח שלכם ולראות מחירים ואפשרויות משלוח בזמן אמת.',
+    'faq.exclamation': '!וואו',
+
+    // Terms and Conditions
+    'terms.title': 'תנאים והגבלות',
+    'terms.effective': 'תאריך תחילה',
+    'terms.eligibility': 'זכאות',
+    'terms.eligibilityText': 'עליכם להיות בני 13 לפחות או בגיל החוקי להסכמה דיגיטלית בתחום השיפוט שלכם כדי להשתמש בשירות זה.',
+    'terms.userResponsibilities': 'אחריות המשתמש',
+    'terms.userResponsibilitiesText': 'לספק תוכן מדויק וחוקי. לא להשתמש בפלטפורמה למטרות בלתי חוקיות, מזיקות או פוגעניות.',
+    'terms.aiContent': 'תוכן שנוצר על ידי בינה מלאכותית',
+    'terms.aiContentText': 'פלט הקומיקס נוצר באמצעות בינה מלאכותית. למרות שאנו שואפים לתוכן יצירתי ומתאים, פלט הבינה המלאכותית עלול להיות לעיתים לא מושלם.',
+    'terms.ownership': 'בעלות וזכויות יוצרים',
+    'terms.ownershipText': 'אתם שומרים על הבעלות על כל תוכן מקורי שאתם מעלים ועל הקומיקס הסופי שנוצר על ידי השירות.',
+    'terms.payments': 'תשלומים והחזרים',
+    'terms.paymentsText': 'הורדות קומיקס דיגיטליות אינן ניתנות להחזר. הזמנות קומיקס מודפסות כפופות למדיניות הדפסה ומשלוח.',
+    'terms.contact': 'צור קשר',
+    'terms.contactText': 'אם יש לכם שאלות על התנאים האלה, תוכלו ליצור איתנו קשר.',
+
+    // Privacy Policy
+    'privacy.title': 'מדיניות פרטיות',
+    'privacy.effective': 'תאריך תחילה',
+    'privacy.infoCollect': 'מידע שאנו אוספים',
+    'privacy.infoCollectText': 'אנו עשויים לאסוף מידע אישי כמו השם שלכם, כתובת דוא"ל, תוכן שהועלה ונתוני שימוש.',
+    'privacy.howUse': 'איך משתמשים במידע שלכם',
+    'privacy.howUseText': 'אנו משתמשים במידע כדי לספק ולשפר את השירותים שלנו, ליצור קומיקסים ולתקשר איתכם.',
+    'privacy.sharing': 'שיתוף המידע שלכם',
+    'privacy.sharingText': 'אנו לא מוכרים את המידע האישי שלכם. אנו עשויים לשתף מידע עם ספקי שירותים שעוזרים לנו להפעיל את האתר.',
+    'privacy.dataRetention': 'שמירת נתונים',
+    'privacy.dataRetentionText': 'אנו שומרים על המידע האישי שלכם רק כל עוד שנדרש כדי לספק את השירותים שלנו.',
+    'privacy.yourRights': 'הזכויות שלכם',
+    'privacy.yourRightsText': 'יתכן שיש לכם זכות לגשת, לתקן או למחוק את הנתונים שלכם בהתאם למיקום שלכם.',
+    'privacy.security': 'אבטחה',
+    'privacy.securityText': 'אנו נוקטים צעדים סבירים להגן על המידע שלכם, אך אף שיטת העברה אינה בטוחה ב-100%.',
+    'privacy.contact': 'צרו קשר',
+    'privacy.contactText': 'אם יש לכם שאלות על מדיניות הפרטיות הזו, אנא צרו איתנו קשר.',
   },
   it: {
     // Navigation
-    nav: {
-      create: "Crea",
-      samples: "Esempi",
-      pricing: "Prezzi",
-      faq: "FAQ",
-      login: "Accedi"
-    },
+    'nav.create': 'Crea',
+    'nav.samples': 'Esempi',
+    'nav.pricing': 'Prezzi',
+    'nav.faq': 'FAQ',
+    'nav.login': 'Accedi',
     
-    // Hero Section
-    hero: {
-      memories: "ricordi",
-      memoriesSubtext: "in fumetti epici stile Marvel!",
-      createComic: "Crea Il Mio Fumetto"
-    },
+    // Hero section
+    'hero.title': 'Trasforma Le Tue Foto In Fumetti Fantastici!',
+    'hero.subtitle': 'Carica una foto, aggiungi la tua storia e guarda l\'IA creare un fumetto personalizzato solo per te.',
+    'hero.cta': 'Inizia a Creare',
+    'hero.memories': 'ricordi',
+    'hero.createComic': 'Crea Il Tuo Fumetto',
+    'hero.memoriesSubtext': 'in fumetti in pochi secondi!',
     
     // Comic Uploader
-    uploader: {
-      title: "Crea Il Tuo Fumetto",
-      steps: "1. Carica una foto 📸\n2. Descrivi la tua storia ✍️\n3. Ottieni il tuo fumetto Marvel! 🦸‍♂️",
-      clickUpload: "Clicca per caricare",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "Pannello Fumetto",
-      placeholder: "Descrivi la tua storia, avventura o ricordo qui... Più dettagli = fumetto migliore!",
-      generating: "Generando...",
-      generateComic: "Genera Fumetto",
-      ready: "✅ Pronto per creare il tuo fumetto!",
-      aiWorking: "🤖 L'IA sta facendo la sua magia..."
-    },
-    
-    // Preview
-    preview: {
-      title: "La Tua Avventura Epica",
-      aiGenerated: "Fumetto Generato da IA",
-      marvelComics: "MARVEL COMICS",
-      presents: "PRESENTA",
-      price: "3,99€",
-      backToEditor: "← Torna all'Editor"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "Scegli Il Tuo Stile di Fumetto",
-      digitalTitle: "Fumetto Digitale",
-      digitalFeature1: "Download PDF di alta qualità",
-      digitalFeature2: "Perfetto per condividere online",
-      digitalFeature3: "Consegna istantanea",
-      digitalPrice: "4,99€",
-      printedTitle: "Fumetto Stampato",
-      printedFeature1: "Qualità di stampa professionale",
-      printedFeature2: "Spedito alla tua porta",
-      printedFeature3: "Sensazione da edizione da collezione",
-      printedPrice: "12,99€"
-    },
-    
-    // FAQ
-    faq: {
-      title: "Domande e Risposte",
-      q1: "Come crea l'IA il mio fumetto?",
-      a1: "La nostra IA analizza la tua foto e storia per creare pannelli stile Marvel con didascalie dinamiche!",
-      q2: "Posso personalizzare il mio fumetto dopo la generazione?",
-      a2: "Sì! Puoi modificare il testo, regolare i pannelli e scegliere diversi stili prima di finalizzare.",
-      q3: "Quali formati di immagine accettate?",
-      a3: "Supportiamo PNG, JPG e WEBP. Per risultati migliori, usa immagini ad alta risoluzione!",
-      q4: "Quanto tempo ci vuole per generare un fumetto?",
-      a4: "La maggior parte dei fumetti è pronta in 30-60 secondi! Storie complesse potrebbero richiedere più tempo.",
-      q5: "Posso creare fumetti in diverse lingue?",
-      a5: "Assolutamente! La nostra IA supporta più lingue per input e generazione di fumetti.",
-      exclamation: "WOW!",
-      contact: "Hai ancora domande?",
-      contactLink: "Contattaci!"
-    },
+    'uploader.title': 'Inizia Il Tuo Fumetto',
+    'uploader.steps': '1. Carica un\'immagine\n2. Aggiungi una didascalia\n3. Genera!',
+    'uploader.clickUpload': 'Clicca per caricare',
+    'uploader.fileTypes': 'JPG, PNG, o WebP',
+    'uploader.comicPanel': 'pannello fumetto',
+    'uploader.placeholder': 'Descrivi cosa sta succedendo nella tua immagine o scrivi un dialogo!',
+    'uploader.generating': 'Generando...',
+    'uploader.generateComic': 'Genera Fumetto',
+    'uploader.ready': 'Ottimo! Ora clicca su Genera Fumetto per iniziare.',
+    'uploader.aiWorking': 'Parlando con l\'IA... Creando la magia del tuo fumetto!',
+
+    // Comic Preview
+    'preview.title': 'La Tua Storia Epica',
+    'preview.backToEditor': '← Torna all\'Editor',
+    'preview.marvelComics': 'GRUPPO MARVEL COMICS',
+    'preview.presents': 'KEEPICS PRESENTA',
+    'preview.price': '€3,99 IT',
+    'preview.aiGenerated': 'FUMETTO GENERATO DA IA',
+
+    // Pricing Section
+    'pricing.title': 'Prezzi e Opzioni',
+    'pricing.digitalTitle': 'Fumetto Digitale (Gratuito)',
+    'pricing.digitalFeature1': 'Crea fino a 3 fumetti/mese',
+    'pricing.digitalFeature2': 'Scarica come PDF/PNG',
+    'pricing.digitalFeature3': 'Prova prima di acquistare!',
+    'pricing.digitalPrice': '€0',
+    'pricing.printedTitle': 'Fumetto Stampato (Premium)',
+    'pricing.printedFeature1': 'Aggiorna per più fumetti',
+    'pricing.printedFeature2': 'Ordina belle stampe tramite Lulu',
+    'pricing.printedFeature3': 'Spedizione mondiale',
+    'pricing.printedPrice': 'A partire da €12',
     
     // Footer
-    footer: {
-      rights: "Tutti i diritti riservati",
-      terms: "Termini di Servizio",
-      privacy: "Politica sulla Privacy",
-      contact: "Contatto",
-      questionsAnswers: "D&R"
-    },
+    'footer.faq': 'FAQ',
+    'footer.terms': 'Termini e Condizioni',
+    'footer.privacy': 'Privacy',
+    'footer.contact': 'Contatti',
+    'footer.rights': 'Tutti i Diritti Riservati',
+    'footer.questionsAnswers': 'Domande e Risposte',
     
-    // Terms of Service
-    terms: {
-      effective: "Data di entrata in vigore",
-      title: "Termini di Servizio",
-      eligibility: "Idoneità",
-      eligibilityText: "Devi avere almeno 13 anni per utilizzare il nostro servizio. Utilizzando keepics, accetti questi termini.",
-      userResponsibilities: "Responsabilità dell'Utente",
-      userResponsibilitiesText: "Sei responsabile del contenuto che carichi. Non caricare materiale protetto da copyright, contenuto inappropriato o contenuto che viola i diritti altrui.",
-      aiContent: "Contenuto Generato da IA",
-      aiContentText: "I fumetti sono generati utilizzando la tecnologia IA. Anche se ci sforziamo per la qualità, i risultati possono variare. Possiedi i diritti del tuo fumetto finale.",
-      ownership: "Proprietà",
-      ownershipText: "Mantieni la proprietà delle tue foto caricate. keepics possiede gli elementi del fumetto generati da IA e lo styling.",
-      payments: "Pagamenti",
-      paymentsText: "Tutti i pagamenti sono elaborati in modo sicuro. I fumetti digitali vengono consegnati istantaneamente. I fumetti fisici vengono spediti entro 5-7 giorni lavorativi.",
-      contact: "Informazioni di Contatto",
-      contactText: "Per domande su questi termini, contattaci a legal@keepics.com"
-    },
-    
+    // FAQ
+    'faq.title': 'Domande Frequenti (FAQ)',
+    'faq.contact': 'Hai ancora domande?',
+    'faq.contactLink': 'Contattaci!',
+
+    // FAQ Questions and Answers
+    'faq.q1': 'Come funziona il processo di creazione del fumetto?',
+    'faq.a1': 'È semplice! Carica una foto, aggiungi una breve descrizione o dialogo, e la nostra IA genererà un fumetto unico basato sul tuo input. Potrai vedere l\'anteprima del risultato e scaricarlo digitalmente o stamparlo come un libro fisico.',
+    'faq.q2': 'Che tipo di immagini posso caricare?',
+    'faq.a2': 'Puoi caricare immagini JPG, PNG o WebP. Assicurati che la tua immagine sia chiara e appropriata per tutti i pubblici. Migliore è la qualità, migliore sarà il tuo fumetto!',
+    'faq.q3': 'Posso scegliere lo stile del fumetto?',
+    'faq.a3': 'Nella versione iniziale, lo stile del fumetto è selezionato automaticamente dall\'IA. Negli aggiornamenti futuri, prevediamo di aggiungere opzioni di stile (manga, cartoon, schizzo, ecc.).',
+    'faq.q4': 'Quanto tempo ci vuole per generare un fumetto?',
+    'faq.a4': 'In media, ci vogliono circa 30-60 secondi perché l\'IA generi il tuo fumetto dopo aver caricato la tua immagine e inserito il tuo testo.',
+    'faq.q5': 'Posso stampare il mio fumetto come un libro vero?',
+    'faq.a5': 'Assolutamente! Una volta che il tuo fumetto è pronto, avrai l\'opzione di stamparlo usando la nostra integrazione con Lulu. Potrai scegliere la tua posizione di spedizione e vedere prezzi e opzioni di consegna in tempo reale.',
+    'faq.exclamation': 'WOW!',
+
+    // Terms and Conditions
+    'terms.title': 'Termini e Condizioni',
+    'terms.effective': 'Data di Entrata in Vigore',
+    'terms.eligibility': 'Idoneità',
+    'terms.eligibilityText': 'Devi avere almeno 13 anni o l\'età legale del consenso digitale nella tua giurisdizione per utilizzare questo Servizio.',
+    'terms.userResponsibilities': 'Responsabilità dell\'Utente',
+    'terms.userResponsibilitiesText': 'Fornire contenuti accurati e legali. Non utilizzare la piattaforma per scopi illegali, dannosi o offensivi.',
+    'terms.aiContent': 'Contenuto Generato da IA',
+    'terms.aiContentText': 'L\'output del fumetto è creato utilizzando l\'intelligenza artificiale. Anche se ci sforziamo per contenuti creativi e appropriati, l\'output dell\'IA può occasionalmente essere imperfetto.',
+    'terms.ownership': 'Proprietà e Copyright',
+    'terms.ownershipText': 'Mantieni la proprietà di qualsiasi contenuto originale che carichi e del fumetto finale generato dal Servizio.',
+    'terms.payments': 'Pagamenti e Rimborsi',
+    'terms.paymentsText': 'I download di fumetti digitali non sono rimborsabili. Gli ordini di fumetti stampati sono soggetti alle politiche di stampa e spedizione.',
+    'terms.contact': 'Contatti',
+    'terms.contactText': 'Se hai domande su questi Termini, puoi contattarci.',
+
     // Privacy Policy
-    privacy: {
-      effective: "Data di entrata in vigore",
-      title: "Politica sulla Privacy",
-      infoCollect: "Informazioni che Raccogliamo",
-      infoCollectText: "Raccogliamo foto che carichi, descrizioni di storie e analisi di utilizzo di base per migliorare il nostro servizio.",
-      howUse: "Come Utilizziamo le Tue Informazioni",
-      howUseText: "I tuoi dati sono utilizzati esclusivamente per generare i tuoi fumetti e migliorare la nostra IA. Non vendiamo mai le tue informazioni personali.",
-      sharing: "Condivisione delle Informazioni",
-      sharingText: "Non condividiamo le tue informazioni personali con terze parti tranne quando richiesto dalla legge.",
-      dataRetention: "Conservazione dei Dati",
-      dataRetentionText: "Le foto caricate vengono eliminate dopo 30 giorni. I fumetti generati vengono conservati per l'accesso al tuo account.",
-      yourRights: "I Tuoi Diritti",
-      yourRightsText: "Puoi richiedere la cancellazione dei tuoi dati, accedere alle tue informazioni o correggere inesattezze in qualsiasi momento.",
-      security: "Sicurezza",
-      securityText: "Utilizziamo crittografia standard del settore e misure di sicurezza per proteggere i tuoi dati.",
-      contact: "Contattaci",
-      contactText: "Per domande sulla privacy, inviaci un'email a privacy@keepics.com"
-    },
-    
-    // Sample Gallery
-    samples: {
-      title: "Fumetti di Esempio",
-      adventure: "Avventura di 6 mesi in Sud America",
-      rome: "Viaggio a Roma con la fidanzata",
-      birthday: "Festa del 2° compleanno!",
-      nature: "Ritiro familiare nella natura",
-      graduation: "Laureato in Medicina",
-      party: "Settimana di festa in Spagna con gli amici",
-      
-      // Adventure panels
-      adventurePanel1: "Giorno 1: Pronti per il selvaggio!",
-      adventurePanel2: "Patagonia: sentieri infiniti",
-      adventurePanel3: "Surf all'alba",
-      adventurePanel4: "Amici da ogni paese",
-      adventurePanel5: "Avventure nella foresta pluviale",
-      adventurePanel6: "Tornati a casa, cuori pieni",
-      
-      // Rome panels
-      romePanel1: "Ciao, Roma!",
-      romePanel2: "Gelato ogni mattina",
-      romePanel3: "Desideri alla Fontana di Trevi",
-      romePanel4: "Tramonto al Colosseo",
-      
-      // Birthday panels
-      birthdayPanel1: "Superstar del compleanno!",
-      birthdayPanel2: "Sorrisi di torta arcobaleno",
-      birthdayPanel3: "Palloncini ovunque!",
-      birthdayPanel4: "Pisolino con nuovo orsacchiotto",
-      
-      // Nature panels
-      naturePanel1: "Inizia l'osservazione delle balene",
-      naturePanel2: "Campeggio sotto le stelle",
-      naturePanel3: "Vagabondaggi nella foresta",
-      naturePanel4: "Risate infinite",
-      
-      // Graduation panels
-      graduationPanel1: "Finalmente, Dottore!",
-      graduationPanel2: "Tocchi in aria",
-      graduationPanel3: "Abbracci della famiglia orgogliosa",
-      graduationPanel4: "Prossima tappa: ospedale!",
-      
-      // Party panels
-      partyPanel1: "Vamos a la playa!",
-      partyPanel2: "Piedi sabbiosi e tramonti",
-      partyPanel3: "Ballando tutta la notte",
-      partyPanel4: "Ricordi per sempre"
-    }
+    'privacy.title': 'Informativa sulla Privacy',
+    'privacy.effective': 'Data di Entrata in Vigore',
+    'privacy.infoCollect': 'Informazioni che Raccogliamo',
+    'privacy.infoCollectText': 'Potremmo raccogliere informazioni personali come il tuo nome, indirizzo email, contenuti caricati e dati di utilizzo.',
+    'privacy.howUse': 'Come Utilizziamo le Tue Informazioni',
+    'privacy.howUseText': 'Utilizziamo le informazioni per fornire e migliorare i nostri servizi, generare fumetti e comunicare con te.',
+    'privacy.sharing': 'Condivisione delle Tue Informazioni',
+    'privacy.sharingText': 'Non vendiamo le tue informazioni personali. Potremmo condividere informazioni con fornitori di servizi che ci aiutano a gestire il sito web.',
+    'privacy.dataRetention': 'Conservazione dei Dati',
+    'privacy.dataRetentionText': 'Conserviamo le tue informazioni personali solo per il tempo necessario a fornire i nostri servizi.',
+    'privacy.yourRights': 'I Tuoi Diritti',
+    'privacy.yourRightsText': 'Potresti avere il diritto di accedere, correggere o eliminare i tuoi dati a seconda della tua posizione.',
+    'privacy.security': 'Sicurezza',
+    'privacy.securityText': 'Prendiamo misure ragionevoli per proteggere le tue informazioni, ma nessun metodo di trasmissione è sicuro al 100%.',
+    'privacy.contact': 'Contattaci',
+    'privacy.contactText': 'Se hai domande su questa Informativa sulla Privacy, ti preghiamo di contattarci.',
   },
   pt: {
     // Navigation
-    nav: {
-      create: "Criar",
-      samples: "Exemplos",
-      pricing: "Preços",
-      faq: "FAQ",
-      login: "Entrar"
-    },
+    'nav.create': 'Criar',
+    'nav.samples': 'Exemplos',
+    'nav.pricing': 'Preços',
+    'nav.faq': 'FAQ',
+    'nav.login': 'Entrar',
     
-    // Hero Section
-    hero: {
-      memories: "memórias",
-      memoriesSubtext: "em quadrinhos épicos estilo Marvel!",
-      createComic: "Criar Meu Quadrinho"
-    },
+    // Hero section
+    'hero.title': 'Transforme Suas Fotos Em Quadrinhos Incríveis!',
+    'hero.subtitle': 'Faça upload de uma foto, adicione sua história e veja a IA criar uma história em quadrinhos personalizada só para você.',
+    'hero.cta': 'Começar a Criar',
+    'hero.memories': 'memórias',
+    'hero.createComic': 'Crie Seu Quadrinho',
+    'hero.memoriesSubtext': 'em quadrinhos em segundos!',
     
     // Comic Uploader
-    uploader: {
-      title: "Crie Seu Quadrinho",
-      steps: "1. Envie uma foto 📸\n2. Descreva sua história ✍️\n3. Receba seu quadrinho Marvel! 🦸‍♂️",
-      clickUpload: "Clique para enviar",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "Painel de Quadrinho",
-      placeholder: "Descreva sua história, aventura ou memória aqui... Mais detalhes = melhor quadrinho!",
-      generating: "Gerando...",
-      generateComic: "Gerar Quadrinho",
-      ready: "✅ Pronto para criar seu quadrinho!",
-      aiWorking: "🤖 IA está fazendo sua mágica..."
-    },
-    
-    // Preview
-    preview: {
-      title: "Sua Aventura Épica",
-      aiGenerated: "Quadrinho Gerado por IA",
-      marvelComics: "MARVEL COMICS",
-      presents: "APRESENTA",
-      price: "R$ 19,99",
-      backToEditor: "← Voltar ao Editor"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "Escolha Seu Estilo de Quadrinho",
-      digitalTitle: "Quadrinho Digital",
-      digitalFeature1: "Download PDF de alta qualidade",
-      digitalFeature2: "Perfeito para compartilhar online",
-      digitalFeature3: "Entrega instantânea",
-      digitalPrice: "R$ 24,99",
-      printedTitle: "Quadrinho Impresso",
-      printedFeature1: "Qualidade de impressão profissional",
-      printedFeature2: "Enviado para sua porta",
-      printedFeature3: "Sensação de edição de colecionador",
-      printedPrice: "R$ 64,99"
-    },
-    
-    // FAQ
-    faq: {
-      title: "Perguntas e Respostas",
-      q1: "Como a IA cria meu quadrinho?",
-      a1: "Nossa IA analisa sua foto e história para criar painéis estilo Marvel com legendas dinâmicas!",
-      q2: "Posso personalizar meu quadrinho após a geração?",
-      a2: "Sim! Você pode editar texto, ajustar painéis e escolher diferentes estilos antes de finalizar.",
-      q3: "Quais formatos de imagem vocês aceitam?",
-      a3: "Suportamos PNG, JPG e WEBP. Para melhores resultados, use imagens de alta resolução!",
-      q4: "Quanto tempo leva para gerar um quadrinho?",
-      a4: "A maioria dos quadrinhos fica pronta em 30-60 segundos! Histórias complexas podem demorar mais.",
-      q5: "Posso criar quadrinhos em diferentes idiomas?",
-      a5: "Absolutamente! Nossa IA suporta múltiplos idiomas para entrada e geração de quadrinhos.",
-      exclamation: "UAU!",
-      contact: "Ainda tem dúvidas?",
-      contactLink: "Entre em contato!"
-    },
+    'uploader.title': 'Comece Seu Quadrinho',
+    'uploader.steps': '1. Envie uma imagem\n2. Adicione uma legenda\n3. Gere!',
+    'uploader.clickUpload': 'Clique para enviar',
+    'uploader.fileTypes': 'JPG, PNG, ou WebP',
+    'uploader.comicPanel': 'painel de quadrinho',
+    'uploader.placeholder': 'Descreva o que está acontecendo na sua imagem ou escreva um diálogo!',
+    'uploader.generating': 'Gerando...',
+    'uploader.generateComic': 'Gerar Quadrinho',
+    'uploader.ready': 'Ótimo! Agora clique em Gerar Quadrinho para começar.',
+    'uploader.aiWorking': 'Conversando com IA... Criando a magia do seu quadrinho!',
+
+    // Comic Preview
+    'preview.title': 'Sua História Épica',
+    'preview.backToEditor': '← Voltar ao Editor',
+    'preview.marvelComics': 'GRUPO MARVEL COMICS',
+    'preview.presents': 'KEEPICS APRESENTA',
+    'preview.price': 'R$ 19,99 BR',
+    'preview.aiGenerated': 'QUADRINHO GERADO POR IA',
+
+    // Pricing Section
+    'pricing.title': 'Preços e Opções',
+    'pricing.digitalTitle': 'Quadrinho Digital (Gratuito)',
+    'pricing.digitalFeature1': 'Crie até 3 quadrinhos/mês',
+    'pricing.digitalFeature2': 'Download como PDF/PNG',
+    'pricing.digitalFeature3': 'Experimente antes de comprar!',
+    'pricing.digitalPrice': 'R$ 0',
+    'pricing.printedTitle': 'Quadrinho Impresso (Premium)',
+    'pricing.printedFeature1': 'Upgrade para mais quadrinhos',
+    'pricing.printedFeature2': 'Peça impressões lindas via Lulu',
+    'pricing.printedFeature3': 'Entrega mundial',
+    'pricing.printedPrice': 'A partir de R$ 60',
     
     // Footer
-    footer: {
-      rights: "Todos os direitos reservados",
-      terms: "Termos de Serviço",
-      privacy: "Política de Privacidade",
-      contact: "Contato",
-      questionsAnswers: "P&R"
-    },
+    'footer.faq': 'FAQ',
+    'footer.terms': 'Termos e Condições',
+    'footer.privacy': 'Privacidade',
+    'footer.contact': 'Contato',
+    'footer.rights': 'Todos os Direitos Reservados',
+    'footer.questionsAnswers': 'Perguntas e Respostas',
     
-    // Terms of Service
-    terms: {
-      effective: "Data de vigência",
-      title: "Termos de Serviço",
-      eligibility: "Elegibilidade",
-      eligibilityText: "Você deve ter pelo menos 13 anos para usar nosso serviço. Ao usar keepics, você concorda com estes termos.",
-      userResponsibilities: "Responsabilidades do Usuário",
-      userResponsibilitiesText: "Você é responsável pelo conteúdo que envia. Não envie material protegido por direitos autorais, conteúdo inadequado ou conteúdo que viole os direitos de outros.",
-      aiContent: "Conteúdo Gerado por IA",
-      aiContentText: "Quadrinhos são gerados usando tecnologia IA. Embora nos esforcemos pela qualidade, os resultados podem variar. Você possui os direitos do seu quadrinho final.",
-      ownership: "Propriedade",
-      ownershipText: "Você mantém a propriedade de suas fotos enviadas. keepics possui os elementos de quadrinho gerados por IA e o estilo.",
-      payments: "Pagamentos",
-      paymentsText: "Todos os pagamentos são processados com segurança. Quadrinhos digitais são entregues instantaneamente. Quadrinhos físicos são enviados em 5-7 dias úteis.",
-      contact: "Informações de Contato",
-      contactText: "Para perguntas sobre estes termos, entre em contato conosco em legal@keepics.com"
-    },
-    
+    // FAQ
+    'faq.title': 'Perguntas Frequentes (FAQ)',
+    'faq.contact': 'Ainda tem dúvidas?',
+    'faq.contactLink': 'Entre em contato!',
+
+    // FAQ Questions and Answers
+    'faq.q1': 'Como funciona o processo de criação de quadrinhos?',
+    'faq.a1': 'É simples! Faça upload de uma foto, adicione uma breve descrição ou diálogo, e nossa IA gerará um quadrinho único baseado na sua entrada. Você poderá visualizar o resultado e baixá-lo digitalmente ou imprimi-lo como um livro físico.',
+    'faq.q2': 'Que tipo de imagens posso enviar?',
+    'faq.a2': 'Você pode enviar imagens JPG, PNG ou WebP. Certifique-se de que sua imagem seja clara e apropriada para todos os públicos. Quanto melhor a qualidade, melhor será seu quadrinho!',
+    'faq.q3': 'Posso escolher o estilo do quadrinho?',
+    'faq.a3': 'Na versão inicial, o estilo do quadrinho é selecionado automaticamente pela IA. Em futuras atualizações, planejamos adicionar opções de estilo (mangá, cartoon, esboço, etc.).',
+    'faq.q4': 'Quanto tempo leva para gerar um quadrinho?',
+    'faq.a4': 'Em média, leva cerca de 30-60 segundos para a IA gerar seu quadrinho após você enviar sua imagem e inserir seu texto.',
+    'faq.q5': 'Posso imprimir meu quadrinho como um livro real?',
+    'faq.a5': 'Absolutamente! Uma vez que seu quadrinho esteja pronto, você terá a opção de imprimi-lo usando nossa integração com Lulu. Você poderá escolher seu local de entrega e ver preços e opções de entrega em tempo real.',
+    'faq.exclamation': 'WOW!',
+
+    // Terms and Conditions
+    'terms.title': 'Termos e Condições',
+    'terms.effective': 'Data de Vigência',
+    'terms.eligibility': 'Elegibilidade',
+    'terms.eligibilityText': 'Você deve ter pelo menos 13 anos ou a idade legal de consentimento digital em sua jurisdição para usar este Serviço.',
+    'terms.userResponsibilities': 'Responsabilidades do Usuário',
+    'terms.userResponsibilitiesText': 'Fornecer conteúdo preciso e legal. Não usar a plataforma para fins ilegais, prejudiciais ou ofensivos.',
+    'terms.aiContent': 'Conteúdo Gerado por IA',
+    'terms.aiContentText': 'A saída do quadrinho é criada usando inteligência artificial. Embora nos esforcemos por conteúdo criativo e apropriado, a saída da IA pode ocasionalmente ser imperfeita.',
+    'terms.ownership': 'Propriedade e Direitos Autorais',
+    'terms.ownershipText': 'Você mantém a propriedade de qualquer conteúdo original que carregar e do quadrinho final gerado pelo Serviço.',
+    'terms.payments': 'Pagamentos e Reembolsos',
+    'terms.paymentsText': 'Downloads de quadrinhos digitais não são reembolsáveis. Pedidos de quadrinhos impressos estão sujeitos às políticas de impressão e envio.',
+    'terms.contact': 'Contato',
+    'terms.contactText': 'Se você tiver alguma dúvida sobre estes Termos, pode entrar em contato conosco.',
+
     // Privacy Policy
-    privacy: {
-      effective: "Data de vigência",
-      title: "Política de Privacidade",
-      infoCollect: "Informações que Coletamos",
-      infoCollectText: "Coletamos fotos que você envia, descrições de histórias e análises básicas de uso para melhorar nosso serviço.",
-      howUse: "Como Usamos Suas Informações",
-      howUseText: "Seus dados são usados apenas para gerar seus quadrinhos e melhorar nossa IA. Nunca vendemos suas informações pessoais.",
-      sharing: "Compartilhamento de Informações",
-      sharingText: "Não compartilhamos suas informações pessoais com terceiros, exceto quando exigido por lei.",
-      dataRetention: "Retenção de Dados",
-      dataRetentionText: "Fotos enviadas são excluídas após 30 dias. Quadrinhos gerados são armazenados para acesso da sua conta.",
-      yourRights: "Seus Direitos",
-      yourRightsText: "Você pode solicitar exclusão de seus dados, acessar suas informações ou corrigir imprecisões a qualquer momento.",
-      security: "Segurança",
-      securityText: "Usamos criptografia padrão da indústria e medidas de segurança para proteger seus dados.",
-      contact: "Entre em Contato",
-      contactText: "Para perguntas sobre privacidade, envie-nos um email para privacy@keepics.com"
-    },
-    
-    // Sample Gallery
-    samples: {
-      title: "Quadrinhos de Exemplo",
-      adventure: "Aventura de 6 meses na América do Sul",
-      rome: "Viagem a Roma com a namorada",
-      birthday: "Festa de 2º aniversário!",
-      nature: "Retiro familiar na natureza",
-      graduation: "Formado na Universidade de Medicina",
-      party: "Semana de festa na Espanha com amigos",
-      
-      // Adventure panels
-      adventurePanel1: "Dia 1: Prontos para o selvagem!",
-      adventurePanel2: "Patagônia: trilhas infinitas",
-      adventurePanel3: "Surf ao nascer do sol",
-      adventurePanel4: "Amigos de todos os países",
-      adventurePanel5: "Aventuras na floresta",
-      adventurePanel6: "De volta para casa, corações cheios",
-      
-      // Rome panels
-      romePanel1: "Ciao, Roma!",
-      romePanel2: "Gelato todas as manhãs",
-      romePanel3: "Desejos na Fontana di Trevi",
-      romePanel4: "Pôr do sol no Coliseu",
-      
-      // Birthday panels
-      birthdayPanel1: "Superstar de aniversário!",
-      birthdayPanel2: "Sorrisos de bolo arco-íris",
-      birthdayPanel3: "Balões em todo lugar!",
-      birthdayPanel4: "Soneca com novo ursinho",
-      
-      // Nature panels
-      naturePanel1: "Observação de baleias começa",
-      naturePanel2: "Acampar sob as estrelas",
-      naturePanel3: "Vagando pela floresta",
-      naturePanel4: "Risadas infinitas",
-      
-      // Graduation panels
-      graduationPanel1: "Finalmente, Doutor!",
-      graduationPanel2: "Chapéus no ar",
-      graduationPanel3: "Abraços da família orgulhosa",
-      graduationPanel4: "Próxima parada: hospital!",
-      
-      // Party panels
-      partyPanel1: "Vamos a la playa!",
-      partyPanel2: "Pés arenosos e pores do sol",
-      partyPanel3: "Dançando a noite toda",
-      partyPanel4: "Memórias para sempre"
-    }
+    'privacy.title': 'Política de Privacidade',
+    'privacy.effective': 'Data de Vigência',
+    'privacy.infoCollect': 'Informações que Coletamos',
+    'privacy.infoCollectText': 'Podemos coletar informações pessoais como seu nome, endereço de e-mail, conteúdo carregado e dados de uso.',
+    'privacy.howUse': 'Como Usamos Suas Informações',
+    'privacy.howUseText': 'Usamos as informações para fornecer e melhorar nossos serviços, gerar quadrinhos e nos comunicar com você.',
+    'privacy.sharing': 'Compartilhamento de Suas Informações',
+    'privacy.sharingText': 'Não vendemos suas informações pessoais. Podemos compartilhar informações com provedores de serviços que nos ajudam a operar o site.',
+    'privacy.dataRetention': 'Retenção de Dados',
+    'privacy.dataRetentionText': 'Mantemos suas informações pessoais apenas pelo tempo necessário para fornecer nossos serviços.',
+    'privacy.yourRights': 'Seus Direitos',
+    'privacy.yourRightsText': 'Você pode ter o direito de acessar, corrigir ou excluir seus dados dependendo da sua localização.',
+    'privacy.security': 'Segurança',
+    'privacy.securityText': 'Tomamos medidas razoáveis para proteger suas informações, mas nenhum método de transmissão é 100% seguro.',
+    'privacy.contact': 'Entre em Contato',
+    'privacy.contactText': 'Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco.',
   },
   ru: {
     // Navigation
-    nav: {
-      create: "Создать",
-      samples: "Примеры",
-      pricing: "Цены",
-      faq: "FAQ",
-      login: "Войти"
-    },
+    'nav.create': 'Создать',
+    'nav.samples': 'Примеры',
+    'nav.pricing': 'Цены',
+    'nav.faq': 'FAQ',
+    'nav.login': 'Войти',
     
-    // Hero Section
-    hero: {
-      memories: "воспоминания",
-      memoriesSubtext: "в эпические комиксы в стиле Marvel!",
-      createComic: "Создать Мой Комикс"
-    },
-    
-    // Comic Uploader
-    uploader: {
-      title: "Создайте Свой Комикс",
-      steps: "1. Загрузите фото 📸\n2. Опишите историю ✍️\n3. Получите комикс Marvel! 🦸‍♂️",
-      clickUpload: "Нажмите для загрузки",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "Панель Комикса",
-      placeholder: "Опишите свою историю, приключение или воспоминание здесь... Больше деталей = лучший комикс!",
-      generating: "Генерация...",
-      generateComic: "Создать Комикс",
-      ready: "✅ Готов создать ваш комикс!",
-      aiWorking: "🤖 ИИ творит магию..."
-    },
-    
-    // Preview
-    preview: {
-      title: "Ваше Эпическое Приключение",
-      aiGenerated: "Комикс, Созданный ИИ",
-      marvelComics: "MARVEL COMICS",
-      presents: "ПРЕДСТАВЛЯЕТ",
-      price: "299₽",
-      backToEditor: "← Назад к Редактору"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "Выберите Стиль Комикса",
-      digitalTitle: "Цифровой Комикс",
-      digitalFeature1: "Высококачественная загрузка PDF",
-      digitalFeature2: "Идеально для онлайн-обмена",
-      digitalFeature3: "Мгновенная доставка",
-      digitalPrice: "399₽",
-      printedTitle: "Печатный Комикс",
-      printedFeature1: "Профессиональное качество печати",
-      printedFeature2: "Доставка к вашей двери",
-      printedFeature3: "Ощущение коллекционного издания",
-      printedPrice: "999₽"
-    },
-    
-    // FAQ
-    faq: {
-      title: "Вопросы и Ответы",
-      q1: "Как ИИ создает мой комикс?",
-      a1: "Наш ИИ анализирует ваше фото и историю для создания панелей в стиле Marvel с динамичными подписями!",
-      q2: "Могу ли я настроить комикс после генерации?",
-      a2: "Да! Вы можете редактировать текст, настраивать панели и выбирать разные стили перед финализацией.",
-      q3: "Какие форматы изображений вы принимаете?",
-      a3: "Мы поддерживаем PNG, JPG и WEBP. Для лучших результатов используйте изображения высокого разрешения!",
-      q4: "Сколько времени занимает создание комикса?",
-      a4: "Большинство комиксов готовы за 30-60 секунд! Сложные истории могут занять больше времени.",
-      q5: "Могу ли я создавать комиксы на разных языках?",
-      a5: "Абсолютно! Наш ИИ поддерживает множество языков для ввода и генерации комиксов.",
-      exclamation: "ВАУ!",
-      contact: "Остались вопросы?",
-      contactLink: "Свяжитесь с нами!"
-    },
-    
-    // Footer
-    footer: {
-      rights: "Все права защищены",
-      terms: "Условия Обслуживания",
-      privacy: "Политика Конфиденциальности",
-      contact: "Контакты",
-      questionsAnswers: "В&О"
-    },
-    
-    // Terms of Service
-    terms: {
-      effective: "Дата вступления в силу",
-      title: "Условия Обслуживания",
-      eligibility: "Право на использование",
-      eligibilityText: "Вам должно быть не менее 13 лет для использования нашего сервиса. Используя keepics, вы соглашаетесь с этими условиями.",
-      userResponsibilities: "Обязанности Пользователя",
-      userResponsibilitiesText: "Вы несете ответственность за загружаемый контент. Не загружайте материалы, защищенные авторским правом, неподходящий контент или контент, нарушающий права других.",
-      aiContent: "Контент, Созданный ИИ",
-      aiContentText: "Комиксы создаются с использованием технологии ИИ. Хотя мы стремимся к качеству, результаты могут варьироваться. Вы владеете правами на свой финальный комикс.",
-      ownership: "Собственность",
-      ownershipText: "Вы сохраняете права на загруженные фотографии. keepics владеет элементами комикса, созданными ИИ, и стилизацией.",
-      payments: "Платежи",
-      paymentsText: "Все платежи обрабатываются безопасно. Цифровые комиксы доставляются мгновенно. Физические комиксы отправляются в течение 5-7 рабочих дней.",
-      contact: "Контактная Информация",
-      contactText: "По вопросам об этих условиях свяжитесь с нами по адресу legal@keepics.com"
-    },
-    
-    // Privacy Policy
-    privacy: {
-      effective: "Дата вступления в силу",
-      title: "Политика Конфиденциальности",
-      infoCollect: "Информация, Которую Мы Собираем",
-      infoCollectText: "Мы собираем фотографии, которые вы загружаете, описания историй и базовую аналитику использования для улучшения нашего сервиса.",
-      howUse: "Как Мы Используем Вашу Информацию",
-      howUseText: "Ваши данные используются исключительно для создания ваших комиксов и улучшения нашего ИИ. Мы никогда не продаем вашу личную информацию.",
-      sharing: "Обмен Информацией",
-      sharingText: "Мы не делимся вашей личной информацией с третьими лицами, кроме случаев, требуемых законом.",
-      dataRetention: "Хранение Данных",
-      dataRetentionText: "Загруженные фотографии удаляются через 30 дней. Созданные комиксы хранятся для доступа к вашему аккаунту.",
-      yourRights: "Ваши Права",
-      yourRightsText: "Вы можете запросить удаление ваших данных, получить доступ к вашей информации или исправить неточности в любое время.",
-      security: "Безопасность",
-      securityText: "Мы используем стандартное для индустрии шифрование и меры безопасности для защиты ваших данных.",
-      contact: "Свяжитесь с Нами",
-      contactText: "По вопросам конфиденциальности отправьте нам email на privacy@keepics.com"
-    },
-    
-    // Sample Gallery
-    samples: {
-      title: "Примеры комиксов",
-      adventure: "6-месячное приключение в Южной Америке",
-      rome: "Поездка в Рим с девушкой",
-      birthday: "Праздник 2-го дня рождения!",
-      nature: "Семейный отдых на природе",
-      graduation: "Окончил медицинский университет",
-      party: "Неделя вечеринок в Испании с друзьями",
-      
-      // Adventure panels
-      adventurePanel1: "День 1: Готовы к дикой природе!",
-      adventurePanel2: "Патагония: бесконечные тропы",
-      adventurePanel3: "Серфинг на рассвете",
-      adventurePanel4: "Друзья из каждой страны",
-      adventurePanel5: "Приключения в тропическом лесу",
-      adventurePanel6: "Дома, сердца полны",
-      
-      // Rome panels
-      romePanel1: "Чао, Рома!",
-      romePanel2: "Джелато каждое утро",
-      romePanel3: "Желания у фонтана Треви",
-      romePanel4: "Закат у Колизея",
-      
-      // Birthday panels
-      birthdayPanel1: "Суперзвезда дня рождения!",
-      birthdayPanel2: "Улыбки радужного торта",
-      birthdayPanel3: "Шарики везде!",
-      birthdayPanel4: "Дремота с новым мишкой",
-      
-      // Nature panels
-      naturePanel1: "Наблюдение за китами начинается",
-      naturePanel2: "Лагерь под звездами",
-      naturePanel3: "Лесные прогулки",
-      naturePanel4: "Бесконечный смех",
-      
-      // Graduation panels
-      graduationPanel1: "Наконец, доктор!",
-      graduationPanel2: "Шапки в воздухе",
-      graduationPanel3: "Объятия гордой семьи",
-      graduationPanel4: "Следующая остановка: больница!",
-      
-      // Party panels
-      partyPanel1: "Вамос а ла плайя!",
-      partyPanel2: "Песчаные ноги и закаты",
-      partyPanel3: "Танцы всю ночь",
-      partyPanel4: "Воспоминания навсегда"
-    }
-  },
-  zh: {
-    // Navigation
-    nav: {
-      create: "创建",
-      samples: "示例",
-      pricing: "价格",
-      faq: "常见问题",
-      login: "登录"
-    },
-    
-    // Hero Section
-    hero: {
-      memories: "回忆",
-      memoriesSubtext: "变成史诗般的漫威风格漫画！",
-      createComic: "创建我的漫画"
-    },
+    // Hero section
+    'hero.title': 'Превратите Ваши Фото В Потрясающие Комиксы!',
+    'hero.subtitle': 'Загрузите фото, добавьте свою историю и смотрите, как ИИ создает персонализированный комикс только для вас.',
+    'hero.cta': 'Начать Создание',
+    'hero.memories': 'воспоминания',
+    'hero.createComic': 'Создайте Свой Комикс',
+    'hero.memoriesSubtext': 'в комиксы за секунды!',
     
     // Comic Uploader
-    uploader: {
-      title: "创建您的漫画",
-      steps: "1. 上传照片 📸\n2. 描述您的故事 ✍️\n3. 获得您的漫威漫画！ 🦸‍♂️",
-      clickUpload: "点击上传",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "漫画面板",
-      placeholder: "在这里描述您的故事、冒险或回忆...更多细节=更好的漫画！",
-      generating: "生成中...",
-      generateComic: "生成漫画",
-      ready: "✅ 准备创建您的漫画！",
-      aiWorking: "🤖 AI正在施展魔法..."
-    },
-    
-    // Preview
-    preview: {
-      title: "您的史诗冒险",
-      aiGenerated: "AI生成的漫画",
-      marvelComics: "漫威漫画",
-      presents: "呈现",
-      price: "¥29.99",
-      backToEditor: "← 返回编辑器"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "选择您的漫画风格",
-      digitalTitle: "数字漫画",
-      digitalFeature1: "高质量PDF下载",
-      digitalFeature2: "完美的在线分享",
-      digitalFeature3: "即时交付",
-      digitalPrice: "¥39.99",
-      printedTitle: "印刷漫画",
-      printedFeature1: "专业印刷质量",
-      printedFeature2: "送货上门",
-      printedFeature3: "收藏版感觉",
-      printedPrice: "¥99.99"
-    },
-    
-    // FAQ
-    faq: {
-      title: "问题与答案",
-      q1: "AI如何创建我的漫画？",
-      a1: "我们的AI分析您的照片和故事，创建具有动态字幕的漫威风格面板！",
-      q2: "生成后我可以自定义我的漫画吗？",
-      a2: "是的！您可以编辑文本、调整面板并在完成前选择不同的漫画风格。",
-      q3: "您接受什么图像格式？",
-      a3: "我们支持PNG、JPG和WEBP。为了获得最佳效果，请使用高分辨率图像！",
-      q4: "生成漫画需要多长时间？",
-      a4: "大多数漫画在30-60秒内准备就绪！复杂的故事可能需要更长时间。",
-      q5: "我可以用不同语言创建漫画吗？",
-      a5: "绝对可以！我们的AI支持多种语言的输入和漫画生成。",
-      exclamation: "哇！",
-      contact: "还有问题吗？",
-      contactLink: "联系我们！"
-    },
+    'uploader.title': 'Начните Свой Комикс',
+    'uploader.steps': '1. Загрузите изображение\n2. Добавьте подпись\n3. Создайте!',
+    'uploader.clickUpload': 'Нажмите для загрузки',
+    'uploader.fileTypes': 'JPG, PNG, или WebP',
+    'uploader.comicPanel': 'панель комикса',
+    'uploader.placeholder': 'Опишите, что происходит на вашем изображении или напишите диалог!',
+    'uploader.generating': 'Создаю...',
+    'uploader.generateComic': 'Создать Комикс',
+    'uploader.ready': 'Отлично! Теперь нажмите Создать Комикс чтобы начать.',
+    'uploader.aiWorking': 'Общаюсь с ИИ... Создаю магию вашего комикса!',
+
+    // Comic Preview
+    'preview.title': 'Ваша Эпическая История',
+    'preview.backToEditor': '← Назад к Редактору',
+    'preview.marvelComics': 'ГРУППА MARVEL COMICS',
+    'preview.presents': 'KEEPICS ПРЕДСТАВЛЯЕТ',
+    'preview.price': '299 ₽ РФ',
+    'preview.aiGenerated': 'КОМИКС СОЗДАН ИИ',
+
+    // Pricing Section
+    'pricing.title': 'Цены и Опции',
+    'pricing.digitalTitle': 'Цифровой Комикс (Бесплатно)',
+    'pricing.digitalFeature1': 'Создавайте до 3 комиксов/месяц',
+    'pricing.digitalFeature2': 'Скачивайте как PDF/PNG',
+    'pricing.digitalFeature3': 'Попробуйте перед покупкой!',
+    'pricing.digitalPrice': '0₽',
+    'pricing.printedTitle': 'Печатный Комикс (Премиум)',
+    'pricing.printedFeature1': 'Обновление для больших комиксов',
+    'pricing.printedFeature2': 'Заказывайте красивые отпечатки через Lulu',
+    'pricing.printedFeature3': 'Доставка по всему миру',
+    'pricing.printedPrice': 'От 900₽',
     
     // Footer
-    footer: {
-      rights: "版权所有",
-      terms: "服务条款",
-      privacy: "隐私政策",
-      contact: "联系",
-      questionsAnswers: "问答"
-    },
+    'footer.faq': 'FAQ',
+    'footer.terms': 'Условия и Положения',
+    'footer.privacy': 'Конфиденциальность',
+    'footer.contact': 'Контакты',
+    'footer.rights': 'Все Права Защищены',
+    'footer.questionsAnswers': 'Вопросы и Ответы',
     
-    // Terms of Service
-    terms: {
-      effective: "生效日期",
-      title: "服务条款",
-      eligibility: "资格",
-      eligibilityText: "您必须年满13岁才能使用我们的服务。通过使用keepics，您同意这些条款。",
-      userResponsibilities: "用户责任",
-      userResponsibilitiesText: "您对上传的内容负责。请勿上传受版权保护的材料、不当内容或侵犯他人权利的内容。",
-      aiContent: "AI生成的内容",
-      aiContentText: "漫画使用AI技术生成。虽然我们努力追求质量，但结果可能有所不同。您拥有最终漫画的权利。",
-      ownership: "所有权",
-      ownershipText: "您保留上传照片的所有权。keepics拥有AI生成的漫画元素和样式。",
-      payments: "付款",
-      paymentsText: "所有付款都经过安全处理。数字漫画即时交付。实体漫画在5-7个工作日内发货。",
-      contact: "联系信息",
-      contactText: "有关这些条款的问题，请通过legal@keepics.com联系我们"
-    },
-    
+    // FAQ
+    'faq.title': 'Часто Задаваемые Вопросы (FAQ)',
+    'faq.contact': 'Остались вопросы?',
+    'faq.contactLink': 'Свяжитесь с нами!',
+
+    // FAQ Questions and Answers
+    'faq.q1': 'Как работает процесс создания комиксов?',
+    'faq.a1': 'Это просто! Загрузите фото, добавьте краткое описание или диалог, и наш ИИ создаст уникальный комикс на основе вашего ввода. Вы сможете просмотреть результат и скачать его цифрово или распечатать как физическую книгу.',
+    'faq.q2': 'Какие изображения я могу загружать?',
+    'faq.a2': 'Вы можете загружать изображения JPG, PNG или WebP. Убедитесь, что ваше изображение четкое и подходящее для всех возрастов. Чем лучше качество, тем лучше будет выглядеть ваш комикс!',
+    'faq.q3': 'Могу ли я выбрать стиль комикса?',
+    'faq.a3': 'В начальной версии стиль комикса автоматически выбирается ИИ. В будущих обновлениях мы планируем добавить варианты стилей (манга, мультфильм, эскиз и т.д.).',
+    'faq.q4': 'Сколько времени занимает создание комикса?',
+    'faq.a4': 'В среднем, ИИ требуется около 30-60 секунд для создания вашего комикса после загрузки изображения и ввода текста.',
+    'faq.q5': 'Могу ли я напечатать свой комикс как настоящую книгу?',
+    'faq.a5': 'Абсолютно! Как только ваш комикс будет готов, у вас будет возможность напечатать его через нашу интеграцию с Lulu. Вы сможете выбрать место доставки и увидеть цены и варианты доставки в реальном времени.',
+    'faq.exclamation': 'ВАУ!',
+
+    // Terms and Conditions
+    'terms.title': 'Условия и Положения',
+    'terms.effective': 'Дата Вступления в Силу',
+    'terms.eligibility': 'Правомочность',
+    'terms.eligibilityText': 'Вы должны быть не моложе 13 лет или достичь законного возраста цифрового согласия в вашей юрисдикции для использования этого Сервиса.',
+    'terms.userResponsibilities': 'Обязанности Пользователя',
+    'terms.userResponsibilitiesText': 'Предоставлять точный и законный контент. Не использовать платформу в незаконных, вредных или оскорбительных целях.',
+    'terms.aiContent': 'Контент, Созданный ИИ',
+    'terms.aiContentText': 'Вывод комикса создается с использованием искусственного интеллекта. Хотя мы стремимся к творческому и подходящему контенту, вывод ИИ может иногда быть несовершенным.',
+    'terms.ownership': 'Собственность и Авторское Право',
+    'terms.ownershipText': 'Вы сохраняете право собственности на любой оригинальный контент, который загружаете, и на финальный комикс, созданный Сервисом.',
+    'terms.payments': 'Платежи и Возвраты',
+    'terms.paymentsText': 'Загрузки цифровых комиксов не подлежат возврату. Заказы печатных комиксов подчиняются политикам печати и доставки.',
+    'terms.contact': 'Контакты',
+    'terms.contactText': 'Если у вас есть вопросы об этих Условиях, вы можете связаться с нами.',
+
     // Privacy Policy
-    privacy: {
-      effective: "生效日期",
-      title: "隐私政策",
-      infoCollect: "我们收集的信息",
-      infoCollectText: "我们收集您上传的照片、故事描述和基本使用分析以改进我们的服务。",
-      howUse: "我们如何使用您的信息",
-      howUseText: "您的数据仅用于生成您的漫画和改进我们的AI。我们从不出售您的个人信息。",
-      sharing: "信息共享",
-      sharingText: "除法律要求外，我们不与第三方共享您的个人信息。",
-      dataRetention: "数据保留",
-      dataRetentionText: "上传的照片在30天后删除。生成的漫画存储以供您的账户访问。",
-      yourRights: "您的权利",
-      yourRightsText: "您可以随时请求删除您的数据、访问您的信息或纠正不准确之处。",
-      security: "安全",
-      securityText: "我们使用行业标准加密和安全措施来保护您的数据。",
-      contact: "联系我们",
-      contactText: "有关隐私问题，请发送电子邮件至privacy@keepics.com"
-    },
-    
-    // Sample Gallery
-    samples: {
-      title: "漫画样本",
-      adventure: "南美6个月冒险",
-      rome: "与女友的罗马之旅",
-      birthday: "2岁生日派对！",
-      nature: "家庭自然度假",
-      graduation: "医学院毕业",
-      party: "与朋友在西班牙的派对周",
-      
-      // Adventure panels
-      adventurePanel1: "第1天：准备野外探险！",
-      adventurePanel2: "巴塔哥尼亚：无尽的小径",
-      adventurePanel3: "日出冲浪",
-      adventurePanel4: "来自各国的朋友",
-      adventurePanel5: "雨林冒险",
-      adventurePanel6: "回到家，心满意足",
-      
-      // Rome panels
-      romePanel1: "你好，罗马！",
-      romePanel2: "每天早上都有冰淇淋",
-      romePanel3: "特雷维喷泉许愿",
-      romePanel4: "斗兽场的日落",
-      
-      // Birthday panels
-      birthdayPanel1: "生日超级明星！",
-      birthdayPanel2: "彩虹蛋糕的笑容",
-      birthdayPanel3: "气球到处都是！",
-      birthdayPanel4: "和新泰迪熊一起小憩",
-      
-      // Nature panels
-      naturePanel1: "观鲸开始",
-      naturePanel2: "在星空下露营",
-      naturePanel3: "森林漫步",
-      naturePanel4: "无尽的欢声笑语",
-      
-      // Graduation panels
-      graduationPanel1: "终于，医生！",
-      graduationPanel2: "学士帽飞向空中",
-      graduationPanel3: "骄傲家庭的拥抱",
-      graduationPanel4: "下一站：医院！",
-      
-      // Party panels
-      partyPanel1: "去海滩吧！",
-      partyPanel2: "沙脚和日落",
-      partyPanel3: "整夜跳舞",
-      partyPanel4: "永远的回忆"
-    }
+    'privacy.title': 'Политика Конфиденциальности',
+    'privacy.effective': 'Дата Вступления в Силу',
+    'privacy.infoCollect': 'Информация, Которую Мы Собираем',
+    'privacy.infoCollectText': 'Мы можем собирать персональную информацию, такую как ваше имя, адрес электронной почты, загруженный контент и данные об использовании.',
+    'privacy.howUse': 'Как Мы Используем Вашу Информацию',
+    'privacy.howUseText': 'Мы используем информацию для предоставления и улучшения наших услуг, создания комиксов и общения с вами.',
+    'privacy.sharing': 'Обмен Вашей Информацией',
+    'privacy.sharingText': 'Мы не продаем вашу персональную информацию. Мы можем делиться информацией с поставщиками услуг, которые помогают нам управлять сайтом.',
+    'privacy.dataRetention': 'Хранение Данных',
+    'privacy.dataRetentionText': 'Мы храним вашу персональную информацию только столько, сколько необходимо для предоставления наших услуг.',
+    'privacy.yourRights': 'Ваши Права',
+    'privacy.yourRightsText': 'В зависимости от вашего местоположения, вы можете иметь право доступа, исправления или удаления ваших данных.',
+    'privacy.security': 'Безопасность',
+    'privacy.securityText': 'Мы принимаем разумные меры для защиты вашей информации, но ни один метод передачи не является 100% безопасным.',
+    'privacy.contact': 'Свяжитесь с Нами',
+    'privacy.contactText': 'Если у вас есть вопросы об этой Политике Конфиденциальности, пожалуйста, свяжитесь с нами.',
   },
   ja: {
     // Navigation
-    nav: {
-      create: "作成",
-      samples: "サンプル",
-      pricing: "価格",
-      faq: "よくある質問",
-      login: "ログイン"
-    },
+    'nav.create': '作成',
+    'nav.samples': 'サンプル',
+    'nav.pricing': '料金',
+    'nav.faq': 'FAQ',
+    'nav.login': 'ログイン',
     
-    // Hero Section
-    hero: {
-      memories: "思い出",
-      memoriesSubtext: "を壮大なマーベル風コミックに！",
-      createComic: "マイコミックを作成"
-    },
+    // Hero section
+    'hero.title': '写真を素晴らしいコミックに変換！',
+    'hero.subtitle': '写真をアップロードし、ストーリーを追加して、AIがあなただけのパーソナライズされたコミックブックを作成するのを見てください。',
+    'hero.cta': '作成を開始',
+    'hero.memories': '思い出',
+    'hero.createComic': 'コミックを作成',
+    'hero.memoriesSubtext': 'を数秒でコミックに！',
     
     // Comic Uploader
-    uploader: {
-      title: "コミックを作成",
-      steps: "1. 写真をアップロード 📸\n2. ストーリーを説明 ✍️\n3. マーベルコミックを取得！ 🦸‍♂️",
-      clickUpload: "クリックしてアップロード",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "コミックパネル",
-      placeholder: "ここにあなたのストーリー、冒険、思い出を説明してください...詳細が多いほど良いコミックになります！",
-      generating: "生成中...",
-      generateComic: "コミック生成",
-      ready: "✅ コミック作成の準備完了！",
-      aiWorking: "🤖 AIが魔法をかけています..."
-    },
-    
-    // Preview
-    preview: {
-      title: "あなたの壮大な冒険",
-      aiGenerated: "AI生成コミック",
-      marvelComics: "マーベルコミックス",
-      presents: "プレゼンツ",
-      price: "¥499",
-      backToEditor: "← エディターに戻る"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "コミックスタイルを選択",
-      digitalTitle: "デジタルコミック",
-      digitalFeature1: "高品質PDFダウンロード",
-      digitalFeature2: "オンライン共有に最適",
-      digitalFeature3: "即座に配信",
-      digitalPrice: "¥599",
-      printedTitle: "印刷コミック",
-      printedFeature1: "プロ品質の印刷",
-      printedFeature2: "ご自宅まで配送",
-      printedFeature3: "コレクター版の感覚",
-      printedPrice: "¥1,299"
-    },
-    
-    // FAQ
-    faq: {
-      title: "質問と回答",
-      q1: "AIはどのようにコミックを作成しますか？",
-      a1: "私たちのAIはあなたの写真とストーリーを分析して、ダイナミックなキャプション付きのマーベル風パネルを作成します！",
-      q2: "生成後にコミックをカスタマイズできますか？",
-      a2: "はい！テキストの編集、パネルの調整、完成前の異なるコミックスタイルの選択ができます。",
-      q3: "どの画像フォーマットを受け付けますか？",
-      a3: "PNG、JPG、WEBPをサポートしています。最良の結果のために高解像度画像を使用してください！",
-      q4: "コミック生成にはどのくらい時間がかかりますか？",
-      a4: "ほとんどのコミックは30-60秒で準備完了！複雑なストーリーはもう少し時間がかかる場合があります。",
-      q5: "異なる言語でコミックを作成できますか？",
-      a5: "もちろんです！私たちのAIは入力とコミック生成の両方で複数の言語をサポートしています。",
-      exclamation: "ワオ！",
-      contact: "まだ質問がありますか？",
-      contactLink: "お問い合わせください！"
-    },
+    'uploader.title': 'コミックを開始',
+    'uploader.steps': '1. 画像をアップロード\n2. キャプションを追加\n3. 生成！',
+    'uploader.clickUpload': 'クリックしてアップロード',
+    'uploader.fileTypes': 'JPG、PNG、またはWebP',
+    'uploader.comicPanel': 'コミックパネル',
+    'uploader.placeholder': '画像で何が起こっているかを説明するか、ダイアログを書いてください！',
+    'uploader.generating': '生成中...',
+    'uploader.generateComic': 'コミック生成',
+    'uploader.ready': '素晴らしい！今すぐコミック生成をクリックして開始してください。',
+    'uploader.aiWorking': 'AIと会話中...あなたのコミックの魔法を作成中！',
+
+    // Comic Preview
+    'preview.title': 'あなたの壮大な物語',
+    'preview.backToEditor': '← エディターに戻る',
+    'preview.marvelComics': 'マーベルコミックスグループ',
+    'preview.presents': 'キーピックス プレゼンツ',
+    'preview.price': '¥450 日本',
+    'preview.aiGenerated': 'AI生成コミック',
+
+    // Pricing Section
+    'pricing.title': '料金とオプション',
+    'pricing.digitalTitle': 'デジタルコミック（無料）',
+    'pricing.digitalFeature1': '月最大3コミック作成',
+    'pricing.digitalFeature2': 'PDF/PNGでダウンロード',
+    'pricing.digitalFeature3': '購入前にお試し！',
+    'pricing.digitalPrice': '¥0',
+    'pricing.printedTitle': '印刷コミック（プレミアム）',
+    'pricing.printedFeature1': 'より多くのコミックへのアップグレード',
+    'pricing.printedFeature2': 'Lulu経由で美しい印刷を注文',
+    'pricing.printedFeature3': '世界配送',
+    'pricing.printedPrice': '¥1,800から',
     
     // Footer
-    footer: {
-      rights: "全著作権所有",
-      terms: "利用規約",
-      privacy: "プライバシーポリシー",
-      contact: "お問い合わせ",
-      questionsAnswers: "Q&A"
-    },
+    'footer.faq': 'FAQ',
+    'footer.terms': '利用規約',
+    'footer.privacy': 'プライバシー',
+    'footer.contact': 'お問い合わせ',
+    'footer.rights': '全著作権所有',
+    'footer.questionsAnswers': '質問と回答',
     
-    // Terms of Service
-    terms: {
-      effective: "発効日",
-      title: "利用規約",
-      eligibility: "利用資格",
-      eligibilityText: "当サービスを利用するには13歳以上である必要があります。keepicsを使用することで、これらの規約に同意したものとみなされます。",
-      userResponsibilities: "ユーザーの責任",
-      userResponsibilitiesText: "アップロードするコンテンツについて責任を負います。著作権で保護された素材、不適切なコンテンツ、他者の権利を侵害するコンテンツをアップロードしないでください。",
-      aiContent: "AI生成コンテンツ",
-      aiContentText: "コミックはAI技術を使用して生成されます。品質を追求していますが、結果は異なる場合があります。最終的なコミックの権利はあなたが所有します。",
-      ownership: "所有権",
-      ownershipText: "アップロードした写真の所有権を保持します。keepicsはAI生成されたコミック要素とスタイリングを所有します。",
-      payments: "支払い",
-      paymentsText: "すべての支払いは安全に処理されます。デジタルコミックは即座に配信されます。物理的なコミックは5-7営業日以内に発送されます。",
-      contact: "連絡先情報",
-      contactText: "これらの規約に関する質問は、legal@keepics.comまでお問い合わせください"
-    },
-    
+    // FAQ
+    'faq.title': 'よくある質問 (FAQ)',
+    'faq.contact': 'まだ質問がありますか？',
+    'faq.contactLink': 'お問い合わせください！',
+
+    // FAQ Questions and Answers
+    'faq.q1': 'コミック作成プロセスはどのように機能しますか？',
+    'faq.a1': '簡単です！写真をアップロードし、短い説明やダイアログを追加すると、私たちのAIがあなたの入力に基づいてユニークなコミックを生成します。結果をプレビューして、デジタルでダウンロードするか、物理的なコミックブックとして印刷することができます。',
+    'faq.q2': 'どのような画像をアップロードできますか？',
+    'faq.a2': 'JPG、PNG、またはWebP画像をアップロードできます。画像が鮮明で、すべての年齢層に適していることを確認してください。品質が良いほど、コミックの見た目も良くなります！',
+    'faq.q3': 'コミックのスタイルを選択できますか？',
+    'faq.a3': '初期バージョンでは、コミックスタイルはAIによって自動的に選択されます。将来のアップデートで、スタイルオプション（マンガ、カートゥーン、スケッチなど）を追加する予定です。',
+    'faq.q4': 'コミックの生成にはどれくらい時間がかかりますか？',
+    'faq.a4': '平均的に、画像をアップロードしてテキストを入力した後、AIがコミックを生成するのに約30-60秒かかります。',
+    'faq.q5': 'コミックを実際の本として印刷できますか？',
+    'faq.a5': 'もちろんです！コミックが完成したら、Luluとの統合を使用して印刷するオプションがあります。配送場所を選択し、リアルタイムで価格と配送オプションを確認できます。',
+    'faq.exclamation': 'ワオ！',
+
+    // Terms and Conditions
+    'terms.title': '利用規約',
+    'terms.effective': '施行日',
+    'terms.eligibility': '資格',
+    'terms.eligibilityText': 'このサービスを利用するには、13歳以上またはお住まいの管轄区域でのデジタル同意の法定年齢に達している必要があります。',
+    'terms.userResponsibilities': 'ユーザーの責任',
+    'terms.userResponsibilitiesText': '正確で合法なコンテンツを提供する。違法、有害、または攻撃的な目的でプラットフォームを使用しない。',
+    'terms.aiContent': 'AI生成コンテンツ',
+    'terms.aiContentText': 'コミック出力は人工知能を使用して作成されます。創造的で適切なコンテンツを目指していますが、AI出力は時々不完全である可能性があります。',
+    'terms.ownership': '所有権と著作権',
+    'terms.ownershipText': 'アップロードした元のコンテンツとサービスによって生成された最終コミックの所有権を保持します。',
+    'terms.payments': '支払いと払い戻し',
+    'terms.paymentsText': 'デジタルコミックのダウンロードは払い戻し不可です。印刷コミックの注文は印刷および配送ポリシーに従います。',
+    'terms.contact': 'お問い合わせ',
+    'terms.contactText': 'これらの規約について質問がある場合は、お問い合わせください。',
+
     // Privacy Policy
-    privacy: {
-      effective: "発効日",
-      title: "プライバシーポリシー",
-      infoCollect: "収集する情報",
-      infoCollectText: "サービス向上のため、アップロードされた写真、ストーリーの説明、基本的な使用分析を収集します。",
-      howUse: "情報の使用方法",
-      howUseText: "あなたのデータはコミック生成とAI改善のためのみに使用されます。個人情報を販売することはありません。",
-      sharing: "情報の共有",
-      sharingText: "法律で要求される場合を除き、第三者と個人情報を共有することはありません。",
-      dataRetention: "データ保持",
-      dataRetentionText: "アップロードされた写真は30日後に削除されます。生成されたコミックはアカウントアクセスのために保存されます。",
-      yourRights: "あなたの権利",
-      yourRightsText: "いつでもデータの削除要求、情報へのアクセス、不正確な情報の修正ができます。",
-      security: "セキュリティ",
-      securityText: "業界標準の暗号化とセキュリティ対策を使用してデータを保護しています。",
-      contact: "お問い合わせ",
-      contactText: "プライバシーに関する質問は、privacy@keepics.comまでメールでお問い合わせください"
-    },
+    'privacy.title': 'プライバシーポリシー',
+    'privacy.effective': '施行日',
+    'privacy.infoCollect': '収集する情報',
+    'privacy.infoCollectText': 'お名前、メールアドレス、アップロードされたコンテンツ、使用データなどの個人情報を収集する場合があります。',
+    'privacy.howUse': '情報の使用方法',
+    'privacy.howUseText': 'サービスの提供と改善、コミックの生成、お客様とのコミュニケーションのために情報を使用します。',
+    'privacy.sharing': '情報の共有',
+    'privacy.sharingText': '個人情報は販売しません。ウェブサイトの運営を支援するサービスプロバイダーと情報を共有する場合があります。',
+    'privacy.dataRetention': 'データ保持',
+    'privacy.dataRetentionText': 'サービスの提供に必要な期間のみ個人情報を保持します。',
+    'privacy.yourRights': 'あなたの権利',
+    'privacy.yourRightsText': 'お住まいの地域によって、データへのアクセス、訂正、削除の権利を持つ場合があります。',
+    'privacy.security': 'セキュリティ',
+    'privacy.securityText': '情報を保護するため合理的な措置を講じていますが、100%安全な送信方法は存在しません。',
+    'privacy.contact': 'お問い合わせ',
+    'privacy.contactText': 'このプライバシーポリシーについて質問がある場合は、お問い合わせください。',
+  },
+  zh: {
+    // Navigation
+    'nav.create': '创建',
+    'nav.samples': '示例',
+    'nav.pricing': '价格',
+    'nav.faq': '常见问题',
+    'nav.login': '登录',
     
-    // Sample Gallery
-    samples: {
-      title: "サンプルコミック",
-      adventure: "南米6ヶ月の冒険",
-      rome: "恋人とのローマ旅行",
-      birthday: "2歳の誕生日パーティー！",
-      nature: "家族自然リトリート",
-      graduation: "医学部卒業",
-      party: "友達とのスペインでのパーティー週間",
-      
-      // Adventure panels
-      adventurePanel1: "1日目：野生の準備完了！",
-      adventurePanel2: "パタゴニア：無限のトレイル",
-      adventurePanel3: "日の出でサーフィン",
-      adventurePanel4: "世界中からの友達",
-      adventurePanel5: "熱帯雨林の冒険",
-      adventurePanel6: "家に帰って、心は満たされて",
-      
-      // Rome panels
-      romePanel1: "チャオ、ローマ！",
-      romePanel2: "毎朝ジェラート",
-      romePanel3: "トレビの泉での願い事",
-      romePanel4: "コロッセオでの夕日",
-      
-      // Birthday panels
-      birthdayPanel1: "誕生日のスーパースター！",
-      birthdayPanel2: "レインボーケーキの笑顔",
-      birthdayPanel3: "風船がいっぱい！",
-      birthdayPanel4: "新しいテディベアとお昼寝",
-      
-      // Nature panels
-      naturePanel1: "ホエールウォッチング開始",
-      naturePanel2: "星空の下でキャンプ",
-      naturePanel3: "森の散策",
-      naturePanel4: "無限の笑い",
-      
-      // Graduation panels
-      graduationPanel1: "ついに、ドクター！",
-      graduationPanel2: "帽子を空に投げて",
-      graduationPanel3: "誇らしい家族のハグ",
-      graduationPanel4: "次の目的地：病院！",
-      
-      // Party panels
-      partyPanel1: "ビーチに行こう！",
-      partyPanel2: "砂の足と夕日",
-      partyPanel3: "一晩中踊る",
-      partyPanel4: "永遠の思い出"
-    }
+    // Hero section
+    'hero.title': '将您的照片转换成精彩漫画！',
+    'hero.subtitle': '上传照片，添加您的故事，观看AI为您创建个性化漫画书。',
+    'hero.cta': '开始创建',
+    'hero.memories': '回忆',
+    'hero.createComic': '创建您的漫画',
+    'hero.memoriesSubtext': '秒内变成漫画！',
+    
+    // Comic Uploader
+    'uploader.title': '开始您的漫画',
+    'uploader.steps': '1. 上传图片\n2. 添加标题\n3. 生成！',
+    'uploader.clickUpload': '点击上传',
+    'uploader.fileTypes': 'JPG、PNG或WebP',
+    'uploader.comicPanel': '漫画面板',
+    'uploader.placeholder': '描述您图片中发生的事情或写一段对话！',
+    'uploader.generating': '生成中...',
+    'uploader.generateComic': '生成漫画',
+    'uploader.ready': '太好了！现在点击生成漫画开始。',
+    'uploader.aiWorking': '正在与AI对话...创造您的漫画魔法！',
+
+    // Comic Preview
+    'preview.title': '您的史诗故事',
+    'preview.backToEditor': '← 返回编辑器',
+    'preview.marvelComics': '漫威漫画集团',
+    'preview.presents': 'KEEPICS 出品',
+    'preview.price': '¥28 中国',
+    'preview.aiGenerated': 'AI生成漫画',
+
+    // Pricing Section
+    'pricing.title': '价格和选项',
+    'pricing.digitalTitle': '数字漫画（免费）',
+    'pricing.digitalFeature1': '每月创建最多3个漫画',
+    'pricing.digitalFeature2': '下载为PDF/PNG',
+    'pricing.digitalFeature3': '先试后买！',
+    'pricing.digitalPrice': '¥0',
+    'pricing.printedTitle': '印刷漫画（高级版）',
+    'pricing.printedFeature1': '升级获得更多漫画',
+    'pricing.printedFeature2': '通过Lulu订购精美印刷品',
+    'pricing.printedFeature3': '全球配送',
+    'pricing.printedPrice': '从¥85起',
+    
+    // Footer
+    'footer.faq': '常见问题',
+    'footer.terms': '条款和条件',
+    'footer.privacy': '隐私',
+    'footer.contact': '联系我们',
+    'footer.rights': '版权所有',
+    'footer.questionsAnswers': '问答',
+    
+    // FAQ
+    'faq.title': '常见问题 (FAQ)',
+    'faq.contact': '还有问题吗？',
+    'faq.contactLink': '联系我们！',
+
+    // FAQ Questions and Answers
+    'faq.q1': '漫画创作过程是如何工作的？',
+    'faq.a1': '很简单！上传一张照片，添加简短描述或对话，我们的AI将根据您的输入生成独特的漫画。您可以预览结果并数字下载或打印成实体漫画书。',
+    'faq.q2': '我可以上传什么类型的图片？',
+    'faq.a2': '您可以上传JPG、PNG或WebP图片。确保您的图片清晰且适合所有年龄段。质量越好，您的漫画看起来就越好！',
+    'faq.q3': '我可以选择漫画的风格吗？',
+    'faq.a3': '在初始版本中，漫画风格由AI自动选择。在未来的更新中，我们计划添加风格选项（漫画、卡通、素描等）。',
+    'faq.q4': '生成漫画需要多长时间？',
+    'faq.a4': '平均而言，在您上传图片并输入文本后，AI生成漫画大约需要30-60秒。',
+    'faq.q5': '我可以将漫画打印成真正的书吗？',
+    'faq.a5': '当然可以！一旦您的漫画准备好，您就可以选择使用我们与Lulu的集成来打印它。您可以选择送货地点并实时查看价格和配送选项。',
+    'faq.exclamation': '哇！',
+
+    // Terms and Conditions
+    'terms.title': '条款和条件',
+    'terms.effective': '生效日期',
+    'terms.eligibility': '资格',
+    'terms.eligibilityText': '您必须年满13岁或达到您所在管辖区的数字同意法定年龄才能使用此服务。',
+    'terms.userResponsibilities': '用户责任',
+    'terms.userResponsibilitiesText': '提供准确和合法的内容。不将平台用于非法、有害或攻击性目的。',
+    'terms.aiContent': 'AI生成内容',
+    'terms.aiContentText': '漫画输出是使用人工智能创建的。虽然我们努力提供创意和适当的内容，但AI输出有时可能不完美。',
+    'terms.ownership': '所有权和版权',
+    'terms.ownershipText': '您保留上传的任何原始内容和服务生成的最终漫画的所有权。',
+    'terms.payments': '付款和退款',
+    'terms.paymentsText': '数字漫画下载不可退款。印刷漫画订单受印刷和运输政策约束。',
+    'terms.contact': '联系方式',
+    'terms.contactText': '如果您对这些条款有任何疑问，可以联系我们。',
+
+    // Privacy Policy
+    'privacy.title': '隐私政策',
+    'privacy.effective': '生效日期',
+    'privacy.infoCollect': '我们收集的信息',
+    'privacy.infoCollectText': '我们可能收集个人信息，如您的姓名、电子邮件地址、上传的内容和使用数据。',
+    'privacy.howUse': '我们如何使用您的信息',
+    'privacy.howUseText': '我们使用信息来提供和改进我们的服务，生成漫画并与您沟通。',
+    'privacy.sharing': '分享您的信息',
+    'privacy.sharingText': '我们不出售您的个人信息。我们可能与帮助我们运营网站的服务提供商分享信息。',
+    'privacy.dataRetention': '数据保留',
+    'privacy.dataRetentionText': '我们仅在提供服务所需的时间内保留您的个人信息。',
+    'privacy.yourRights': '您的权利',
+    'privacy.yourRightsText': '根据您的位置，您可能有权访问、更正或删除您的数据。',
+    'privacy.security': '安全',
+    'privacy.securityText': '我们采取合理措施保护您的信息，但没有传输方法是100%安全的。',
+    'privacy.contact': '联系我们',
+    'privacy.contactText': '如果您对此隐私政策有任何疑问，请联系我们。',
   },
   ar: {
     // Navigation
-    nav: {
-      create: "إنشاء",
-      samples: "عينات",
-      pricing: "الأسعار",
-      faq: "الأسئلة الشائعة",
-      login: "تسجيل الدخول"
-    },
+    'nav.create': 'إنشاء',
+    'nav.samples': 'عينات',
+    'nav.pricing': 'الأسعار',
+    'nav.faq': 'الأسئلة الشائعة',
+    'nav.login': 'تسجيل الدخول',
     
-    // Hero Section
-    hero: {
-      memories: "الذكريات",
-      memoriesSubtext: "إلى قصص مصورة ملحمية بأسلوب مارفل!",
-      createComic: "إنشاء قصتي المصورة"
-    },
-    
-    // Comic Uploader
-    uploader: {
-      title: "أنشئ قصتك المصورة",
-      steps: "1. ارفع صورة 📸\n2. اوصف قصتك ✍️\n3. احصل على قصة مارفل المصورة! 🦸‍♂️",
-      clickUpload: "انقر للرفع",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "لوحة القصة المصورة",
-      placeholder: "اوصف قصتك أو مغامرتك أو ذكرياتك هنا... كلما زادت التفاصيل = قصة مصورة أفضل!",
-      generating: "جاري الإنشاء...",
-      generateComic: "إنشاء القصة المصورة",
-      ready: "✅ جاهز لإنشاء قصتك المصورة!",
-      aiWorking: "🤖 الذكاء الاصطناعي يعمل سحره..."
-    },
-    
-    // Preview
-    preview: {
-      title: "مغامرتك الملحمية",
-      aiGenerated: "قصة مصورة مولدة بالذكاء الاصطناعي",
-      marvelComics: "مارفل كوميكس",
-      presents: "يقدم",
-      price: "14.99 ريال",
-      backToEditor: "← العودة للمحرر"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "اختر نمط قصتك المصورة",
-      digitalTitle: "قصة مصورة رقمية",
-      digitalFeature1: "تحميل PDF عالي الجودة",
-      digitalFeature2: "مثالي للمشاركة عبر الإنترنت",
-      digitalFeature3: "تسليم فوري",
-      digitalPrice: "18.99 ريال",
-      printedTitle: "قصة مصورة مطبوعة",
-      printedFeature1: "جودة طباعة احترافية",
-      printedFeature2: "يتم شحنها إلى بابك",
-      printedFeature3: "إحساس الإصدار المحدود",
-      printedPrice: "48.99 ريال"
-    },
-    
-    // FAQ
-    faq: {
-      title: "الأسئلة والأجوبة",
-      q1: "كيف ينشئ الذكاء الاصطناعي قصتي المصورة؟",
-      a1: "يحلل ذكاؤنا الاصطناعي صورتك وقصتك لإنشاء لوحات بأسلوب مارفل مع تسميات توضيحية ديناميكية!",
-      q2: "هل يمكنني تخصيص قصتي المصورة بعد الإنشاء؟",
-      a2: "نعم! يمكنك تحرير النص وتعديل اللوحات واختيار أنماط مختلفة قبل الانتهاء.",
-      q3: "ما هي تنسيقات الصور التي تقبلونها؟",
-      a3: "ندعم PNG و JPG و WEBP. للحصول على أفضل النتائج، استخدم صور عالية الدقة!",
-      q4: "كم من الوقت يستغرق إنشاء قصة مصورة؟",
-      a4: "معظم القصص المصورة جاهزة في 30-60 ثانية! القصص المعقدة قد تستغرق وقتاً أطول قليلاً.",
-      q5: "هل يمكنني إنشاء قصص مصورة بلغات مختلفة؟",
-      a5: "بالطبع! يدعم ذكاؤنا الاصطناعي لغات متعددة للإدخال وإنشاء القصص المصورة.",
-      exclamation: "رائع!",
-      contact: "لا تزال لديك أسئلة؟",
-      contactLink: "اتصل بنا!"
-    },
-    
-    // Footer
-    footer: {
-      rights: "جميع الحقوق محفوظة",
-      terms: "شروط الخدمة",
-      privacy: "سياسة الخصوصية",
-      contact: "اتصل",
-      questionsAnswers: "س&ج"
-    },
-    
-    // Terms of Service
-    terms: {
-      effective: "تاريخ السريان",
-      title: "شروط الخدمة",
-      eligibility: "الأهلية",
-      eligibilityText: "يجب أن تكون 13 عاماً على الأقل لاستخدام خدمتنا. باستخدام keepics، فإنك توافق على هذه الشروط.",
-      userResponsibilities: "مسؤوليات المستخدم",
-      userResponsibilitiesText: "أنت مسؤول عن المحتوى الذي ترفعه. لا ترفع مواد محمية بحقوق الطبع والنشر أو محتوى غير لائق أو محتوى ينتهك حقوق الآخرين.",
-      aiContent: "المحتوى المولد بالذكاء الاصطناعي",
-      aiContentText: "يتم إنشاء القصص المصورة باستخدام تقنية الذكاء الاصطناعي. بينما نسعى للجودة، قد تختلف النتائج. أنت تملك حقوق قصتك المصورة النهائية.",
-      ownership: "الملكية",
-      ownershipText: "تحتفظ بملكية صورك المرفوعة. keepics تملك عناصر القصة المصورة المولدة بالذكاء الاصطناعي والتصميم.",
-      payments: "المدفوعات",
-      paymentsText: "جميع المدفوعات تتم معالجتها بأمان. القصص المصورة الرقمية يتم تسليمها فوراً. القصص المصورة المطبوعة يتم شحنها خلال 5-7 أيام عمل.",
-      contact: "معلومات الاتصال",
-      contactText: "للأسئلة حول هذه الشروط، اتصل بنا على legal@keepics.com"
-    },
-    
-    // Privacy Policy
-    privacy: {
-      effective: "تاريخ السريان",
-      title: "سياسة الخصوصية",
-      infoCollect: "المعلومات التي نجمعها",
-      infoCollectText: "نجمع الصور التي ترفعها ووصف القصص والتحليلات الأساسية للاستخدام لتحسين خدمتنا.",
-      howUse: "كيف نستخدم معلوماتك",
-      howUseText: "بياناتك تُستخدم فقط لإنشاء قصصك المصورة وتحسين ذكائنا الاصطناعي. لا نبيع معلوماتك الشخصية أبداً.",
-      sharing: "مشاركة المعلومات",
-      sharingText: "لا نشارك معلوماتك الشخصية مع أطراف ثالثة إلا عند الطلب القانوني.",
-      dataRetention: "الاحتفاظ بالبيانات",
-      dataRetentionText: "الصور المرفوعة يتم حذفها بعد 30 يوماً. القصص المصورة المولدة يتم تخزينها لوصول حسابك.",
-      yourRights: "حقوقك",
-      yourRightsText: "يمكنك طلب حذف بياناتك أو الوصول لمعلوماتك أو تصحيح الأخطاء في أي وقت.",
-      security: "الأمان",
-      securityText: "نستخدم التشفير المعياري في الصناعة وإجراءات الأمان لحماية بياناتك.",
-      contact: "اتصل بنا",
-      contactText: "لأسئلة الخصوصية، أرسل لنا إيميل على privacy@keepics.com"
-    },
-    
-    // Sample Gallery
-    samples: {
-      title: "نماذج القصص المصورة",
-      adventure: "مغامرة 6 أشهر في أمريكا الجنوبية",
-      rome: "رحلة إلى روما مع الصديقة",
-      birthday: "حفلة عيد الميلاد الثاني!",
-      nature: "رحلة العائلة في الطبيعة",
-      graduation: "تخرجت من كلية الطب",
-      party: "أسبوع الحفلات في إسبانيا مع الأصدقاء",
-      
-      // Adventure panels
-      adventurePanel1: "اليوم الأول: جاهزون للبرية!",
-      adventurePanel2: "باتاغونيا: مسارات لا نهائية",
-      adventurePanel3: "ركوب الأمواج عند شروق الشمس",
-      adventurePanel4: "أصدقاء من كل بلد",
-      adventurePanel5: "مغامرات الغابات المطيرة",
-      adventurePanel6: "عودة للمنزل، قلوب مليئة",
-      
-      // Rome panels
-      romePanel1: "تشاو، روما!",
-      romePanel2: "جيلاتو كل صباح",
-      romePanel3: "أمنيات نافورة تريفي",
-      romePanel4: "غروب الشمس عند الكولوسيوم",
-      
-      // Birthday panels
-      birthdayPanel1: "نجم عيد الميلاد!",
-      birthdayPanel2: "ابتسامات كعكة قوس قزح",
-      birthdayPanel3: "بالونات في كل مكان!",
-      birthdayPanel4: "قيلولة مع دبدوب جديد",
-      
-      // Nature panels
-      naturePanel1: "مراقبة الحيتان تبدأ",
-      naturePanel2: "تخييم تحت النجوم",
-      naturePanel3: "تجول في الغابة",
-      naturePanel4: "ضحك لا نهائي",
-      
-      // Graduation panels
-      graduationPanel1: "أخيراً، دكتور!",
-      graduationPanel2: "القبعات في الهواء",
-      graduationPanel3: "عناق العائلة الفخورة",
-      graduationPanel4: "المحطة التالية: المستشفى!",
-      
-      // Party panels
-      partyPanel1: "فاموس أ لا بلايا!",
-      partyPanel2: "أقدام رملية وغروب",
-      partyPanel3: "رقص طوال الليل",
-      partyPanel4: "ذكريات إلى الأبد"
-    }
-  },
-  ko: {
-    // Navigation
-    nav: {
-      create: "만들기",
-      samples: "샘플",
-      pricing: "가격",
-      faq: "자주 묻는 질문",
-      login: "로그인"
-    },
-    
-    // Hero Section
-    hero: {
-      memories: "추억",
-      memoriesSubtext: "을 장대한 마블 스타일 만화로!",
-      createComic: "내 만화 만들기"
-    },
+    // Hero section
+    'hero.title': '!حوّل صورك إلى قصص مصورة رائعة',
+    'hero.subtitle': 'ارفع صورة، أضف قصتك، وشاهد الذكاء الاصطناعي ينشئ قصة مصورة مخصصة لك فقط.',
+    'hero.cta': 'ابدأ الإنشاء',
+    'hero.memories': 'ذكريات',
+    'hero.createComic': 'أنشئ قصتك المصورة',
+    'hero.memoriesSubtext': '!إلى قصص مصورة في ثوانٍ',
     
     // Comic Uploader
-    uploader: {
-      title: "만화 만들기",
-      steps: "1. 사진 업로드 📸\n2. 스토리 설명 ✍️\n3. 마블 만화 받기! 🦸‍♂️",
-      clickUpload: "클릭하여 업로드",
-      fileTypes: "PNG, JPG, WEBP",
-      comicPanel: "만화 패널",
-      placeholder: "여기에 당신의 이야기, 모험 또는 추억을 설명하세요... 더 많은 세부사항 = 더 좋은 만화!",
-      generating: "생성 중...",
-      generateComic: "만화 생성",
-      ready: "✅ 만화 만들 준비 완료!",
-      aiWorking: "🤖 AI가 마법을 부리고 있습니다..."
-    },
-    
-    // Preview
-    preview: {
-      title: "당신의 장대한 모험",
-      aiGenerated: "AI 생성 만화",
-      marvelComics: "마블 코믹스",
-      presents: "프레젠츠",
-      price: "₩5,900",
-      backToEditor: "← 편집기로 돌아가기"
-    },
-    
-    // Pricing
-    pricing: {
-      title: "만화 스타일 선택",
-      digitalTitle: "디지털 만화",
-      digitalFeature1: "고품질 PDF 다운로드",
-      digitalFeature2: "온라인 공유에 완벽",
-      digitalFeature3: "즉시 배송",
-      digitalPrice: "₩7,900",
-      printedTitle: "인쇄 만화",
-      printedFeature1: "전문 인쇄 품질",
-      printedFeature2: "문앞까지 배송",
-      printedFeature3: "수집가 에디션 느낌",
-      printedPrice: "₩19,900"
-    },
-    
-    // FAQ
-    faq: {
-      title: "질문과 답변",
-      q1: "AI는 어떻게 내 만화를 만드나요?",
-      a1: "우리 AI는 당신의 사진과 이야기를 분석하여 역동적인 캡션이 있는 마블 스타일 패널을 만듭니다!",
-      q2: "생성 후 만화를 사용자 정의할 수 있나요?",
-      a2: "네! 텍스트 편집, 패널 조정, 완성 전 다른 만화 스타일 선택이 가능합니다.",
-      q3: "어떤 이미지 형식을 받나요?",
-      a3: "PNG, JPG, WEBP를 지원합니다. 최상의 결과를 위해 고해상도 이미지를 사용하세요!",
-      q4: "만화 생성에 얼마나 걸리나요?",
-      a4: "대부분의 만화는 30-60초 안에 준비됩니다! 복잡한 이야기는 조금 더 걸릴 수 있습니다.",
-      q5: "다른 언어로 만화를 만들 수 있나요?",
-      a5: "물론입니다! 우리 AI는 입력과 만화 생성 모두에서 여러 언어를 지원합니다.",
-      exclamation: "와우!",
-      contact: "아직 질문이 있나요?",
-      contactLink: "문의하세요!"
-    },
+    'uploader.title': 'ابدأ قصتك المصورة',
+    'uploader.steps': 'ارفع صورة .1\nأضف تسمية توضيحية .2\n!أنشئ .3',
+    'uploader.clickUpload': 'اضغط للرفع',
+    'uploader.fileTypes': 'JPG أو PNG أو WebP',
+    'uploader.comicPanel': 'لوحة القصة المصورة',
+    'uploader.placeholder': '!صف ما يحدث في صورتك أو اكتب حواراً',
+    'uploader.generating': '...جاري الإنشاء',
+    'uploader.generateComic': 'أنشئ القصة المصورة',
+    'uploader.ready': '.رائع! اضغط الآن على أنشئ القصة المصورة للبدء',
+    'uploader.aiWorking': '!أتحدث مع الذكاء الاصطناعي... أنشئ سحر قصتك المصورة',
+
+    // Comic Preview
+    'preview.title': 'قصتك الملحمية',
+    'preview.backToEditor': '← العودة للمحرر',
+    'preview.marvelComics': 'مجموعة مارفل كوميكس',
+    'preview.presents': 'كيبيكس يقدم',
+    'preview.price': '15 ريال السعودية',
+    'preview.aiGenerated': 'قصة مصورة من إنتاج الذكاء الاصطناعي',
+
+    // Pricing Section
+    'pricing.title': 'الأسعار والخيارات',
+    'pricing.digitalTitle': 'قصة مصورة رقمية (مجاني)',
+    'pricing.digitalFeature1': 'أنشئ حتى 3 قصص مصورة/شهر',
+    'pricing.digitalFeature2': 'حمّل كـ PDF/PNG',
+    'pricing.digitalFeature3': '!جرب قبل الشراء',
+    'pricing.digitalPrice': '0 ريال',
+    'pricing.printedTitle': 'قصة مصورة مطبوعة (بريميوم)',
+    'pricing.printedFeature1': 'ترقية لمزيد من القصص المصورة',
+    'pricing.printedFeature2': 'اطلب مطبوعات جميلة عبر Lulu',
+    'pricing.printedFeature3': 'شحن عالمي',
+    'pricing.printedPrice': 'ابتداءً من 45 ريال',
     
     // Footer
-    footer: {
-      rights: "모든 권리 보유",
-      terms: "서비스 약관",
-      privacy: "개인정보 보호정책",
-      contact: "연락처",
-      questionsAnswers: "Q&A"
-    },
+    'footer.faq': 'الأسئلة الشائعة',
+    'footer.terms': 'الشروط والأحكام',
+    'footer.privacy': 'الخصوصية',
+    'footer.contact': 'اتصل بنا',
+    'footer.rights': 'جميع الحقوق محفوظة',
+    'footer.questionsAnswers': 'الأسئلة والأجوبة',
     
-    // Terms of Service
-    terms: {
-      effective: "발효일",
-      title: "서비스 약관",
-      eligibility: "자격",
-      eligibilityText: "서비스를 이용하려면 13세 이상이어야 합니다. keepics를 사용함으로써 이 약관에 동의하는 것입니다.",
-      userResponsibilities: "사용자 책임",
-      userResponsibilitiesText: "업로드하는 콘텐츠에 대해 책임집니다. 저작권이 있는 자료, 부적절한 콘텐츠, 타인의 권리를 침해하는 콘텐츠를 업로드하지 마세요.",
-      aiContent: "AI 생성 콘텐츠",
-      aiContentText: "만화는 AI 기술을 사용하여 생성됩니다. 품질을 위해 노력하지만 결과는 다를 수 있습니다. 최종 만화의 권리는 당신이 소유합니다.",
-      ownership: "소유권",
-      ownershipText: "업로드한 사진의 소유권을 유지합니다. keepics는 AI 생성된 만화 요소와 스타일링을 소유합니다.",
-      payments: "결제",
-      paymentsText: "모든 결제는 안전하게 처리됩니다. 디지털 만화는 즉시 배송됩니다. 실물 만화는 5-7 영업일 내에 배송됩니다.",
-      contact: "연락처 정보",
-      contactText: "이 약관에 대한 질문은 legal@keepics.com으로 문의하세요"
-    },
-    
+    // FAQ
+    'faq.title': 'الأسئلة الشائعة',
+    'faq.contact': 'لا تزال لديك أسئلة؟',
+    'faq.contactLink': '!اتصل بنا',
+
+    // FAQ Questions and Answers
+    'faq.q1': 'كيف تعمل عملية إنشاء القصص المصورة؟',
+    'faq.a1': 'الأمر بسيط! ارفع صورة، أضف وصفاً قصيراً أو حواراً، وسيقوم الذكاء الاصطناعي بإنشاء قصة مصورة فريدة بناءً على إدخالك. ستتمكن من معاينة النتيجة وتنزيلها رقمياً أو طباعتها ككتاب قصص مصورة مادي.',
+    'faq.q2': 'ما نوع الصور التي يمكنني رفعها؟',
+    'faq.a2': 'يمكنك رفع صور JPG أو PNG أو WebP. تأكد من أن صورتك واضحة ومناسبة لجميع الأعمار. كلما كانت الجودة أفضل، كانت قصتك المصورة تبدو أفضل!',
+    'faq.q3': 'هل يمكنني اختيار نمط القصة المصورة؟',
+    'faq.a3': 'في النسخة الأولية، يتم اختيار نمط القصة المصورة تلقائياً بواسطة الذكاء الاصطناعي. في التحديثات المستقبلية، نخطط لإضافة خيارات الأنماط (مانجا، كرتون، رسم، إلخ).',
+    'faq.q4': 'كم من الوقت يستغرق إنشاء قصة مصورة؟',
+    'faq.a4': 'في المتوسط، يستغرق الأمر حوالي 30-60 ثانية للذكاء الاصطناعي لإنشاء قصتك المصورة بعد رفع صورتك وإدخال نصك.',
+    'faq.q5': 'هل يمكنني طباعة قصتي المصورة ككتاب حقيقي؟',
+    'faq.a5': 'بالطبع! بمجرد أن تصبح قصتك المصورة جاهزة، ستحصل على خيار طباعتها باستخدام تكاملنا مع Lulu. ستتمكن من اختيار موقع الشحن ورؤية الأسعار وخيارات التسليم في الوقت الفعلي.',
+    'faq.exclamation': '!رائع',
+
+    // Terms and Conditions
+    'terms.title': 'الشروط والأحكام',
+    'terms.effective': 'تاريخ السريان',
+    'terms.eligibility': 'الأهلية',
+    'terms.eligibilityText': 'يجب أن تكون على الأقل 13 عاماً أو السن القانونية للموافقة الرقمية في ولايتك القضائية لاستخدام هذه الخدمة.',
+    'terms.userResponsibilities': 'مسؤوليات المستخدم',
+    'terms.userResponsibilitiesText': 'تقديم محتوى دقيق وقانوني. عدم استخدام المنصة لأغراض غير قانونية أو ضارة أو مسيئة.',
+    'terms.aiContent': 'المحتوى المُنشأ بالذكاء الاصطناعي',
+    'terms.aiContentText': 'يتم إنشاء مخرجات القصة المصورة باستخدام الذكاء الاصطناعي. رغم سعينا للحصول على محتوى إبداعي ومناسب، قد تكون مخرجات الذكاء الاصطناعي أحياناً غير مثالية.',
+    'terms.ownership': 'الملكية وحقوق التأليف والنشر',
+    'terms.ownershipText': 'تحتفظ بملكية أي محتوى أصلي ترفعه والقصة المصورة النهائية المُنشأة بواسطة الخدمة.',
+    'terms.payments': 'المدفوعات والاسترداد',
+    'terms.paymentsText': 'تنزيلات القصص المصورة الرقمية غير قابلة للاسترداد. طلبات القصص المصورة المطبوعة تخضع لسياسات الطباعة والشحن.',
+    'terms.contact': 'الاتصال',
+    'terms.contactText': 'إذا كان لديك أي أسئلة حول هذه الشروط، يمكنك الاتصال بنا.',
+
     // Privacy Policy
-    privacy: {
-      effective: "발효일",
-      title: "개인정보 보호정책",
-      infoCollect: "수집하는 정보",
-      infoCollectText: "서비스 개선을 위해 업로드한 사진, 스토리 설명, 기본 사용 분석을 수집합니다.",
-      howUse: "정보 사용 방법",
-      howUseText: "데이터는 만화 생성과 AI 개선을 위해서만 사용됩니다. 개인정보를 판매하지 않습니다.",
-      sharing: "정보 공유",
-      sharingText: "법적으로 요구되는 경우를 제외하고 제3자와 개인정보를 공유하지 않습니다.",
-      dataRetention: "데이터 보관",
-      dataRetentionText: "업로드된 사진은 30일 후 삭제됩니다. 생성된 만화는 계정 접근을 위해 저장됩니다.",
-      yourRights: "당신의 권리",
-      yourRightsText: "언제든지 데이터 삭제 요청, 정보 접근, 부정확한 정보 수정이 가능합니다.",
-      security: "보안",
-      securityText: "업계 표준 암호화와 보안 조치를 사용하여 데이터를 보호합니다.",
-      contact: "문의하기",
-      contactText: "개인정보 보호 질문은 privacy@keepics.com으로 이메일 보내주세요"
-    },
-    
-    // Sample Gallery
-    samples: {
-      title: "샘플 만화",
-      adventure: "남미 6개월 모험",
-      rome: "여자친구와 함께한 로마 여행",
-      birthday: "2살 생일 파티!",
-      nature: "가족 자연 휴양",
-      graduation: "의대 졸업",
-      party: "친구들과 함께한 스페인 파티 주간",
-      
-      // Adventure panels
-      adventurePanel1: "1일차: 야생 준비 완료!",
-      adventurePanel2: "파타고니아: 끝없는 길",
-      adventurePanel3: "일출 서핑",
-      adventurePanel4: "모든 나라의 친구들",
-      adventurePanel5: "열대우림 모험",
-      adventurePanel6: "집으로 돌아와, 마음이 가득",
-      
-      // Rome panels
-      romePanel1: "챠오, 로마!",
-      romePanel2: "매일 아침 젤라또",
-      romePanel3: "트레비 분수 소원",
-      romePanel4: "콜로세움의 석양",
-      
-      // Birthday panels
-      birthdayPanel1: "생일 슈퍼스타!",
-      birthdayPanel2: "무지개 케이크 미소",
-      birthdayPanel3: "풍선이 가득!",
-      birthdayPanel4: "새 테디베어와 낮잠",
-      
-      // Nature panels
-      naturePanel1: "고래 관찰 시작",
-      naturePanel2: "별 아래 캠핑",
-      naturePanel3: "숲속 산책",
-      naturePanel4: "끝없는 웃음",
-      
-      // Graduation panels
-      graduationPanel1: "드디어, 의사!",
-      graduationPanel2: "모자를 하늘로",
-      graduationPanel3: "자랑스러운 가족의 포옹",
-      graduationPanel4: "다음 목적지: 병원!",
-      
-      // Party panels
-      partyPanel1: "바모스 아 라 플라야!",
-      partyPanel2: "모래 발과 석양",
-      partyPanel3: "밤새 춤추기",
-      partyPanel4: "영원한 추억"
-    }
+    'privacy.title': 'سياسة الخصوصية',
+    'privacy.effective': 'تاريخ السريان',
+    'privacy.infoCollect': 'المعلومات التي نجمعها',
+    'privacy.infoCollectText': 'قد نجمع معلومات شخصية مثل اسمك وعنوان بريدك الإلكتروني والمحتوى المرفوع وبيانات الاستخدام.',
+    'privacy.howUse': 'كيف نستخدم معلوماتك',
+    'privacy.howUseText': 'نستخدم المعلومات لتقديم وتحسين خدماتنا وإنشاء القصص المصورة والتواصل معك.',
+    'privacy.sharing': 'مشاركة معلوماتك',
+    'privacy.sharingText': 'لا نبيع معلوماتك الشخصية. قد نشارك المعلومات مع مقدمي الخدمات الذين يساعدوننا في تشغيل الموقع.',
+    'privacy.dataRetention': 'الاحتفاظ بالبيانات',
+    'privacy.dataRetentionText': 'نحتفظ بمعلوماتك الشخصية فقط للمدة اللازمة لتقديم خدماتنا.',
+    'privacy.yourRights': 'حقوقك',
+    'privacy.yourRightsText': 'قد يكون لديك الحق في الوصول إلى بياناتك أو تصحيحها أو حذفها حسب موقعك.',
+    'privacy.security': 'الأمان',
+    'privacy.securityText': 'نتخذ تدابير معقولة لحماية معلوماتك، لكن لا توجد طريقة نقل آمنة 100%.',
+    'privacy.contact': 'اتصل بنا',
+    'privacy.contactText': 'إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا.',
   }
 };
