@@ -1,20 +1,20 @@
-
 import { useRef, useState } from "react";
 import { Image, ArrowUp, Sparkles } from "lucide-react";
 import MarvelComicPreview from "./MarvelComicPreview";
-import { supabase } from "../lib/supabase";
+import { generateComicPanels } from "../utils/generateComicPanels";
+
+// Place your API key here (DEMO ONLY!):
+const OPENAI_API_KEY = "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";
 
 const ComicUploader = () => {
   const [image, setImage] = useState<string | null>(null);
   const [caption, setCaption] = useState<string>("");
   const fileInput = useRef<HTMLInputElement>(null);
 
-  // Loading, preview, and error state
+  // Add loading and AI panel state
   const [showPreview, setShowPreview] = useState(false);
   const [loading, setLoading] = useState(false);
   const [panelCaptions, setPanelCaptions] = useState<string[] | null>(null);
-  const [panelImages, setPanelImages] = useState<string[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
@@ -24,42 +24,18 @@ const ComicUploader = () => {
     }
   };
 
-  // Call Supabase Edge Function for comic generation
+  // Updated button click handler
   const handleGenerateComic = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setPanelCaptions(null);
-    setPanelImages(null);
-    setError(null);
-
     try {
-      if (!image || !caption) throw new Error("Please upload an image and enter a caption!");
-
-      // Call Supabase Edge Function
-      const { data, error: functionError } = await supabase.functions.invoke('generate-comic', {
-        body: {
-          image: image, // Base64 data URL
-          caption: caption,
-          style: "marvel"
-        }
-      });
-
-      if (functionError) {
-        throw new Error(functionError.message || "Comic generation failed");
-      }
-
-      // Validate panels structure
-      if (!data.panels || !Array.isArray(data.panels) || data.panels.length < 2) {
-        throw new Error("Invalid comic API response");
-      }
-
-      setPanelCaptions(data.panels.map((p: any) => p.caption));
-      setPanelImages(data.panels.map((p: any) => p.img));
+      const panels = await generateComicPanels(caption, OPENAI_API_KEY, 6);
+      setPanelCaptions(panels);
       setShowPreview(true);
-    } catch (err: any) {
-      setError(err.message || "Failed to generate comic panels.");
+    } catch (err) {
+      alert("Failed to generate comic panels: " + (err as any)?.message);
       setPanelCaptions(null);
-      setPanelImages(null);
     } finally {
       setLoading(false);
     }
@@ -75,7 +51,6 @@ const ComicUploader = () => {
         caption={caption}
         onBack={handleBack}
         panelCaptions={panelCaptions ?? undefined}
-        panelImages={panelImages ?? undefined}
       />
     );
   }
@@ -87,7 +62,7 @@ const ComicUploader = () => {
     >
       <h2 className="comic-title text-5xl text-blue-700 mb-4 animate-text-glow">Start Your Comic</h2>
       <p className="mb-5 text-xl text-blue-700 font-semibold bg-gradient-to-r from-yellow-50 via-pink-50 to-blue-50 px-4 py-2 rounded-full shadow-inner border-2 border-yellow-200 comic-outline animate-shake">
-        1. Upload an image <br /> 2. Add a caption<br /> 3. Generate!
+        1. Upload an image <br/> 2. Add a caption<br/> 3. Generate!
       </p>
       <form className="flex flex-col sm:flex-row w-full gap-8" onSubmit={handleGenerateComic}>
         <div className="flex flex-col items-center w-full sm:w-1/2">
@@ -140,7 +115,7 @@ const ComicUploader = () => {
               </>
             ) : (
               <>
-                <ArrowUp size={32} />
+                <ArrowUp size={32} /> 
                 <Sparkles className="inline text-pink-500 animate-shine" size={24} />
                 Generate Comic
               </>
@@ -155,12 +130,7 @@ const ComicUploader = () => {
       )}
       {loading && (
         <div className="mt-8 text-blue-700 font-semibold text-center w-full animate-fade-in">
-          Creating your comic magic with AI...
-        </div>
-      )}
-      {error && (
-        <div className="mt-8 text-red-700 font-semibold text-center w-full animate-fade-in">
-          {error}
+          Talking to AI... Creating your comic magic!
         </div>
       )}
     </section>
