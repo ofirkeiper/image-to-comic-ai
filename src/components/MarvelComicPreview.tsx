@@ -1,5 +1,5 @@
-
 import React from "react";
+import { useTranslation } from "@/contexts/TranslationContext";
 
 // For demo: an array of Marvel/superhero placeholder action images (unsplash or svg)
 const marvelImages = [
@@ -69,6 +69,8 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
   panelCaptions,
   panelImages,
 }) => {
+  const { t } = useTranslation();
+
   // If panelCaptions provided (from OpenAI), use those. Else, fallback to old splitTextToPanels logic.
   const textPanels = panelCaptions && panelCaptions.length >= 2
     ? panelCaptions.slice(0, 6)
@@ -88,7 +90,7 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
           MARVEL
         </div>
         <h2 className="text-center text-2xl md:text-3xl font-bold uppercase tracking-wider ml-16" style={{ fontFamily: "'Bangers', cursive" }}>
-          Your Epic Story
+          {t('preview.title')}
         </h2>
         <div className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-black px-2 py-1 text-xs font-bold border-2 border-black rounded-full">
           #1
@@ -154,9 +156,9 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
 
       {/* Marvel-style footer */}
       <div className="mt-4 flex justify-between items-center text-xs bg-red-600 text-white px-3 py-2 border-4 border-black" style={{ fontFamily: "'Bangers', cursive" }}>
-        <span>MARVEL COMICS GROUP</span>
-        <span>KEEPICS PRESENTS</span>
-        <span>$3.99 US</span>
+        <span>{t('preview.marvelComics')}</span>
+        <span>{t('preview.presents')}</span>
+        <span>{t('preview.price')}</span>
       </div>
 
       {onBack && (
@@ -168,7 +170,7 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
             boxShadow: "4px 4px 0px #000000"
           }}
         >
-          ← Back to Editor
+          {t('preview.backToEditor')}
         </button>
       )}
     </section>

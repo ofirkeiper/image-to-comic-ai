@@ -1,5 +1,6 @@
 
 import React from "react";
+import { useTranslation } from "@/contexts/TranslationContext";
 
 const SampleComicSpeechBubble = ({
   children,
@@ -35,6 +36,7 @@ const SampleComicPreview: React.FC<SampleComicPreviewProps> = ({
   title,
   style = "Modern",
 }) => {
+  const { t } = useTranslation();
   const n = panels.length;
   
   return (
@@ -109,7 +111,7 @@ const SampleComicPreview: React.FC<SampleComicPreviewProps> = ({
       
       {/* Mini footer */}
       <div className="mt-2 text-center text-xs bg-red-600 text-white px-2 py-1 border-2 border-black" style={{ fontFamily: "'Bangers', cursive" }}>
-        <span>AI GENERATED COMIC</span>
+        <span>{t('preview.aiGenerated')}</span>
       </div>
     </section>
   );
