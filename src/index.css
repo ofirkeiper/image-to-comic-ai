@@ -1,20 +1,20 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* CSS Variables for Design System */
+/* Design System Variables */
 @layer base {
   :root {
-    /* Color System */
+    /* Core Colors */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -26,20 +26,19 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-
-    /* Comic Theme Colors */
-    --comic-primary: 59 100% 70%;
-    --comic-secondary: 330 100% 85%;
-    --comic-accent: 220 100% 75%;
-    --comic-danger: 0 100% 70%;
-    --comic-success: 120 50% 60%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
     
-    /* Shadows & Effects */
-    --comic-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    --comic-border: 3px solid #1e3a8a;
-    --comic-glow: 0 0 20px rgba(250, 204, 21, 0.6);
+    /* Extended Palette */
+    --success: 142.1 76.2% 36.3%;
+    --warning: 47.9 95.8% 53.1%;
+    --info: 204 94% 94%;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
 
   .dark {
@@ -49,7 +48,7 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 222.2 47.4% 11.2%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -57,212 +56,359 @@
     --muted-foreground: 215 20.2% 65.1%;
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 72.2% 50.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 217.2 91.2% 59.8%;
   }
 }
 
-/* Base Styles */
+/* Base Typography & Layout */
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border box-border;
+  }
+  
+  html {
+    @apply scroll-smooth;
   }
   
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #fffbe7 0%, #f0f9ff 50%, #dce5fe 100%);
-    min-height: 100vh;
-    overflow-x: hidden;
+    @apply bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-foreground font-inter antialiased min-h-screen;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
-
-  /* Typography System */
-  h1, .comic-title {
-    font-family: 'Bangers', cursive;
-    letter-spacing: 0.05em;
-    text-shadow: 2px 2px 0px #ffffff, 3px 3px 0px #1e3a8a;
+  
+  /* Typography Scale */
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-none;
   }
-
-  h2, h3, h4, h5, h6 {
-    font-weight: 600;
-    line-height: 1.2;
+  
+  h2 {
+    @apply text-3xl md:text-4xl font-semibold tracking-tight;
   }
-
+  
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl font-medium;
+  }
+  
+  h5 {
+    @apply text-lg md:text-xl font-medium;
+  }
+  
+  h6 {
+    @apply text-base md:text-lg font-medium;
+  }
+  
   p {
-    line-height: 1.6;
+    @apply leading-7 text-muted-foreground;
+  }
+  
+  a {
+    @apply text-primary underline-offset-4 hover:underline transition-colors;
   }
 }
 
-/* Component Layer - Reusable UI Components */
+/* Modern Components */
 @layer components {
-  /* Comic Style Elements */
-  .comic-panel {
-    @apply relative rounded-2xl border-4 border-blue-700 bg-gradient-to-br from-yellow-100 via-pink-100 to-blue-100 p-6 shadow-xl;
-    filter: drop-shadow(3px 3px 0px #000000);
+  /* Card System */
+  .modern-card {
+    @apply relative bg-card rounded-2xl border border-border shadow-md hover:shadow-lg transition-all duration-300;
   }
-
-  .comic-button {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border-4 border-blue-700 bg-gradient-to-r from-yellow-400 via-pink-300 to-blue-400 px-6 py-3 font-bold text-blue-900 shadow-xl transition-all duration-200;
-    font-family: 'Bangers', cursive;
-    letter-spacing: 0.05em;
-    filter: drop-shadow(2px 2px 0px #000000);
+  
+  .modern-card-elevated {
+    @apply modern-card shadow-lg hover:shadow-xl;
   }
-
-  .comic-button:hover {
-    @apply scale-105 bg-gradient-to-r from-pink-400 via-yellow-300 to-blue-500 text-white;
-    filter: drop-shadow(3px 3px 0px #000000);
-    box-shadow: var(--comic-glow);
+  
+  .modern-card-content {
+    @apply p-6 space-y-4;
   }
-
-  .comic-input {
-    @apply w-full rounded-xl border-4 border-blue-400 bg-white/90 px-4 py-3 text-lg transition-all duration-200 focus:border-yellow-400 focus:outline-none focus:ring-4 focus:ring-yellow-400/50;
-    filter: drop-shadow(2px 2px 0px #00000030);
+  
+  /* Button System */
+  .btn-modern {
+    @apply inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
   }
-
-  .comic-card {
-    @apply relative overflow-hidden rounded-2xl border-4 border-pink-300 bg-gradient-to-br from-yellow-50 via-pink-50 to-blue-50 p-8 shadow-2xl;
-    filter: drop-shadow(4px 4px 0px #000000);
+  
+  .btn-primary {
+    @apply btn-modern bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md;
   }
-
+  
+  .btn-secondary {
+    @apply btn-modern bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border;
+  }
+  
+  .btn-ghost {
+    @apply btn-modern hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .btn-outline {
+    @apply btn-modern border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground;
+  }
+  
+  /* Input System */
+  .input-modern {
+    @apply flex h-12 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm ring-offset-background transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
   /* Speech Bubble */
   .speech-bubble {
-    @apply relative rounded-2xl border-3 border-blue-600 bg-white p-4 shadow-lg;
-    filter: drop-shadow(2px 2px 0px #000000);
+    @apply relative bg-white rounded-2xl border-2 border-blue-300 p-6 shadow-lg;
   }
-
+  
   .speech-bubble::after {
     content: '';
     position: absolute;
-    bottom: -12px;
-    left: 24px;
+    bottom: -10px;
+    left: 30px;
     width: 0;
     height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 12px solid white;
-    filter: drop-shadow(0px 2px 0px #1d4ed8);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
   }
-
+  
   /* Navigation */
-  .comic-nav {
-    @apply sticky top-0 z-50 w-full border-b-4 border-blue-200 bg-white/90 backdrop-blur-sm shadow-lg;
+  .nav-modern {
+    @apply sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60;
   }
-
-  .comic-nav-item {
-    @apply relative font-semibold text-blue-900 transition-all duration-200 hover:text-yellow-600;
+  
+  .nav-item {
+    @apply relative px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors;
   }
-
-  .comic-nav-item::after {
+  
+  .nav-item-active {
+    @apply nav-item text-foreground;
+  }
+  
+  .nav-item-active::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -1px;
     left: 0;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #facc15, #ec4899);
-    transition: width 0.3s ease;
+    right: 0;
+    height: 2px;
+    background: hsl(var(--primary));
   }
-
-  .comic-nav-item:hover::after {
-    width: 100%;
+  
+  /* Comic Specific Styles */
+  .comic-panel {
+    @apply relative bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50 rounded-3xl border-4 border-blue-600 p-8 shadow-xl transform hover:scale-105 transition-all duration-300;
+  }
+  
+  .comic-panel::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #f59e0b);
+    border-radius: inherit;
+    z-index: -1;
+    padding: 2px;
+  }
+  
+  .comic-title {
+    @apply text-4xl md:text-5xl font-black text-blue-900 tracking-wider transform -rotate-2;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 3px 3px 0px #ffffff, 4px 4px 0px #1e40af;
+  }
+  
+  .comic-button {
+    @apply relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-2xl border-4 border-blue-800 shadow-xl transform hover:scale-110 hover:rotate-1 transition-all duration-300;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .comic-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .comic-button:hover::before {
+    opacity: 1;
+  }
+  
+  /* Form Styles */
+  .form-group {
+    @apply space-y-2;
+  }
+  
+  .form-label {
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  }
+  
+  .form-message {
+    @apply text-sm font-medium text-destructive;
+  }
+  
+  /* Loading States */
+  .loading-skeleton {
+    @apply animate-pulse rounded-md bg-muted;
+  }
+  
+  .loading-spinner {
+    @apply animate-spin rounded-full border-2 border-muted border-t-primary;
   }
 }
 
-/* Utility Layer - Animation & Helper Classes */
+/* Utility Classes */
 @layer utilities {
-  /* Modern Animation System */
-  .animate-comic-entrance {
-    animation: comicEntrance 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* Text Utilities */
+  .text-balance {
+    text-wrap: balance;
   }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent;
   }
-
+  
+  /* Animation Utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-down {
+    animation: slideDown 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+  
   .animate-bounce-gentle {
     animation: bounceGentle 2s ease-in-out infinite;
   }
-
-  .animate-glow-pulse {
-    animation: glowPulse 2s ease-in-out infinite alternate;
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
   }
-
-  .animate-slide-up {
-    animation: slideUp 0.6s ease-out;
+  
+  .animate-pulse-slow {
+    animation: pulseSlow 3s ease-in-out infinite;
   }
-
-  .animate-scale-in {
-    animation: scaleIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
+  
   .animate-wiggle {
-    animation: wiggle 1s ease-in-out infinite;
+    animation: wiggle 0.5s ease-in-out;
   }
-
-  .animate-pop {
-    animation: pop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  .animate-spin-slow {
+    animation: spinSlow 8s linear infinite;
   }
-
-  .animate-gradient-shift {
-    animation: gradientShift 4s ease-in-out infinite;
-  }
-
-  .animate-text-reveal {
-    animation: textReveal 1s ease-out;
-  }
-
-  /* Hover Effects */
+  
+  /* Interactive Utilities */
   .hover-lift {
-    @apply transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl;
+    @apply transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg;
   }
-
+  
   .hover-glow {
-    @apply transition-all duration-300;
+    @apply transition-shadow duration-300 hover:shadow-xl hover:shadow-primary/25;
   }
-
-  .hover-glow:hover {
-    box-shadow: var(--comic-glow);
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
   }
-
-  /* Responsive Text */
-  .text-responsive-xl {
-    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl;
+  
+  /* Layout Utilities */
+  .container-modern {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
   }
-
-  .text-responsive-lg {
-    @apply text-2xl sm:text-3xl md:text-4xl;
+  
+  .section-padding {
+    @apply py-16 sm:py-20 lg:py-24;
   }
-
-  /* Gradient Text */
-  .text-gradient-comic {
-    @apply bg-gradient-to-r from-blue-600 via-yellow-500 to-pink-500 bg-clip-text text-transparent;
+  
+  .glass-effect {
+    @apply bg-white/20 backdrop-blur-lg border border-white/30;
+  }
+  
+  /* Focus Utilities */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
 }
 
 /* Keyframe Animations */
-@keyframes comicEntrance {
-  0% {
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    transform: scale(0.8) rotate(-5deg);
+    transform: translateY(20px);
   }
-  50% {
-    transform: scale(1.05) rotate(2deg);
-  }
-  100% {
+  to {
     opacity: 1;
-    transform: scale(1) rotate(0deg);
+    transform: translateY(0);
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
   }
-  50% {
-    transform: translateY(-10px);
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -271,41 +417,28 @@
     transform: translateY(0);
   }
   40% {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
   }
   60% {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
   }
 }
 
-@keyframes glowPulse {
-  from {
-    box-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
   }
-  to {
-    box-shadow: 0 0 30px rgba(250, 204, 21, 0.8), 0 0 40px rgba(236, 72, 153, 0.3);
+  50% {
+    transform: translateY(-15px);
   }
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
+@keyframes pulseSlow {
+  0%, 100% {
     opacity: 1;
-    transform: translateY(0);
   }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
+  50% {
+    opacity: 0.7;
   }
 }
 
@@ -321,273 +454,37 @@
   }
 }
 
-@keyframes pop {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes textReveal {
+@keyframes spinSlow {
   from {
-    opacity: 0;
-    transform: translateY(20px);
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0px);
-  }
-}
-
-/* Legacy Animation Support */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes bounceX {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateX(0);
-  }
-  40% {
-    transform: translateX(-10px);
-  }
-  60% {
-    transform: translateX(5px);
-  }
-}
-
-@keyframes wiggleX {
-  0%, 100% {
     transform: rotate(0deg);
   }
-  25% {
-    transform: rotate(-3deg);
-  }
-  75% {
-    transform: rotate(3deg);
-  }
-}
-
-@keyframes popText {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes popBtn {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-2px);
-  }
-  75% {
-    transform: translateX(2px);
-  }
-}
-
-@keyframes textGlow {
-  from {
-    text-shadow: 2px 2px 0 #fff, 3px 3px 0 #1e3a8a, 0 0 10px #facc15;
-  }
   to {
-    text-shadow: 2px 2px 0 #fff, 3px 3px 0 #1e3a8a, 0 0 20px #facc15, 0 0 30px #facc15;
+    transform: rotate(360deg);
   }
 }
 
-@keyframes shine {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-@keyframes heroPop {
-  0% {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes heroSparkle {
-  0%, 100% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(1.1);
-  }
-}
-
-@keyframes gradientMove {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes bounceSlow {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
-
-/* Legacy Animation Classes */
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-in-out;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.6s ease-out;
-}
-
-.animate-bounce-x {
-  animation: bounceX 2s infinite;
-}
-
-.animate-wiggle-x {
-  animation: wiggleX 1s ease-in-out infinite;
-}
-
-.animate-pop-text {
-  animation: popText 0.6s ease-out;
-}
-
-.animate-pop-btn {
-  animation: popBtn 0.3s ease-out;
-}
-
-.animate-shake {
-  animation: shake 0.5s ease-in-out;
-}
-
-.animate-text-glow {
-  animation: textGlow 2s ease-in-out infinite alternate;
-}
-
-.animate-shine {
-  animation: shine 1.5s ease-in-out infinite;
-}
-
-.animate-hero-pop {
-  animation: heroPop 1s ease-out;
-}
-
-.animate-hero-sparkle {
-  animation: heroSparkle 2s ease-in-out infinite;
-}
-
-.animate-gradient-move {
-  animation: gradientMove 3s ease-in-out infinite;
-}
-
-.animate-bounce-slow {
-  animation: bounceSlow 3s ease-in-out infinite;
-}
-
-/* Responsive Design Helpers */
+/* Responsive Design */
 @media (max-width: 640px) {
   .comic-panel {
     @apply p-4;
   }
   
-  .comic-card {
-    @apply p-4;
+  .comic-title {
+    @apply text-2xl;
   }
   
-  h1, .comic-title {
-    font-size: clamp(2rem, 8vw, 4rem);
+  .modern-card-content {
+    @apply p-4;
   }
 }
 
-/* Print Styles */
-@media print {
-  .comic-panel,
-  .comic-card {
-    filter: none;
-    box-shadow: none;
+@media (max-width: 768px) {
+  .btn-modern {
+    @apply px-4 py-2 text-xs;
   }
 }
 
-/* High Contrast Mode */
-@media (prefers-contrast: high) {
-  .comic-panel,
-  .comic-card {
-    border-width: 6px;
-  }
-}
-
-/* Reduced Motion */
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -595,5 +492,24 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .modern-card,
+  .comic-panel {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+  
+  .btn-modern {
+    border: 1px solid #000 !important;
   }
 }
