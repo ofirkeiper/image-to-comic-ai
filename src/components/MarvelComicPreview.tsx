@@ -48,13 +48,14 @@ const ComicSpeechBubble = ({
   style?: React.CSSProperties;
 }) => (
   <div
-    className="font-bold text-sm md:text-base text-black bg-white border-3 border-black rounded-2xl px-3 py-2 relative z-20 shadow-lg"
+    className="font-bold text-sm md:text-base text-black bg-white border-4 border-black rounded-2xl px-3 py-2 relative z-20 shadow-lg"
     style={{
       ...style,
       clipPath: "polygon(0% 0%, 100% 0%, 100% 75%, 25% 75%, 15% 100%, 10% 75%, 0% 75%)",
       fontFamily: "'Comic Neue', 'Bangers', cursive",
       letterSpacing: "0.5px",
-      lineHeight: "1.2"
+      lineHeight: "1.2",
+      boxShadow: "4px 4px 0px #000000, 0 0 0 4px #000000"
     }}
   >
     <span className="relative z-10">{children}</span>
@@ -82,24 +83,24 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
   return (
     <section className="bg-white rounded-lg border-4 border-black shadow-xl max-w-4xl mx-auto mt-12 p-4 relative" style={{ backgroundColor: '#f8f8f8' }}>
       {/* Comic Title Header */}
-      <div className="bg-red-600 text-white px-4 py-2 mb-4 relative">
-        <div className="absolute left-2 top-0 bg-white text-red-600 px-2 py-1 text-xs font-bold border-2 border-black" style={{ transform: 'translateY(-50%)' }}>
+      <div className="bg-red-600 text-white px-4 py-2 mb-4 relative border-4 border-black">
+        <div className="absolute left-2 top-0 bg-white text-red-600 px-2 py-1 text-xs font-bold border-4 border-black" style={{ transform: 'translateY(-50%)' }}>
           MARVEL
         </div>
-        <h2 className="text-center text-2xl md:text-3xl font-bold uppercase tracking-wider ml-16">
+        <h2 className="text-center text-2xl md:text-3xl font-bold uppercase tracking-wider ml-16" style={{ fontFamily: "'Bangers', cursive" }}>
           Your Epic Story
         </h2>
-        <div className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-black px-2 py-1 text-xs font-bold border border-black rounded-full">
+        <div className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-black px-2 py-1 text-xs font-bold border-2 border-black rounded-full">
           #1
         </div>
       </div>
 
       {/* Comic Panel Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 bg-white p-2 border-2 border-black">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 bg-white p-2 border-4 border-black">
         {panelImgs.map((img, i) => (
           <div
             key={i}
-            className="relative border-3 border-black bg-white overflow-hidden"
+            className="relative border-4 border-black bg-white overflow-hidden"
             style={{ 
               aspectRatio: i === 0 ? '16/10' : '4/3',
               gridColumn: i === 0 && n > 2 ? 'span 2' : 'span 1'
@@ -110,11 +111,26 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
               alt={`Panel ${i + 1}`}
               className="w-full h-full object-cover"
               style={{ 
-                filter: "contrast(1.1) saturate(1.2)",
+                filter: "contrast(1.3) saturate(1.4) hue-rotate(5deg) brightness(1.1)",
+                mixBlendMode: "multiply"
               }}
             />
+            {/* Comic book effect overlay */}
+            <div 
+              className="absolute inset-0 pointer-events-none" 
+              style={{
+                background: `
+                  radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 2px, transparent 2px),
+                  radial-gradient(circle at 75% 75%, rgba(0,0,0,0.1) 1px, transparent 1px),
+                  linear-gradient(45deg, rgba(255,0,0,0.1) 25%, transparent 25%),
+                  linear-gradient(-45deg, rgba(0,0,255,0.1) 25%, transparent 25%)
+                `,
+                backgroundSize: '8px 8px, 6px 6px, 20px 20px, 20px 20px'
+              }}
+            />
+            
             {/* Panel border effect */}
-            <div className="absolute inset-0 border-2 border-black pointer-events-none" />
+            <div className="absolute inset-0 border-4 border-black pointer-events-none" />
             
             {/* Speech bubble positioned in corner */}
             <div className="absolute bottom-2 left-2 right-2 z-20">
@@ -129,7 +145,7 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
             </div>
 
             {/* Panel number */}
-            <div className="absolute top-1 left-1 w-6 h-6 bg-yellow-300 text-black text-center text-xs font-bold border border-black rounded-full flex items-center justify-center z-30">
+            <div className="absolute top-2 left-2 w-8 h-8 bg-yellow-300 text-black text-center text-sm font-bold border-3 border-black rounded-full flex items-center justify-center z-30" style={{ fontFamily: "'Bangers', cursive" }}>
               {i + 1}
             </div>
           </div>
@@ -137,7 +153,7 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
       </div>
 
       {/* Marvel-style footer */}
-      <div className="mt-4 flex justify-between items-center text-xs bg-red-600 text-white px-3 py-1">
+      <div className="mt-4 flex justify-between items-center text-xs bg-red-600 text-white px-3 py-2 border-4 border-black" style={{ fontFamily: "'Bangers', cursive" }}>
         <span>MARVEL COMICS GROUP</span>
         <span>KEEPICS PRESENTS</span>
         <span>$3.99 US</span>
@@ -145,8 +161,12 @@ const MarvelComicPreview: React.FC<MarvelComicPreviewProps> = ({
 
       {onBack && (
         <button
-          className="mt-4 font-bold text-lg text-white bg-red-600 rounded-lg px-6 py-2 border-2 border-black shadow hover:bg-red-700 transition-all uppercase"
+          className="mt-4 font-bold text-lg text-white bg-red-600 rounded-lg px-6 py-3 border-4 border-black shadow-lg hover:bg-red-700 transition-all uppercase"
           onClick={onBack}
+          style={{ 
+            fontFamily: "'Bangers', cursive",
+            boxShadow: "4px 4px 0px #000000"
+          }}
         >
           ← Back to Editor
         </button>
