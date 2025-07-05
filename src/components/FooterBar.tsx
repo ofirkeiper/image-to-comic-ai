@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Dialog,
@@ -8,6 +7,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import ComicFAQDialog from "./ComicFAQDialog";
+import LanguageSelector from "./LanguageSelector";
+import { useTranslation } from "@/contexts/TranslationContext";
 
 // Reusable FAQ content
 const faqText = `
@@ -245,12 +246,14 @@ If you have any questions about this Privacy Policy, please contact us at:
 `;
 
 const FooterBar = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="mt-20 w-full py-8 border-t-2 border-blue-200 bg-gradient-to-r from-blue-50 via-white to-yellow-100 shadow-t-sm">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between px-6">
         <div className="flex items-center gap-3 mb-6 md:mb-0">
           <span className="font-bangers text-xl text-blue-900 tracking-wide">keepics</span>
-          <span className="text-xs text-gray-400">© {new Date().getFullYear()} All Rights Reserved</span>
+          <span className="text-xs text-gray-400">© {new Date().getFullYear()} {t('footer.rights')}</span>
         </div>
         <ul className="flex flex-wrap gap-5 text-xs text-blue-900 font-semibold items-center">
           <li>
@@ -260,12 +263,12 @@ const FooterBar = () => {
             <Dialog>
               <DialogTrigger asChild>
                 <button className="hover:text-yellow-500 underline transition bg-transparent border-none cursor-pointer p-0 m-0">
-                  Terms and Conditions
+                  {t('footer.terms')}
                 </button>
               </DialogTrigger>
               <DialogContent className="max-h-[85vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle className="mb-4 text-2xl font-bold">Terms and Conditions</DialogTitle>
+                  <DialogTitle className="mb-4 text-2xl font-bold">{t('footer.terms')}</DialogTitle>
                 </DialogHeader>
                 <div className="text-xs whitespace-pre-line leading-relaxed text-blue-900 font-medium pr-2">
                   {termsText}
@@ -277,12 +280,12 @@ const FooterBar = () => {
             <Dialog>
               <DialogTrigger asChild>
                 <button className="hover:text-yellow-500 underline transition bg-transparent border-none cursor-pointer p-0 m-0">
-                  Privacy
+                  {t('footer.privacy')}
                 </button>
               </DialogTrigger>
               <DialogContent className="max-h-[85vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle className="mb-4 text-2xl font-bold">Privacy Policy</DialogTitle>
+                  <DialogTitle className="mb-4 text-2xl font-bold">{t('footer.privacy')}</DialogTitle>
                 </DialogHeader>
                 <div className="text-xs whitespace-pre-line leading-relaxed text-blue-900 font-medium pr-2">
                   {privacyText}
@@ -292,17 +295,11 @@ const FooterBar = () => {
           </li>
           <li>
             <a href="#" className="hover:text-yellow-500 underline transition">
-              Contact
+              {t('footer.contact')}
             </a>
           </li>
           <li>
-            <select className="bg-blue-50 border border-blue-300 rounded px-2 py-1 text-xs font-medium ml-2">
-              <option>EN</option>
-              <option>ES</option>
-              <option>FR</option>
-              <option>HE</option>
-              <option>DE</option>
-            </select>
+            <LanguageSelector />
           </li>
         </ul>
       </div>

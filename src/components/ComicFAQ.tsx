@@ -1,5 +1,5 @@
-
 import React from "react";
+import { useTranslation } from "@/contexts/TranslationContext";
 
 const faqs = [
   {
@@ -72,10 +72,12 @@ const comicColors = [
 ];
 
 const ComicFAQ = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="faq" className="mt-20 mb-12 max-w-4xl mx-auto px-4 bg-gradient-to-br from-yellow-50 via-blue-50 to-pink-50 rounded-3xl border-8 border-blue-200 shadow-xl comic-outline">
       <h2 className="comic-title text-4xl md:text-5xl text-center mb-8 text-blue-800 bg-gradient-to-r from-yellow-100 via-pink-200 to-blue-200 px-6 py-2 rounded-xl inline-block shadow comic-outline animate-text-glow">
-        <span className="mr-2">❓</span> Frequently Asked Questions (FAQ)
+        <span className="mr-2">❓</span> {t('faq.title')}
       </h2>
       <ul className="space-y-6">
         {faqs.map((faq, i) => (
@@ -98,7 +100,9 @@ const ComicFAQ = () => {
         ))}
       </ul>
       <div className="flex justify-center mt-8">
-        <span className="text-yellow-600 text-2xl rotate-[-12deg] font-bangers comic-outline animate-pop-text bg-pink-100 px-3 py-1 rounded-xl border-2 border-blue-200 shadow">Still have questions? <a href="#" className="text-blue-700 underline hover:text-yellow-600 font-bangers transition">Contact us!</a></span>
+        <span className="text-yellow-600 text-2xl rotate-[-12deg] font-bangers comic-outline animate-pop-text bg-pink-100 px-3 py-1 rounded-xl border-2 border-blue-200 shadow">
+          {t('faq.contact')} <a href="#" className="text-blue-700 underline hover:text-yellow-600 font-bangers transition">{t('faq.contactLink')}</a>
+        </span>
       </div>
     </section>
   );
