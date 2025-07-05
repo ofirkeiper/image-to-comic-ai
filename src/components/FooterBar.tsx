@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   Dialog,
@@ -12,7 +13,7 @@ import ComicFAQDialog from "./ComicFAQDialog";
 const faqText = `
 1. How does the comic creation process work?
 Answer:
-It’s simple! Upload a photo, add a short description or dialogue, and our AI will generate a unique comic based on your input. You’ll be able to preview the result and either download it digitally or print it as a physical comic book.
+It's simple! Upload a photo, add a short description or dialogue, and our AI will generate a unique comic based on your input. You'll be able to preview the result and either download it digitally or print it as a physical comic book.
 
 2. What kind of images can I upload?
 Answer:
@@ -28,7 +29,7 @@ On average, it takes about 30–60 seconds for the AI to generate your comic aft
 
 5. Can I print my comic as a real book?
 Answer:
-Absolutely! Once your comic is ready, you’ll have the option to print it using our integration with Lulu. You’ll be able to choose your shipping location and see real-time pricing and delivery options.
+Absolutely! Once your comic is ready, you'll have the option to print it using our integration with Lulu. You'll be able to choose your shipping location and see real-time pricing and delivery options.
 
 6. How much does it cost?
 Answer:
@@ -38,7 +39,7 @@ You can try out comic creation for free (limited previews). Full-resolution down
 Answer:
 Yes. A detailed receipt and invoice will be emailed to you automatically after purchase.
 
-8. Can I edit my comic after it’s generated?
+8. Can I edit my comic after it's generated?
 Answer:
 Currently, editing is limited. You can regenerate your comic by uploading a new photo or adjusting the text. Full editing tools are coming soon.
 
@@ -58,11 +59,11 @@ Yes, as long as you own the image and the content you upload. Please ensure any 
 Answer:
 The site is in English by default, but we support multiple languages depending on your location. You can also switch languages manually from the menu.
 
-13. Can I get a refund if I’m not happy with my comic?
+13. Can I get a refund if I'm not happy with my comic?
 Answer:
-Digital products are non-refundable. For printed books, please contact our support if your order arrives damaged or there’s an issue with printing or delivery.
+Digital products are non-refundable. For printed books, please contact our support if your order arrives damaged or there's an issue with printing or delivery.
 
-14. I’m a teacher/parent/organization. Can I use this for a group?
+14. I'm a teacher/parent/organization. Can I use this for a group?
 Answer:
 Yes! We love working with schools and organizations. Please contact us for bulk licensing or classroom tools.
 
@@ -74,7 +75,7 @@ You can reach us through the Contact Us page, where you can fill out a form or u
 const termsText = `
 Effective Date: [Insert Date]
 
-Welcome to [Your Website Name] (“we,” “our,” “us”). These Terms and Conditions (“Terms”) govern your access to and use of our website, services, and all related features (collectively, the “Service”). By accessing or using our Service, you agree to these Terms. If you do not agree, do not use the Service.
+Welcome to [Your Website Name] ("we," "our," "us"). These Terms and Conditions ("Terms") govern your access to and use of our website, services, and all related features (collectively, the "Service"). By accessing or using our Service, you agree to these Terms. If you do not agree, do not use the Service.
 
 1. Eligibility
 
@@ -120,7 +121,7 @@ We reserve the right to remove or report such content.
 6. Payments and Refunds
 
 Digital comic downloads are non-refundable.
-Printed comic orders via Lulu are subject to Lulu’s printing and shipping policies.
+Printed comic orders via Lulu are subject to Lulu's printing and shipping policies.
 If your printed order arrives damaged or incorrect, please contact us within 14 days of delivery with proof of the issue.
 All payments are processed securely via third-party providers (e.g. Stripe, PayPal).
 You will receive an invoice or receipt via email after every purchase.
@@ -174,6 +175,75 @@ If you have any questions or concerns about these Terms, you can contact us at:
 We may update these Terms from time to time. When we do, we will revise the "Effective Date" at the top of the page. Continued use of the Service constitutes acceptance of the new Terms.
 `;
 
+const privacyText = `
+Privacy Policy
+
+Effective Date: [Insert date]
+
+At [Your Website Name] ("we", "our", "us"), we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and share information when you use our website and services.
+
+Information We Collect
+
+We may collect the following types of information:
+
+Personal Information: such as your name, email address, or payment information when you register, make a purchase, or contact us.
+Uploaded Content: images, text prompts, and other content you upload to create comics.
+Usage Data: including your IP address, browser type, pages visited, and actions taken on the site.
+Cookies and Tracking Technologies: to improve your experience and analyze website performance.
+
+How We Use Your Information
+
+We use the information we collect to:
+
+Provide and improve our services.
+Generate comics based on your inputs.
+Communicate with you about your account, support requests, or updates.
+Analyze and improve the functionality, security, and performance of our site.
+Comply with legal obligations.
+
+Sharing Your Information
+
+We do not sell your personal information.
+We may share information with:
+
+Service providers and partners that help us operate the website (e.g., cloud hosting, AI APIs).
+Authorities if required by law or to protect rights and safety.
+
+Data Retention
+
+We keep your personal information only as long as necessary to provide our services or comply with legal obligations.
+
+Your Rights
+
+Depending on your location, you may have the right to:
+
+Access and receive a copy of your data.
+Correct or delete your data.
+Object to or restrict certain processing.
+Withdraw consent where applicable.
+You can contact us at [your email address] to exercise your rights.
+
+Cookies
+
+We use cookies and similar technologies for functionality, analytics, and to enhance your experience.
+You can manage cookies through your browser settings.
+
+Security
+
+We take reasonable measures to protect your information, but no method of transmission over the Internet or electronic storage is 100% secure.
+
+Changes to This Policy
+
+We may update this Privacy Policy from time to time.
+We will notify you of significant changes by posting the updated policy on this page.
+
+Contact Us
+
+If you have any questions about this Privacy Policy, please contact us at:
+📧 [your email]
+🌐 [your website]
+`;
+
 const FooterBar = () => {
   return (
     <footer className="mt-20 w-full py-8 border-t-2 border-blue-200 bg-gradient-to-r from-blue-50 via-white to-yellow-100 shadow-t-sm">
@@ -204,9 +274,21 @@ const FooterBar = () => {
             </Dialog>
           </li>
           <li>
-            <a href="#" className="hover:text-yellow-500 underline transition">
-              Privacy
-            </a>
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="hover:text-yellow-500 underline transition bg-transparent border-none cursor-pointer p-0 m-0">
+                  Privacy
+                </button>
+              </DialogTrigger>
+              <DialogContent className="max-h-[85vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="mb-4 text-2xl font-bold">Privacy Policy</DialogTitle>
+                </DialogHeader>
+                <div className="text-xs whitespace-pre-line leading-relaxed text-blue-900 font-medium pr-2">
+                  {privacyText}
+                </div>
+              </DialogContent>
+            </Dialog>
           </li>
           <li>
             <a href="#" className="hover:text-yellow-500 underline transition">
