@@ -163,6 +163,22 @@
   .animate-shine {
     animation: shine 1.5s ease-in-out infinite;
   }
+
+  .animate-hero-pop {
+    animation: heroPop 1s ease-out;
+  }
+
+  .animate-hero-sparkle {
+    animation: heroSparkle 2s ease-in-out infinite;
+  }
+
+  .animate-gradient-move {
+    animation: gradientMove 3s ease-in-out infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounceSlow 3s ease-in-out infinite;
+  }
 }
 
 @keyframes fadeIn {
@@ -213,4 +229,26 @@
 @keyframes shine {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.7; }
+}
+
+@keyframes heroPop {
+  0% { transform: scale(0.9); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes heroSparkle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+}
+
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes bounceSlow {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
 }
