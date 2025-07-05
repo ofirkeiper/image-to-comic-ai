@@ -20,25 +20,35 @@ const PAGE_TEXT = [
     emoji: "🤖",
   },
   {
-    title: "Let’s get started!",
+    title: "Let's get started!",
     subtitle: "Make your first comic now!",
     emoji: "🚀",
   },
 ];
 
 const ComicIntro = ({ onFinish }: { onFinish: () => void }) => {
+  console.log("ComicIntro rendering");
   const [page, setPage] = useState(0);
   const [show, setShow] = useState(true);
+  console.log("ComicIntro page:", page, "show:", show);
 
   useEffect(() => {
+    console.log("ComicIntro useEffect triggered, page:", page);
     if (page < 3) {
-      const timeout = setTimeout(() => setPage(p => p + 1), 1100);
+      const timeout = setTimeout(() => {
+        console.log("Moving to next page:", page + 1);
+        setPage(p => p + 1);
+      }, 1100);
       return () => clearTimeout(timeout);
     } else {
       // Start fade out effect
+      console.log("Starting fade out");
       const timeout = setTimeout(() => {
         setShow(false);
-        setTimeout(onFinish, 600); // after fade out, call onFinish
+        setTimeout(() => {
+          console.log("Calling onFinish");
+          onFinish();
+        }, 600); // after fade out, call onFinish
       }, 800);
       return () => clearTimeout(timeout);
     }

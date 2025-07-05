@@ -1,3 +1,4 @@
+
 import ComicHero from "@/components/ComicHero";
 import ComicUploader from "@/components/ComicUploader";
 import SampleGallery from "@/components/SampleGallery";
@@ -8,7 +9,9 @@ import ComicFAQ from "@/components/ComicFAQ";
 import { useState } from "react";
 
 const Index = () => {
+  console.log("Index component rendering");
   const [introDone, setIntroDone] = useState(false);
+  console.log("introDone state:", introDone);
 
   return (
     <>
