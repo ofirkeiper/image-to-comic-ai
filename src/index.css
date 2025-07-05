@@ -39,12 +39,6 @@
     --success: 142.1 76.2% 36.3%;
     --warning: 47.9 95.8% 53.1%;
     --info: 204 94% 94%;
-    
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
 
   .dark {
@@ -99,12 +93,6 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
   }
 }
 
