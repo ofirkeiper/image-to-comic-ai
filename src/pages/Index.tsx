@@ -5,14 +5,10 @@ import SampleGallery from "@/components/SampleGallery";
 import PricingSection from "@/components/PricingSection";
 import FooterBar from "@/components/FooterBar";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import { useState } from "react";
 
 const Index = () => {
   console.log("Index component rendering");
   
-  // Always show main content immediately - no intro blocking
-  const [introDone] = useState(true);
-
   return (
     <ErrorBoundary>
       <div className="w-full min-h-screen bg-gradient-to-b from-yellow-50 via-white to-blue-100">
@@ -38,7 +34,7 @@ const Index = () => {
           </button>
         </nav>
         
-        {/* Main Content - Always visible */}
+        {/* Main Content */}
         <ErrorBoundary>
           <ComicHero />
         </ErrorBoundary>
